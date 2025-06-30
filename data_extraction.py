@@ -58,6 +58,37 @@ def extract_accelerator_investments(investments_df: pd.DataFrame) -> pd.DataFram
     
     return accelerated_investments
 
+def extract_investments_by_type(investments: pd.DataFrame, funding_rounds: pd.DataFrame, investment_type: str) -> pd.DataFrame:
+    """
+    Extract specific investments based on funding round investment type.
+    
+    Args:
+        investments: DataFrame containing investment data
+        funding_rounds: DataFrame containing funding rounds data
+        investment_type: The investment type to filter for
+        
+    Returns:
+        DataFrame containing only investments from funding rounds with the specified investment type
+    """
+    # First, filter funding rounds by investment type
+    filtered_funding_rounds = funding_rounds[
+        funding_rounds['investment_type'].str.contains(investment_type, case=False, na=False)
+    ]
+    
+    # Get the UUIDs of funding rounds with the specified investment type
+    funding_round_uuids = set(filtered_funding_rounds['uuid'].dropna())
+    
+    # Filter investments that have a funding_round_uuid in the filtered set
+    filtered_investments = investments[
+        investments['funding_round_uuid'].isin(funding_round_uuids)
+    ].copy()
+    
+    print(f"Found {len(filtered_funding_rounds)} funding rounds with '{investment_type}' type")
+    print(f"Found {filtered_investments.shape[0]} investments from these funding rounds")
+    print(f"Unique companies with {investment_type} investments: {filtered_investments['org_uuid'].nunique()}")
+    
+    return filtered_investments
+
 def extract_vc_investments(investments_df: pd.DataFrame) -> pd.DataFrame:
     """
     Extract venture capital investments (excluding accelerators/incubators).
@@ -81,6 +112,7 @@ def extract_vc_investments(investments_df: pd.DataFrame) -> pd.DataFrame:
     
     return vc_investments
 
+# Maybe not so useful, because we are actually looking to coinvestment
 def identify_two_stage_companies(accelerated_df: pd.DataFrame, vc_df: pd.DataFrame) -> pd.DataFrame:
     """
     Identify companies that received both accelerator and VC funding (two-stage approach).
@@ -239,29 +271,29 @@ def get_data_summary(data: Dict[str, pd.DataFrame]) -> Dict[str, Dict]:
     
     return summary
 
-def create_accelerator_vc_pairs(accelerated_investments: pd.DataFrame, 
-                               vc_investments: pd.DataFrame) -> pd.DataFrame:
+def create_investment_pairs(left_side_investments: pd.DataFrame, 
+                               right_side_investments: pd.DataFrame) -> pd.DataFrame:
     """
     Create accelerator-VC pairs following the clustering analysis approach.
     
     Args:
-        accelerated_investments: DataFrame of accelerator investments
-        vc_investments: DataFrame of VC investments
+        left_side_investments: DataFrame of accelerator investments
+        right_side_investments: DataFrame of VC investments
         
     Returns:
         DataFrame with accelerator-VC investment pairs
     """
     # Merge on company UUID to find two-stage investments
     two_stage_investments = pd.merge(
-        accelerated_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid']], 
-        vc_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid', 
+        left_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid']], 
+        right_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid', 
                        'company_name', 'category_groups_list', 'investment_type', 'total_funding_usd']], 
         on='org_uuid', 
         how='inner',
         suffixes=('_accelerator', '_vc')
     )
     
-    print(f"Created {two_stage_investments.shape[0]} accelerator-VC investment pairs")
-    print(f"Covering {two_stage_investments['org_uuid'].nunique()} unique companies")
+    print(f"Created {two_stage_investments.shape[0]} investment pairs")
+    print(f"Covering {two_stage_investments['org_uuid'].nunique()} unique investors")
     
     return two_stage_investments
