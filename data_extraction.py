@@ -271,8 +271,7 @@ def get_data_summary(data: Dict[str, pd.DataFrame]) -> Dict[str, Dict]:
     
     return summary
 
-def create_investment_pairs(left_side_investments: pd.DataFrame, 
-                               right_side_investments: pd.DataFrame) -> pd.DataFrame:
+def create_investment_pairs(left_side_investments: pd.DataFrame, right_side_investments: pd.DataFrame, suffix_left: str = 'left', suffix_right: str = 'right') -> pd.DataFrame:
     """
     Create accelerator-VC pairs following the clustering analysis approach.
     
@@ -290,7 +289,7 @@ def create_investment_pairs(left_side_investments: pd.DataFrame,
                        'company_name', 'category_groups_list', 'investment_type', 'total_funding_usd']], 
         on='org_uuid', 
         how='inner',
-        suffixes=('_accelerator', '_vc')
+        suffixes=('_' + suffix_left, '_' + suffix_right)
     )
     
     print(f"Created {two_stage_investments.shape[0]} investment pairs")
