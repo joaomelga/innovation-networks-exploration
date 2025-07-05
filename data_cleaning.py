@@ -29,12 +29,12 @@ def clean_companies_data(companies_df: pd.DataFrame) -> pd.DataFrame:
             if removed > 0:
                 print(f"Removed {removed} companies missing {col}")
     
-    # 2. Exclude companies founded after 2014 (as per paper methodology)
+    # 2. Exclude companies founded after 2017 (as per paper methodology + 3 years)
     if 'founded_year' in df.columns:
         before = len(df)
-        df = df[df['founded_year'] <= 2014]
+        df = df[df['founded_year'] <= 2017]
         removed = before - len(df)
-        print(f"Removed {removed} companies founded after 2014")
+        print(f"Removed {removed} companies founded after 2017")
     
     # 3. Exclude companies that had an "exit" (bankruptcy or takeover)
     if 'status' in df.columns:
