@@ -7517,7 +7517,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Data-Extraction-and-Cleaning-Tests">Data Extraction and Cleaning Tests<a class="anchor-link" href="#Data-Extraction-and-Cleaning-Tests">¶</a></h1><p>This notebook tests the data extraction and cleaning functions implemented according to the methodology from Dalle et al. (2025).</p>
+<h1 id="Data-Extraction,-Cleaning,-and-Explorantion">Data Extraction, Cleaning, and Explorantion<a class="anchor-link" href="#Data-Extraction,-Cleaning,-and-Explorantion">¶</a></h1><p>This notebook tests the data extraction and cleaning functions implemented according to the methodology from Dalle et al. (2025).</p>
 </div>
 </div>
 </div>
@@ -7637,6 +7637,30 @@ a.anchor-link {
 <pre>Loading raw data from France dataset...
 ✓ Loaded companies: 56797 rows, 43 columns
 ✓ Loaded funding_rounds: 14375 rows, 17 columns
+✓ Loaded companies: 56797 rows, 43 columns
+✓ Loaded funding_rounds: 14375 rows, 17 columns
+✓ Loaded investments: 23420 rows, 35 columns
+✓ Loaded investors: 4564 rows, 12 columns
+
+==================================================
+RAW DATA OVERVIEW
+==================================================
+
+COMPANIES:
+Shape: (56797, 43)
+Columns: ['uuid', 'name', 'cb_url', 'rank', 'homepage_url']...
+
+FUNDING_ROUNDS:
+Shape: (14375, 17)
+Columns: ['uuid', 'name', 'country_code', 'country', 'region']...
+
+INVESTMENTS:
+Shape: (23420, 35)
+Columns: ['uuid', 'funding_round_uuid', 'investor_uuid', 'is_lead_investor', 'investor_name']...
+
+INVESTORS:
+Shape: (4564, 12)
+Columns: ['uuid', 'name', 'city', 'region', 'country_code']...
 ✓ Loaded investments: 23420 rows, 35 columns
 ✓ Loaded investors: 4564 rows, 12 columns
 
@@ -7825,6 +7849,20 @@ Filtered investments: 20650
 
 4. Excluding accelerator-only companies...
 Excluding companies with accelerator-only funding...
+Companies with accelerator-only funding: 116
+Companies after excluding accelerator-only: 2361
+Investments after excluding accelerator-only: 20505
+
+5. Final consistency check...
+
+FINAL SAMPLE:
+Companies: 2361
+Investments: 10163
+Unique investors: 2343
+
+==================================================
+CLEANING PROCESS COMPLETED
+==================================================
 Companies with accelerator-only funding: 116
 Companies after excluding accelerator-only: 2361
 Investments after excluding accelerator-only: 20505
@@ -8818,6 +8856,7 @@ Covering 232 unique investors
 <li><strong>State Specialization</strong></li>
 <li><strong>Cross-Stage Progression</strong></li>
 </ul>
+<p><strong>TO DO</strong>: clustering coefficient</p>
 <p>... continue it</p>
 </div>
 </div>
@@ -9666,6 +9705,13 @@ Series A-B VC Network Structure:
   Cross-stage connections: 2,963
   Network density: 0.017778
   Multi-stage VCs: 235
+
+Series A-B VC Network Structure:
+  Series A VCs: 323
+  Series B VCs: 516
+  Cross-stage connections: 2,963
+  Network density: 0.017778
+  Multi-stage VCs: 235
 </pre>
 </div>
 </div>
@@ -9994,6 +10040,21 @@ Density Comparison Across Network Types:
 Relative Integration Levels:
   Accelerator-VC vs VC-VC: 1.74x
   Series A-B vs VC-VC: 1.68x
+
+VC-VC Network Structure:
+  Unique VCs: 1,180
+  Partnership edges: 7,360
+  Network density: 0.010581
+  Connected components: 125
+
+Density Comparison Across Network Types:
+  VC-VC density: 0.010581
+  Accelerator-VC density: 0.018430
+  Series A-B VC density: 0.017778
+
+Relative Integration Levels:
+  Accelerator-VC vs VC-VC: 1.74x
+  Series A-B vs VC-VC: 1.68x
 </pre>
 </div>
 </div>
@@ -10026,7 +10087,7 @@ Relative Integration Levels:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Compare all bipartite networks systematically</span>
@@ -10035,7 +10096,7 @@ Relative Integration Levels:
     <span class="s1">'Series_A-B_VCs'</span><span class="p">:</span> <span class="n">series_ab_analysis</span>
 <span class="p">})</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Comprehensive Network Comparison:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Network Comparison:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">35</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">networks_comparison</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">'</span><span class="si">%.4f</span><span class="s1">'</span><span class="p">))</span>
 
