@@ -627,11 +627,104 @@ def create_pseudo_bipartite_graph(df, node_set_1_col, node_set_2_col, weight_col
         return create_bipartite_graph(df, node_set_1_col, node_set_2_col, weight_col, 
                                     set_1_name, set_2_name)
 
-def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weight_col=None,
-                                      set_1_name='set_1', set_2_name='set_2', 
-                                      handle_overlap='suffix'):
+def compute_connectance(G):
     """
-    Comprehensive analysis of bipartite network structure with overlap handling.
+    Compute connectance (proportion of realized links to possible links).
+    
+    Parameters:
+    -----------
+    G : networkx.Graph
+        Bipartite graph
+    
+    Returns:
+    --------
+    float
+        Connectance value (0-1)
+    """
+    bip_info = is_bipartite_graph(G)
+    
+    if not bip_info['is_bipartite']:
+        raise ValueError("Graph is not bipartite")
+    
+    set_0_size = len(bip_info['set_0'])
+    set_1_size = len(bip_info['set_1'])
+    
+    max_possible_links = set_0_size * set_1_size
+    actual_links = G.number_of_edges()
+    
+    connectance = actual_links / max_possible_links if max_possible_links > 0 else 0
+    
+    return connectance
+
+def compute_bipartite_modularity(G, communities=None):
+    """
+    Compute modularity for bipartite networks using Barber's method.
+    
+    Parameters:
+    -----------
+    G : networkx.Graph
+        Bipartite graph
+    communities : dict, optional
+        Node to community mapping. If None, uses greedy optimization.
+    
+    Returns:
+    --------
+    dict
+        Dictionary with modularity value and community structure
+    """
+    bip_info = is_bipartite_graph(G)
+    
+    if not bip_info['is_bipartite']:
+        raise ValueError("Graph is not bipartite")
+    
+    if communities is None:
+        # Use greedy modularity optimization as baseline
+        communities = nx.community.greedy_modularity_communities(G)
+        community_dict = {}
+        for i, community in enumerate(communities):
+            for node in community:
+                community_dict[node] = i
+    else:
+        community_dict = communities
+    
+    # Compute bipartite modularity using Barber's formula
+    m = G.number_of_edges()
+    modularity = 0
+    
+    if m == 0:
+        return {'modularity': 0, 'communities': community_dict}
+    
+    set_0 = bip_info['set_0']
+    set_1 = bip_info['set_1']
+    
+    for node_i in set_0:
+        for node_j in set_1:
+            # Actual edge
+            A_ij = 1 if G.has_edge(node_i, node_j) else 0
+            
+            # Expected edge probability
+            k_i = G.degree(node_i)
+            k_j = G.degree(node_j)
+            P_ij = (k_i * k_j) / (2 * m)
+            
+            # Community indicator
+            delta = 1 if community_dict.get(node_i) == community_dict.get(node_j) else 0
+            
+            modularity += (A_ij - P_ij) * delta
+    
+    modularity = modularity / (2 * m) if m > 0 else 0
+    
+    return {
+        'modularity': modularity,
+        'communities': community_dict,
+        'num_communities': len(set(community_dict.values()))
+    }
+
+def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weight_col=None,
+                                     set_1_name='set_1', set_2_name='set_2', 
+                                     handle_overlap='suffix'):
+    """
+    Robust bipartite analysis with overlap handling and ecological metrics.
     
     Parameters:
     -----------
@@ -653,22 +746,152 @@ def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weigh
     Returns:
     --------
     dict
-        Comprehensive analysis results including overlap information
+        Comprehensive analysis results with ecological metrics
     """
-    # Check for overlaps first
-    overlap_info = check_bipartite_overlap(df, node_set_1_col, node_set_2_col)
-    
     # Create bipartite graph with overlap handling
     G = create_pseudo_bipartite_graph(df, node_set_1_col, node_set_2_col, weight_col, 
                                     set_1_name, set_2_name, handle_overlap)
     
-    results = {
-        'graph': G,
-        'overlap_info': overlap_info,
-        'basic_metrics': compute_bipartite_metrics(G),
-        'nestedness': compute_nestedness_nodf(G),
-        'cross_assortativity': compute_cross_assortativity(G),
-        'projections': compute_bipartite_projections(G)
-    }
+    # Basic metrics
+    basic_metrics = compute_bipartite_metrics(G)
     
-    return results
+    # Ecological metrics
+    connectance = compute_connectance(G)
+    nestedness = compute_nestedness_nodf(G)
+    modularity_result = compute_bipartite_modularity(G)
+    cross_assort = compute_cross_assortativity(G)
+    projections = compute_bipartite_projections(G)
+    
+    # Enhanced metrics
+    basic_metrics['connectance'] = connectance
+    basic_metrics['modularity'] = modularity_result['modularity']
+    basic_metrics['num_communities'] = modularity_result['num_communities']
+    
+    return {
+        'graph': G,
+        'basic_metrics': basic_metrics,
+        'nestedness': nestedness,
+        'modularity_analysis': modularity_result,
+        'cross_assortativity': cross_assort,
+        'projections': projections,
+        'ecological_summary': {
+            'connectance': connectance,
+            'nestedness_nodf': nestedness['nodf_total'],
+            'modularity': modularity_result['modularity'],
+            'cross_assortativity': cross_assort['cross_assortativity']
+        }
+    }
+
+def summarize_bipartite_ecology(analysis_result):
+    """
+    Create ecological interpretation summary for bipartite network.
+    
+    Parameters:
+    -----------
+    analysis_result : dict
+        Result from analyze_bipartite_structure_robust
+    
+    Returns:
+    --------
+    dict
+        Ecological interpretation summary
+    """
+    metrics = analysis_result['ecological_summary']
+    
+    # Connectance interpretation
+    connectance = metrics['connectance']
+    if connectance > 0.3:
+        connectance_desc = "High connectance - dense network"
+    elif connectance > 0.1:
+        connectance_desc = "Medium connectance - moderately connected"
+    else:
+        connectance_desc = "Low connectance - sparse network"
+    
+    # Nestedness interpretation
+    nestedness = metrics['nestedness_nodf']
+    if nestedness > 60:
+        nestedness_desc = "Highly nested - mutualistic structure"
+    elif nestedness > 30:
+        nestedness_desc = "Moderately nested - mixed structure"
+    else:
+        nestedness_desc = "Low nestedness - modular structure"
+    
+    # Modularity interpretation
+    modularity = metrics['modularity']
+    if modularity > 0.3:
+        modularity_desc = "High modularity - strong community structure"
+    elif modularity > 0.1:
+        modularity_desc = "Medium modularity - moderate communities"
+    else:
+        modularity_desc = "Low modularity - weak community structure"
+    
+    # Overall ecological type
+    if nestedness > 40 and modularity < 0.2:
+        network_type = "Mutualistic (like pollinator networks)"
+    elif modularity > 0.3 and nestedness < 30:
+        network_type = "Modular (compartmentalized)"
+    else:
+        network_type = "Mixed architecture"
+    
+    return {
+        'network_type': network_type,
+        'connectance_interpretation': connectance_desc,
+        'nestedness_interpretation': nestedness_desc,
+        'modularity_interpretation': modularity_desc,
+        'resilience_prediction': "High resilience to specialist loss, vulnerable to generalist loss" if nestedness > 40 else "Variable resilience patterns"
+    }
+
+def create_accelerator_vc_pairs(investments_df, funding_rounds_df, accelerators, vcs, min_shared_investments=2):
+    """
+    Create accelerator-VC pairs based on co-investment patterns.
+    
+    Parameters:
+    -----------
+    investments_df : pandas.DataFrame
+        Investment data
+    funding_rounds_df : pandas.DataFrame
+        Funding rounds data
+    accelerators : list
+        List of accelerator names
+    vcs : list
+        List of VC names
+    min_shared_investments : int
+        Minimum number of shared investments to create edge
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        DataFrame with accelerator-VC pairs and shared investment counts
+    """
+    # Merge investments with funding rounds
+    investment_data = investments_df.merge(
+        funding_rounds_df[['uuid', 'company_uuid']], 
+        left_on='funding_round_uuid', 
+        right_on='uuid', 
+        how='left'
+    )
+    
+    # Filter for accelerators and VCs
+    acc_investments = investment_data[
+        investment_data['investor_name'].isin(accelerators)
+    ][['investor_name', 'company_uuid']].drop_duplicates()
+    
+    vc_investments = investment_data[
+        investment_data['investor_name'].isin(vcs)
+    ][['investor_name', 'company_uuid']].drop_duplicates()
+    
+    # Find co-investments
+    co_investments = acc_investments.merge(
+        vc_investments, 
+        on='company_uuid', 
+        suffixes=('_acc', '_vc')
+    )
+    
+    # Count shared investments per accelerator-VC pair
+    pairs = co_investments.groupby(['investor_name_acc', 'investor_name_vc']).size().reset_index()
+    pairs.columns = ['accelerator', 'vc', 'shared_investments']
+    
+    # Filter by minimum threshold
+    pairs = pairs[pairs['shared_investments'] >= min_shared_investments]
+    
+    return pairs
