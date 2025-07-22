@@ -777,6 +777,8 @@ def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weigh
         'ecological_summary': {
             'connectance': connectance,
             'nestedness_nodf': nestedness['nodf_total'],
+            'nestedness_nodf_acc': nestedness['nodf_rows'],
+            'nestedness_nodf_vc': nestedness['nodf_cols'],
             'modularity': modularity_result['modularity'],
             'cross_assortativity': cross_assort['cross_assortativity']
         }

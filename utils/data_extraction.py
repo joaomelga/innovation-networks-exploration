@@ -3,7 +3,7 @@ import numpy as np
 from typing import Dict, List, Tuple, Optional
 import os
 
-def load_france_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
+def load_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
     """
     Load all CSV files from the France data directory.
     
