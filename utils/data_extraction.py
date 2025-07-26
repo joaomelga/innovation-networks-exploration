@@ -286,7 +286,7 @@ def create_investment_pairs(left_side_investments: pd.DataFrame, right_side_inve
     two_stage_investments = pd.merge(
         left_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid']], 
         right_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid', 
-                       'company_name', 'category_groups_list', 'investment_type', 'total_funding_usd']], 
+                       'company_name', 'category_groups_list', 'investment_type', 'total_funding_usd', 'announced_year']], 
         on='org_uuid', 
         how='inner',
         suffixes=('_' + suffix_left, '_' + suffix_right)

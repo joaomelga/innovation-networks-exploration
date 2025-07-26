@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple, Optional
 def clean_companies_data(companies_df: pd.DataFrame) -> pd.DataFrame:
     """
     Clean companies dataset according to the paper methodology.
-    Excludes companies with incomplete information, founded after 2014, or with exit status.
+    Excludes companies with incomplete information, founded after 2017, or with exit status.
     
     Args:
         companies_df: Raw companies DataFrame
@@ -209,7 +209,7 @@ def create_final_sample(data: Dict[str, pd.DataFrame],
     Create the final cleaned sample following the paper methodology exactly.
     
     This implements the complete cleaning process described in the paper:
-    1. Clean companies data (remove incomplete info, post-2014 founding, exits)
+    1. Clean companies data (remove incomplete info, post-2017 founding, exits)
     2. Clean funding data (ensure consistency)
     3. Apply $150,000 funding threshold
     4. Exclude accelerator-only companies (prevent endogeneity bias)
