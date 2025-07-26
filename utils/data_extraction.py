@@ -36,6 +36,39 @@ def load_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
     
     return data
 
+def load_clean_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
+    """
+    Load all CSV files from the France data directory.
+    
+    Args:
+        data_dir: Path to the directory containing CSV files
+        
+    Returns:
+        Dictionary containing all loaded DataFrames
+    """
+    data_files = {
+        'companies': 'companies_clean.csv',
+        'funding_rounds': 'funding_rounds_clean.csv',
+        'investments': 'investments_clean.csv',
+        'investors': 'investors_clean.csv'
+    }
+    
+    data = {}
+    
+    for key, filename in data_files.items():
+        filepath = os.path.join(data_dir, filename)
+        if os.path.exists(filepath):
+            try:
+                df = pd.read_csv(filepath, encoding='utf-8')
+                data[key] = df
+                # print(f"✓ Loaded {key}: {df.shape[0]} rows, {df.shape[1]} columns")
+            except Exception as e:
+                print(f"✗ Error loading {filename}: {e}")
+        else:
+            print(f"✗ File not found: {filepath}")
+    
+    return data
+
 def extract_accelerator_investments(investments_df: pd.DataFrame) -> pd.DataFrame:
     """
     Extract investments from accelerators/incubators.
