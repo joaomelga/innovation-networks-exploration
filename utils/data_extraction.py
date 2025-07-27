@@ -317,7 +317,7 @@ def create_investment_pairs(left_side_investments: pd.DataFrame, right_side_inve
     """
     # Merge on company UUID to find two-stage investments
     two_stage_investments = pd.merge(
-        left_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid']], 
+        left_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid', 'total_funding_usd', 'announced_year']], 
         right_side_investments[['uuid', 'investor_uuid', 'investor_name', 'investor_types', 'org_uuid', 
                        'company_name', 'category_groups_list', 'investment_type', 'total_funding_usd', 'announced_year']], 
         on='org_uuid', 
