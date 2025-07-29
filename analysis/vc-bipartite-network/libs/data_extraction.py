@@ -133,10 +133,7 @@ def extract_vc_investments(investments_df: pd.DataFrame) -> pd.DataFrame:
         DataFrame containing only VC investments
     """
     # Filter for VC investments, excluding accelerators/incubators
-    vc_mask = (
-        investments_df['investor_types'].str.contains('venture', case=False, na=False) &
-        ~investments_df['investor_types'].str.contains('accelerator|incubator', case=False, na=False)
-    )
+    vc_mask = (investments_df['investor_types'].str.contains('venture', case=False, na=False))
     
     vc_investments = investments_df[vc_mask].copy()
     

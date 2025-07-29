@@ -759,8 +759,8 @@ def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weigh
     connectance = compute_connectance(G)
     nestedness = compute_nestedness_nodf(G)
     modularity_result = compute_bipartite_modularity(G)
-    cross_assort = compute_cross_assortativity(G)
-    projections = compute_bipartite_projections(G)
+    # cross_assort = compute_cross_assortativity(G)
+    # projections = compute_bipartite_projections(G)
     
     # Enhanced metrics
     basic_metrics['connectance'] = connectance
@@ -772,15 +772,15 @@ def analyze_bipartite_structure_robust(df, node_set_1_col, node_set_2_col, weigh
         'basic_metrics': basic_metrics,
         'nestedness': nestedness,
         'modularity_analysis': modularity_result,
-        'cross_assortativity': cross_assort,
-        'projections': projections,
+        # 'cross_assortativity': cross_assort,
+        # 'projections': projections,
         'ecological_summary': {
             'connectance': connectance,
             'nestedness_nodf': nestedness['nodf_total'],
             'nestedness_nodf_acc': nestedness['nodf_rows'],
             'nestedness_nodf_vc': nestedness['nodf_cols'],
             'modularity': modularity_result['modularity'],
-            'cross_assortativity': cross_assort['cross_assortativity']
+            # 'cross_assortativity': cross_assort['cross_assortativity']
         }
     }
 
