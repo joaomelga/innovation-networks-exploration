@@ -337,6 +337,6 @@ def create_investment_pairs(left_side_investments: pd.DataFrame, right_side_inve
     two_stage_investments = merged.drop(columns='pairs')
     
     print(f"Created {two_stage_investments.shape[0]} investment pairs")
-    print(f"Covering {two_stage_investments['org_uuid'].nunique()} unique investors")
+    print(f"Covering {two_stage_investments['org_uuid'].nunique()} unique statups")
     
     return two_stage_investments
