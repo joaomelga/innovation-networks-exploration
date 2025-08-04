@@ -4,8 +4,12 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{cite}
 \usepackage{url}
+
+\usepackage{setspace}
+\onehalfspacing
 
 \title{Venture Capital Network Structure and Nestedness Analysis}
 \author{}
@@ -21,7 +25,9 @@
 
 This study uses data from Crunchbase, a broad database containing information about startups, venture capital firms, and investment rounds. The dataset includes information about companies, investors, investments, and funding rounds in the United States market. International venture capital firms from other countries also appear in the dataset when they participate in US startup investments.
 
-The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process implemented in our \texttt{data\_cleaning.py} module includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
+The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process implemented includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
+
+@todo: maybe remove following paragraph
 
 To avoid endogeneity bias, companies that received funding only from accelerators were excluded from the analysis, following the approach described by Dalle et al. \cite{Dalle2025}. This ensures that observed network patterns reflect genuine investor relationships rather than program-specific effects.
 
@@ -33,7 +39,9 @@ The analysis focuses on venture capital co-investment patterns across different 
     \item Late stages: Series B through Series I
 \end{itemize}
 
-A bipartite network is constructed where nodes represent venture capital firms and edges represent co-investment relationships in the same company. The network is bipartite because it connects two distinct sets of investors: those participating in early-stage rounds (right nodes) and those participating in late-stage rounds (left nodes). This approach, implemented in our \texttt{network\_analysis.py} module, allows us to study how early-stage and late-stage investors interact in the investment ecosystem.
+A bipartite network is constructed where nodes represent venture capital firms and edges represent co-investment relationships in the same company. The network is bipartite because it connects two distinct sets of investors: those participating in early-stage rounds (right nodes) and those participating in late-stage rounds (left nodes).
+
+This approach allows us to study how early-stage and late-stage investors interact in the investment ecosystem.
 
 The bipartite graph $G = (U \cup V, E)$ consists of:
 \begin{align}
@@ -42,7 +50,7 @@ V &= \{v_1, v_2, \ldots, v_n\} \text{ (early-stage VCs)} \\
 E &\subseteq U \times V \text{ (co-investment relationships)}
 \end{align}
 
-To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization.
+To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization. Further more,  Investors that participated in both early and late stages receive a suffix so they can be threated as distinct agents for each phase.
 
 \subsection{Community Detection}
 
@@ -61,7 +69,7 @@ The algorithm identifies communities of venture capital firms that frequently co
 
 Nestedness is a structural property commonly observed in ecological networks \cite{AlmeidaNeto2008} that describes the tendency for specialists to interact with a subset of the partners of generalists. In the context of venture capital networks, nestedness would indicate that investors with fewer connections tend to co-invest with a subset of the partners of more connected investors.
 
-We measure nestedness using the NODF (Nestedness based on Overlap and Decreasing Fill) metric \cite{AlmeidaNeto2008}, implemented in our \texttt{nestedness\_calculator.py} module. For a bipartite adjacency matrix $M$ with rows and columns sorted by decreasing degree, NODF is calculated as:
+We measure nestedness using the NODF (Nestedness based on Overlap and Decreasing Fill) metric \cite{AlmeidaNeto2008}. For a bipartite adjacency matrix $M$ with rows and columns sorted by decreasing degree, NODF is calculated as:
 
 \begin{equation}
 NODF = \frac{NODF_{rows} + NODF_{columns}}{2}
@@ -74,6 +82,8 @@ NODF_{columns} &= \frac{100}{C(C-1)/2} \sum_{i=1}^{C-1} \sum_{j=i+1}^{C} \frac{|
 \end{align}
 
 Here, $R$ and $C$ are the number of rows and columns, $N_i$ represents the set of connections for node $i$, and $k_i$ is the degree of node $i$.
+
+With this method, NODF vary between 0 and 1 (perfect nestedness).
 
 \subsection{Statistical Significance Testing}
 
@@ -91,61 +101,159 @@ where $\mu_{null}$ and $\sigma_{null}$ are the mean and standard deviation of th
 
 \subsection{Network Characteristics}
 
-The analysis identifies a substantial venture capital co-investment network comprising [FIGURE 1: Network statistics to be inserted]. The bipartite network structure reveals clear separation between early-stage and late-stage investor communities, with varying degrees of connectivity between these groups.
+\newcommand{\numCompanies}{22,527}
+\newcommand{\numInvestors}{38,843}
+\newcommand{\numInvestments}{147,832}
+\newcommand{\numFundingRounds}{268,283}
 
-[FIGURE 2: Network visualization showing bipartite structure]
+The Crunchbase dataset, following the cleaning processes described in the "Methodology" section, yields \numInvestments{} investment registers, representing transactions among \numCompanies{} companies and \numInvestors{} investors across \numFundingRounds{} funding rounds.
 
-Community detection using greedy modularity optimization identifies multiple investor communities of varying sizes. The algorithm discovers [NUMBER] distinct communities, with the largest communities containing over [NUMBER] investors each.
+\newcommand{\numVCInvestments}{104,618}
+\newcommand{\numCompaniesWithVCFund}{16,932}
+
+Exclusion of non-venture capital investors reduces the dataset to \numVCInvestments{} investment records and \numCompaniesWithVCFund{} unique companies with venture capital funding.
+
+\newcommand{\invPairs}{169,679}
+\newcommand{\invPairsUniqueStartups}{3,666}
+
+The division of venture capital firms into early-stage and late-stage investor groups results in \invPairs{} investment pairs comprising \invPairsUniqueStartups{} unique startups.
+
+@todo: add network visualization showing bipartite structure
+
+\newcommand{\numCommunities}{175}
+\newcommand{\numTopCommunities}{5}
+\newcommand{\numCommunitiesThreshold}{150}
 
 \subsection{Community Structure and Size Distribution}
 
-The community size distribution follows a typical power-law pattern observed in many social networks. The top 10 communities by size account for the majority of investors in the network, suggesting a hierarchical organization within the venture capital ecosystem.
+Community detection using greedy modularity optimization identifies \numCommunities{} distinct communities, with the largest communities containing over 4000 investors pairs each.
 
-[FIGURE 3: Community size distribution]
+Analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. This threshold excludes smaller communities that may not provide reliable nestedness measurements due to limited connectivity patterns. Such a threshold yields \numTopCommunities{} communities.
 
-Analysis focuses on communities with at least 100 nodes to ensure statistical power for nestedness analysis. This threshold excludes smaller communities that may not provide reliable nestedness measurements due to limited connectivity patterns.
+Table \ref{tab:community_sizes} shows the size distribution of the largest communities identified by the modularity optimization algorithm.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Community ID} & \textbf{Number of Pairs} \\
+\hline
+0 & 4,248 \\
+1 & 4,089 \\
+2 & 3,959 \\
+3 & 979 \\
+4 & 188 \\
+5 & 155 \\
+6 & 137 \\
+7 & 122 \\
+\hline
+\end{tabular}
+\caption{Size distribution of the largest investor communities identified through greedy modularity optimization}
+\label{tab:community_sizes}
+\end{table}
+
+The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities. (@todo mention literature, as this phenomena is somehow well-known).
+
+The community size distribution follows a typical power-law pattern observed in many social networks, where the top \numTopCommunities{} communities by size account for the majority of investors in the network, suggesting a hierarchical organization within the venture capital ecosystem.
+
+@todo: add figure of community size distribution
 
 \subsection{Nestedness Findings}
 
-The nestedness analysis reveals significant heterogeneity across investor communities. Of the [NUMBER] communities analyzed, [NUMBER] show statistically significant nestedness (p < 0.05) compared to degree-preserving null models.
+\newcommand{\numCommAnalysedNestedness}{5}
 
-[FIGURE 4: Observed vs null nestedness scatter plot]
+The nestedness analysis reveals significant heterogeneity across investor communities. Of the \numCommAnalysedNestedness{} communities analyzed, 1 show statistically significant nestedness (p < 0.05) compared to degree-preserving null models.
 
-The distribution of Z-scores across communities indicates that most communities exhibit nestedness levels consistent with random networks, but several communities show substantially higher nestedness than expected by chance.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./assets/null-model-analysis-top-5.png}
+\caption{Observed vs null nestedness comparison for the top \numCommAnalysedNestedness{} communities. Each point represents a community, with observed NODF scores plotted against the mean null model NODF scores.}
+\label{fig:nestedness_comparison}
+\end{figure}
 
-[FIGURE 5: Z-score distribution histogram]
+% @todo: analyse Z-score. The distribution of Z-scores across communities indicates that most communities exhibit nestedness levels consistent with random networks, but several communities show substantially higher nestedness than expected by chance.
 
-Community [NUMBER] emerges as particularly interesting, showing the highest nestedness score (NODF = [VALUE]) with strong statistical significance (Z-score = [VALUE], p = [VALUE]). This community demonstrates a clear hierarchical structure where less connected investors tend to co-invest with a subset of the partners of more connected investors.
+\newcommand{\interestingCommunity}{2}
+\newcommand{\interestingCommunityNODF}{0.088}
+\newcommand{\interestingCommunityPValue}{0.00001}
 
-[FIGURE 6: Null model analysis for top nested community]
+Community \interestingCommunity{} emerges as particularly interesting, showing nestedness score (NODF = \interestingCommunityNODF{}) with strong statistical significance ( p = \interestingCommunityPValue{}). This community demonstrates a clear mutualistic structure where less connected investors tend to co-invest with a subset of the partners of more connected investors.
 
 \subsection{Community Characterization}
 
 Analysis of the geographic and sectoral characteristics of the most nested communities reveals distinct patterns:
 
+@todo: mention only first 3 communities are being compared
+
 \subsubsection{Geographic Distribution}
 
 The highly nested communities show concentration in specific geographic regions, with [DESCRIPTION of geographic patterns].
 
-[FIGURE 7: Geographic distribution across communities]
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./assets/investor-left-countries.png}
+    \caption{Late-stage investors geographic distribution}
+    \label{fig:late_stage_geo}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./assets/investor-right-countries.png}
+    \caption{Early-stage investors geographic distribution}
+    \label{fig:early_stage_geo}
+\end{subfigure}
+\caption{Geographic distribution of venture capital investors across the largest communities, showing distinct regional clustering patterns between late-stage (left) and early-stage (right) investor groups.}
+\label{fig:geographic_distribution}
+\end{figure}
 
 \subsubsection{Investment Stage Preferences}
 
 Communities differ in their focus on specific investment stages. The most nested community shows [DESCRIPTION of stage preferences].
 
-[FIGURE 8: Investment stage distribution]
+Figure \ref{fig:investment_stage_distribution} illustrates the distribution of investment stages within each community, revealing distinct patterns in how early-stage and late-stage investors are distributed across different funding rounds.
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./assets/late-investment-types-distribution.png}
+    \caption{Late-stage investment types distribution}
+    \label{fig:late_stage_types}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./assets/early-investment-types-distribution.png}
+    \caption{Early-stage investment types distribution}
+    \label{fig:early_stage_types}
+\end{subfigure}
+\caption{Investment stage preferences across the largest communities, showing the distribution of investment types for late-stage (left) and early-stage (right) investor groups.}
+\label{fig:investment_stage_distribution}
+\end{figure}
 
 \subsubsection{Sectoral Focus}
 
 Sectoral analysis reveals that nested communities often specialize in particular technology sectors or industries.
 
-[FIGURE 9: Sectoral distribution across communities]
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./assets/sectorial-distribution.png}
+\caption{Sectoral distribution across the largest communities, showing industry specialization patterns within different investor groups.}
+\label{fig:sectoral_distribution}
+\end{figure}
 
 \subsubsection{Funding Characteristics}
 
 The funding patterns within nested communities differ from random networks, with [DESCRIPTION of funding patterns].
 
-[FIGURE 10: Funding distribution analysis]
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{./assets/funding-characteristics.png}
+\caption{Funding characteristics across the largest communities, showing distribution patterns of funding amounts and investment frequency within different investor groups.}
+\label{fig:funding_characteristics}
+\end{figure}
 
 \subsection{Implications and Future Directions}
 
