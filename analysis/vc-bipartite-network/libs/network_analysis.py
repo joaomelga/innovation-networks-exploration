@@ -69,7 +69,7 @@ def create_bipartite_graph(df, node_set_1_col, node_set_2_col, weight_col=None,
     
     return G
 
-def is_bipartite_graph(G):
+def get_bipartite_sets(G):
     """
     Check if a graph is bipartite and return partition information.
     
@@ -122,7 +122,7 @@ def compute_bipartite_projections(G, weighted=True):
     dict
         Dictionary with 'projection_0', 'projection_1', and metadata
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
@@ -160,7 +160,7 @@ def compute_bipartite_metrics(G):
     dict
         Dictionary containing various bipartite metrics
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
@@ -220,7 +220,7 @@ def compute_nestedness_nodf(G):
     dict
         Dictionary with NODF score and component scores
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
@@ -304,7 +304,7 @@ def compute_cross_assortativity(G):
     dict
         Dictionary with assortativity metrics
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
@@ -398,7 +398,7 @@ def visualize_bipartite_graph(G, layout='spring', figsize=(12, 8),
     edge_alpha : float
         Edge transparency
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         print("Warning: Graph is not bipartite")
@@ -641,7 +641,7 @@ def compute_connectance(G):
     float
         Connectance value (0-1)
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
@@ -672,7 +672,7 @@ def compute_bipartite_modularity(G, communities=None):
     dict
         Dictionary with modularity value and community structure
     """
-    bip_info = is_bipartite_graph(G)
+    bip_info = get_bipartite_sets(G)
     
     if not bip_info['is_bipartite']:
         raise ValueError("Graph is not bipartite")
