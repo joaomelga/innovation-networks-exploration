@@ -3,44 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: references.bib
-You've used 4 entries,
+Warning--empty journal in Theophile2024
+You've used 7 entries,
             2118 wiz_defined-function locations,
-            532 strings with 4843 characters,
-and the built_in function-call counts, 1451 in all, are:
-= -- 139
-> -- 82
+            557 strings with 5310 characters,
+and the built_in function-call counts, 2378 in all, are:
+= -- 234
+> -- 120
 < -- 0
-+ -- 34
-- -- 28
-* -- 117
-:= -- 257
-add.period$ -- 13
-call.type$ -- 4
-change.case$ -- 25
++ -- 49
+- -- 40
+* -- 184
+:= -- 415
+add.period$ -- 23
+call.type$ -- 7
+change.case$ -- 40
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 43
-empty$ -- 100
-format.name$ -- 28
-if$ -- 285
+cite$ -- 8
+duplicate$ -- 75
+empty$ -- 173
+format.name$ -- 40
+if$ -- 472
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 4
-newline$ -- 24
-num.names$ -- 8
-pop$ -- 18
+int.to.str$ -- 7
+missing$ -- 7
+newline$ -- 40
+num.names$ -- 14
+pop$ -- 30
 preamble$ -- 1
-purify$ -- 21
+purify$ -- 33
 quote$ -- 0
-skip$ -- 31
+skip$ -- 53
 stack$ -- 0
-substring$ -- 96
-swap$ -- 4
+substring$ -- 167
+swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
-warning$ -- 0
-while$ -- 13
-width$ -- 5
-write$ -- 47
+type$ -- 28
+warning$ -- 1
+while$ -- 23
+width$ -- 8
+write$ -- 80
+(There was 1 warning)

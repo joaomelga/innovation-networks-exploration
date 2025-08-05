@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1754303572.3992 "main.aux" "main.bbl" "main" 1754303575.18878 0
-  "./references.bib" 1754300962 1716 8f6d6ec858c192abba2568f9044d48e9 ""
+["bibtex main"] 1754426091.19092 "main.aux" "main.bbl" "main" 1754426093.92953 0
+  "./references.bib" 1754426049 2328 8d6b6b63eb49f7bfaa6d4c53ac13c9b3 ""
   "c:/texlive/2025/texmf-dist/bibtex/bst/base/plain.bst" 1754156441 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1754303574 10195 f0eb9a3ba7a3d9ef5bf608b215cf545a "pdflatex"
+  "main.aux" 1754426093 10472 5e202f8590d7819c97bc8a62c72ddf6b "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1754303572.81576 "c:/Projects/ATC/memoire/texts/main.tex" "main.pdf" "main" 1754303575.18931 0
+["pdflatex"] 1754426091.611 "c:/Projects/ATC/memoire/texts/main.tex" "main.pdf" "main" 1754426093.93024 0
   "assets/early-investment-types-distribution.png" 1754298871 47637 d03b53a91f17e54450cb37070a73c2c7 ""
   "assets/funding-characteristics.png" 1754299223 166064 4c36ff048ed4ffddc5abec8655b57bc3 ""
   "assets/investor-left-countries.png" 1754297861 52626 ace61f374f1e53a11bfbb26b1e5c0681 ""
@@ -15,7 +15,7 @@
   "assets/late-investment-types-distribution.png" 1754298838 50090 dbde2f92b171074a52067e81c40efd5d ""
   "assets/null-model-analysis-top-5.png" 1754297188 311933 791e1511caf24e04d7761bd0f369cf79 ""
   "assets/sectorial-distribution.png" 1754299161 61969 f3e3682a9d6da16f2ca227d068551719 ""
-  "c:/Projects/ATC/memoire/texts/main.tex" 1754303569 19880 cb2ca2fa0b6dca9318b9a45ff0eafdad ""
+  "c:/Projects/ATC/memoire/texts/main.tex" 1754424553 19901 5d79b1b440a1a629757a2328c8da4088 ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1754156755 2971 def0b6c1f0b107b3b936def894055589 ""
   "c:/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1754156755 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1754157653 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -166,9 +166,10 @@
   "c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1754161581 5572357 f0501b90ab048e2d9ec23d8a1bf903b2 ""
   "c:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1754161799 3605798 b6657184bdefc9d967c817e99e846803 ""
   "c:/texlive/2025/texmf.cnf" 1754161563 713 e69b156964470283e0530f5060668171 ""
-  "main.aux" 1754303574 10195 f0eb9a3ba7a3d9ef5bf608b215cf545a "pdflatex"
-  "main.bbl" 1754303572 985 c28005e7704ef14500146a66b53f8258 "bibtex main"
-  "main.tex" 1754303569 19880 cb2ca2fa0b6dca9318b9a45ff0eafdad ""
+  "intro.tex" 1754426085 3282 f4d85f90fc49c02b2f81e4a0f6c67562 ""
+  "main.aux" 1754426093 10472 5e202f8590d7819c97bc8a62c72ddf6b "pdflatex"
+  "main.bbl" 1754426091 1530 a46867d3e92a36bf74a6bdd4568c46f6 "bibtex main"
+  "main.tex" 1754424553 19901 5d79b1b440a1a629757a2328c8da4088 ""
   (generated)
   "main.aux"
   "main.log"
