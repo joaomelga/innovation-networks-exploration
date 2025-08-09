@@ -7,7 +7,7 @@
 \newcommand{\numInvestments}{147,832}
 \newcommand{\numFundingRounds}{268,283}
 
-The Crunchbase dataset, following the cleaning processes described in the "Methodology" section, yields \numInvestments{} investment registers, representing transactions among \numCompanies{} companies and \numInvestors{} investors.
+The Crunchbase dataset, following the cleaning processes described in the \textit{Methodology} section, yields \numInvestments{} investment registers, representing transactions among \numCompanies{} companies and \numInvestors{} investors.
 
 % across \numFundingRounds{} funding rounds.
 
@@ -21,25 +21,24 @@ Exclusion of non-venture capital investors reduces the dataset to \numVCInvestme
 
 The division of venture capital firms into early-stage and late-stage investor groups results in \invPairs{} investment pairs comprising \invPairsUniqueStartups{} unique startups.
 
+\todo[inline]{Add explanation on why investment pairs are higher than investment record}
 \todo[inline]{Add network visualization showing bipartite structure}
 
-\newcommand{\numCommunities}{175}
+\newcommand{\numCommunities}{170}
 \newcommand{\numTopCommunities}{5}
 \newcommand{\numCommunitiesThreshold}{150}
 
-Community detection using greedy modularity optimization identifies \numCommunities{} distinct communities, with the largest communities containing over 4000 investors each, followed by 1 community with almost 1000 agents, 4 communities with more than 100 agents, and then several smaller groups.
+Community detection using greedy modularity optimization identifies around \numCommunities{} distinct communities (the number of communities oscilantes between 167 and 175 across different trials), with the largest communities containing over 4000 investors each, followed by 1 community with almost 1000 agents, 4 communities with more than 100 agents, and then several smaller groups, as summarized in Table~\ref{tab:community_sizes}.
 
-Analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. Such a threshold yields \numTopCommunities{} communities.
+In a first moment, analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. Such a threshold yields \numTopCommunities{} communities.
 
-Table \ref{tab:community_sizes} shows the size distribution of the largest communities identified by the modularity optimization algorithm.
+\todo[inline]{Add rationale of threshold}
 
-\todo[inline]{Rationale of threshold}
-
-\begin{table}[htbp]
+\begin{table}[htp]
 \centering
 \begin{tabular}{|c|c|}
 \hline
-\textbf{Community ID} & \textbf{Number of Pairs} \\
+\textbf{Community ID} & \textbf{Number of Investors} \\
 \hline
 0 & 4,248 \\
 1 & 4,089 \\
@@ -69,9 +68,9 @@ The largest three communities (0, 1, and 2) contain over 12,000 investors combin
 
 Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits statistically significant nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
 
-Figure \ref{fig:nestedness_comparison} presents the comparison between observed and null model nestedness scores, where each data point represents a distinct community positioned according to its observed NODF value against the corresponding null model mean.
+Figure \ref{fig:nestedness_comparison} presents the comparison between observed and null model nestedness scores, where each left plot represents a distinct community's null model NODF distribution accompanied by its observed NODF value.
 
-\begin{figure}[htbp]
+\begin{figure}[htp]
 \centering
 \includegraphics[width=1\textwidth]{./assets/null-model-analysis-top-5.png}
 \caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" stands for late stage investors, and "Right" for early stage ones.}
@@ -82,48 +81,45 @@ Figure \ref{fig:nestedness_comparison} presents the comparison between observed 
 \newcommand{\interestingCommunityNODF}{0.088}
 \newcommand{\interestingCommunityPValue}{0.00001}
 
-Community \interestingCommunity{} demonstrates the most pronounced nestedness, exhibiting an NODF score of \interestingCommunityNODF{} with statistical significance of p = \interestingCommunityPValue{}. This hierarchical structure indicates that less-connected investors maintain co-investment relationships with subsets of partners associated with highly-connected investors, creating a hierarchical investment pattern.
+Community \interestingCommunity{} demonstrates the most pronounced nestedness, exhibiting an NODF score of \interestingCommunityNODF{} with statistical significance of p = \interestingCommunityPValue{}. It indicates that there is a non-aleatory behavior where less-connected investors maintain co-investment relationships with subsets of partners associated with highly-connected investors, creating a sort of hierarchical investment pattern.
 
-Additionally, Community \interestingCommunity{} exhibits an asymmetric composition with a pronounced ratio favoring late-stage investors over early-stage investors. This imbalance contributes to the nested structure by creating hierarchical dependencies between investor types.
+Additionally, Community \interestingCommunity{} exhibits an asymmetric composition with a pronounced ratio favoring late-stage investors over early-stage investors. This imbalance may contribute to the nested structure by creating hierarchical dependencies between investor types.
 
-The following sections provide detailed characterization of this nested community through comparison with Communities 0 and 1, which serve as contrasting examples of similar-sized but differently structured investor networks.
+\todo[inline]{Explore how imbalance contribute to nestedness according to literature}
 
-
+The following sections provide detailed characterization of the 3 most relevant communities in terms of number of investors, while analysing in-depth the Community 2 (where nestedness were observed) through comparison with Communities 0 and 1, which serve as contrasting examples of similar-sized but differently structured investor networks.
 
 \subsection{Communities Characterization}
 
 Community boundaries are defined at the node level, meaning each investor belongs to exactly one community. However, edges (investment relationships) can span community boundaries when investors from different communities co-invest in the same startup.
 
-To analyze investment patterns, we classify each syndicated investment as either: (1) intra-community if all participating investors belong to the same community, or (2) cross-community if investors from multiple communities participate together.
-
-Table \ref{tab:investment_distribution} presents the resulting investment distribution across communities.
+To analyze investment patterns, we classify each syndicated investment as either: (1) intra-community if all participating investors belong to the same community, or (2) cross-community if investors from multiple communities participate together. Table \ref{tab:investment_distribution} presents the resulting investment distribution across communities.
 
 \begin{table}[htbp]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{Community} & \textbf{Number of Investments} & \textbf{Relative Proportion} \\
+\textbf{Community} & \textbf{Co-investments Pairs} & \textbf{Relative Proportion} \\
 \hline
 Community 0 & 32,164 & 19.4\% \\
 Community 1 & 17,301 & 10.4\% \\
 Community 2 & 55,863 & 33.6\% \\
-Community 3 & 2,904 & 1.7\% \\
 Cross-community & 58,329 & 35.1\% \\
-\hline
-\textbf{Total} & \textbf{166,561} & \textbf{100\%} \\
 \hline
 \end{tabular}
 \caption{Distribution of syndicated investments across investor communities}
 \label{tab:investment_distribution}
 \end{table}
 
-The analysis reveals important patterns in investment activity distribution. Community 2, which exhibits significant nestedness, accounts for the largest share of investments (33.6\%), containing approximately 50\% more investments than Community 0 and over three times more than Community 1. This concentration of investment activity within the nested community suggests that hierarchical investor structures may facilitate higher transaction volumes. Notably, cross-community investments represent over one-third of all transactions, indicating substantial interconnectedness across community boundaries.
+The analysis reveals important patterns in investment activity distribution. Community 2, which exhibits significant nestedness, accounts for the largest share of investments (33.6\%), containing approximately 50\% more investments than Community 0 and over three times more than Community 1. This concentration of investment activity within the nested community suggests that this pattern of investor structures may facilitate higher transaction volumes. Notably, cross-community investments represent over one-third of all transactions, indicating substantial interconnectedness across community boundaries.
 
 \subsubsection{Degree Distribution}
 
-Before examining community-level investment patterns, we analyze the degree distribution characteristics across the three largest investor communities. The degree distribution analysis reveals that all communities exhibit power-law patterns typical of scale-free networks, with notable differences in magnitude and scale parameters.
+Before furhter examining community-level investment patterns in-depth, we analyze the degree distribution characteristics across the three largest investor communities. Right away, it reveals that all communities exhibit power-law patterns typical of scale-free networks, with notable differences in magnitude and scale parameters.
 
 Communities 0 and 2 demonstrate remarkably similar degree distribution magnitudes, while Community 1 exhibits consistently lower magnitude values across all degree ranges. This pattern becomes particularly evident when examining the degree distributions on a logarithmic scale, where Community 2 shows the highest volume of nodes across all degree ranges, suggesting greater overall connectivity within this community.
+
+\todo[inline]{Compare connectance among communities}
 
 \begin{figure}[ht]
 \centering
@@ -132,7 +128,9 @@ Communities 0 and 2 demonstrate remarkably similar degree distribution magnitude
 \label{fig:node_degree_distributions}
 \end{figure}
 
-Analysis of high-degree nodes (95th percentile) reveals distinct patterns across communities. Community 0 demonstrates a mixed composition of hub nodes, with early-stage investors like Techstars-seed (degree: 582) and 500 Global-seed (degree: 564) dominating the highest positions, alongside significant late-stage players such as Gaingels-series\_b (degree: 509). Community 1 exhibits a more balanced distribution with Intel Capital maintaining strong presence across multiple investment stages, while Community 2 shows remarkable concentration among early-stage Silicon Valley investors, with SV Angel-seed achieving the highest connectivity (degree: 974) followed by other prominent early-stage firms including Andreessen Horowitz and Khosla Ventures.
+Analysis of high-degree nodes (95th percentile) reveals distinct patterns across communities. Community 0 demonstrates a mixed composition of hub nodes, with early-stage investors like Techstars-seed (degree: 582) and 500 Global-seed (degree: 564) dominating the highest positions, alongside significant late-stage players such as Gaingels-series\_b (degree: 509). 
+
+Community 1 exhibits a more balanced distribution with Intel Capital maintaining strong presence across multiple investment stages, while Community 2 shows remarkable concentration among early-stage Silicon Valley investors, with SV Angel-seed achieving the highest connectivity (degree: 974) followed by other prominent early-stage firms including Andreessen Horowitz and Khosla Ventures.
 
 Table \ref{tab:high_degree_nodes} presents the top high-degree nodes for each community, highlighting the structural differences in hub organization.
 
@@ -165,7 +163,7 @@ Table \ref{tab:high_degree_nodes} presents the top high-degree nodes for each co
 \label{tab:high_degree_nodes}
 \end{table}
 
-The relationship between degree centrality and investment activity demonstrates a positive correlation across all communities, with higher-degree nodes exhibiting greater investment frequency. This pattern suggests that network position, as measured by degree centrality, serves as a reliable predictor of investment activity levels within the venture capital ecosystem.
+As per Figure \ref{fig:degree_vs_activity}, the relationship between degree centrality and investment activity demonstrates a positive correlation across all communities, with higher-degree nodes exhibiting greater investment frequency. This pattern suggests that network position, as measured by degree centrality, serves as a reliable predictor of investment activity levels within the venture capital ecosystem.
 
 \todo[inline]{Add more centrality metrics}
 
@@ -182,30 +180,57 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 
 \todo[inline]{Better format geographic distribution figure}
 
-\begin{figure}[htbp]
+\begin{figure}[htp]
 \centering
-\begin{subfigure}{0.48\textwidth}
+\begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{./assets/investor-left-countries.png}
-    \caption{Late-stage investors geographic distribution}
+    \caption{Late-stage investors geographic distribution (countries)}
     \label{fig:late_stage_geo}
 \end{subfigure}
-\hfill
-\begin{subfigure}{0.48\textwidth}
+
+\vspace{0.5em}
+
+\begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{./assets/investor-right-countries.png}
-    \caption{Early-stage investors geographic distribution}
+    \caption{Early-stage investors geographic distribution (countries)}
     \label{fig:early_stage_geo}
 \end{subfigure}
-\caption{Geographic distribution of venture capital investors across the largest communities. The bipartite structure reveals differential geographic clustering between late-stage (left) and early-stage (right) investor networks, with Community 1 exhibiting greater international diversification compared to the U.S.-concentrated Communities 0 and 2.}
+\caption{Geographic distribution of venture capital investors across the largest communities. The bipartite structure reveals differential geographic clustering between late-stage (top) and early-stage (bottom) investor networks, with Community 1 exhibiting greater international diversification compared to the U.S.-concentrated Communities 0 and 2.}
+\label{fig:geographic_distribution}
+\end{figure}
+
+\begin{figure}[htp]
+\centering
+\begin{subfigure}{0.8\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{./assets/investor-left-regions.png}
+    \caption{Late-stage investors geographic distribution (regions)}
+    \label{fig:late_stage_geo}
+\end{subfigure}
+
+\vspace{0.5em}
+
+\begin{subfigure}{0.8\textwidth}
+    \centering
+    \includegraphics[width=1\textwidth]{./assets/investor-right-regions.png}
+    \caption{Early-stage investors geographic distribution (regions)}
+    \label{fig:early_stage_geo}
+\end{subfigure}
+\caption{Geographic distribution of venture capital investors across regions}
 \label{fig:geographic_distribution}
 \end{figure}
 
 % The geographic distributions exhibit notable asymmetries: late-stage investors demonstrate greater international representation, while early-stage investors show concentrated domestic clustering. This pattern suggests stage-specific geographic preferences that may reflect risk tolerance, regulatory constraints, or information asymmetries across international markets.
 
-Communities 0 and 2 exhibit similar geographic profiles with predominantly American investors, reflecting the dominance of U.S.-based venture capital (important to remember our dataset contains only American startups' investments, which include international investors). However, regional analysis within the United States reveals a striking pattern: Community 2 demonstrates exceptional concentration in California, particularly Silicon Valley, with approximately 50\% more California-based investors than either Community 0 or Community 1 for both late-stage and early-stage investor categories.
+Communities 0 and 2 exhibit similar geographic profiles with predominantly American investors, reflecting the dominance of U.S.-based venture capital (important to remember our dataset contains only American startups' investments, which include international investors). 
 
-This Silicon Valley concentration in the nested Community 2 is particularly significant given the region's status as the world's premier innovation ecosystem. The dominance of California investors in the only statistically nested community suggests a potential relationship between geographic clustering in innovation hubs and the emergence of hierarchical investment structures. This pattern may reflect the dense information networks, frequent face-to-face interactions, and shared risk assessment practices characteristic of Silicon Valley's venture capital community.
+However, regional analysis within the United States reveals a striking pattern: Community 2 demonstrates exceptional concentration in California, particularly Silicon Valley, with approximately 50\% more California-based investors than either Community 0 or Community 1 for both late-stage and early-stage investor categories.
+
+This Silicon Valley concentration in the nested Community 2 is particularly interesting given the region's status as the world's premier innovation ecosystem. The dominance of California investors in the only statistically nested community suggests a potential relationship between geographic clustering in innovation hubs and the emergence of hierarchical investment structures. 
+
+% This pattern may reflect the dense information networks, frequent face-to-face interactions, and shared risk assessment practices characteristic of Silicon Valley's venture capital community.
 
 In contrast, Community 1 demonstrates significantly greater international diversification, with substantial representation from Israel, the United Kingdom, China, South Korea, Singapore, and France. This international composition in Community 1 may reflect different risk tolerance profiles, regulatory environments, or access to cross-border deal flow compared to the more domestically concentrated communities.
 
@@ -224,9 +249,11 @@ Analysis of funding patterns reveals that the nested Community 2 exhibits substa
 
 \todo[inline]{plot a graph of distribtuion of invesments among degrees of investors}
 
-The funding characteristics analysis indicates that nested communities exhibit concentrated capital deployment patterns, with higher-degree investors participating in larger funding rounds while maintaining broader portfolio diversification. This suggests that hierarchical investor organization may create more efficient capital allocation mechanisms compared to randomly structured networks.
+Furthermore, nested communities exhibit concentrated capital deployment patterns, with higher-degree investors participating in larger funding rounds while maintaining broader portfolio diversification. This suggests that hierarchical investor organization may create more efficient capital allocation mechanisms compared to randomly structured networks.
 
-Despite superficial similarities between Communities 0 and 2 in terms of size and geographic concentration within the United States, the nested structure in Community 2 appears to confer distinctive advantages. While both communities share comparable scales and American investor bases, Community 2's hierarchical organization enables it to achieve substantially higher transaction volumes (33.6\% vs. 19.4\% of total investments) and more comprehensive funding coverage across all investment stages. This pattern may suggest that nestedness functions as an organizational catalyst, transforming communities with otherwise similar characteristics into more efficient capital deployment networks.
+Despite superficial similarities between Communities 0 and 2 in terms of size and geographic concentration within the United States, the nested structure in Community 2 appears to confer distinctive advantages. While both communities share comparable scales and American investor bases, Community 2's hierarchical organization enables it to achieve substantially higher transaction volumes (33.6\% vs. 19.4\% of total investments) and more comprehensive funding coverage across all investment stages. 
+
+This pattern may suggest that nestedness functions as an organizational catalyst, transforming communities with otherwise similar characteristics into more efficient capital deployment networks.
 
 \todo[inline]{add literature base for this strong assumption}
 
@@ -236,14 +263,14 @@ The investment stage distributions reveal systematic specialization patterns acr
 
 \begin{figure}[htbp]
 \centering
-\begin{subfigure}{0.5\textwidth}
+\begin{subfigure}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{./assets/late-investment-types-distribution.png}
     \caption{Late-stage investment types distribution}
     \label{fig:late_stage_types}
 \end{subfigure}
 \hfill
-\begin{subfigure}{0.5\textwidth}
+\begin{subfigure}[t]{0.48\textwidth}
     \centering
     \includegraphics[width=\textwidth]{./assets/early-investment-types-distribution.png}
     \caption{Early-stage investment types distribution}
@@ -282,17 +309,21 @@ Community 0 serves as an effective structural baseline for comparison with neste
 
 \subsection{Evolution of Nestedness in Community 2}
 
-To understand the emergence and development of nested structure, we conducted a temporal analysis of Community 2's nestedness evolution using cumulative 21-year windows. This analysis reveals how the significantly nested structure observed in the static analysis developed over time and when it became statistically distinguishable from random network configurations.
+To understand the emergence and development of nested structure, we conducted a temporal analysis of Community 2's nestedness evolution using cumulative window. This analysis reveals how the significantly nested structure observed in the static analysis developed over time and when it became statistically distinguishable from random network configurations.
 
 The temporal analysis spans 18 years (2007-2024) with sufficient data for nestedness calculation. Early periods (2004-2006) contained insufficient investment activity for meaningful analysis. The evolution demonstrates three distinct phases: an early non-significant period (2007-2018), a transition period (2019), and a sustained significant period (2019-2024).
 
 During the non-significant period (2007-2018), observed nestedness scores ranged from 0.15 to 0.38, consistently failing to exceed null model expectations. Z-scores remained predominantly negative, indicating that the observed network structure was less nested than expected under random configuration preserving the degree sequence. This suggests that early venture capital network organization in Community 2 followed patterns indistinguishable from random syndication among investors with equivalent activity levels.
 
-The transition occurred in 2019, marking the first year when Community 2 achieved statistically significant nestedness (Z-score: 2.91, p-value < 0.001). This transition coincided with substantial network growth, reaching 2,364 total nodes and 33,805 edges. Notably, the 2019 transition corresponds to the network achieving a connectance threshold of 0.0264, suggesting that nestedness emergence may be related to specific density conditions within large-scale investment networks.
+The transition occurred in 2019, marking the first year when Community 2 achieved statistically significant nestedness (Z-score: 2.91, p-value < 0.001). This transition coincided with substantial network growth, reaching 2,364 total nodes and 33,805 edges. 
 
-The sustained significant period (2019-2024) demonstrates consistent statistical significance with progressively strengthening Z-scores, reaching a maximum of 4.76 in 2022. Interestingly, while absolute nestedness scores decreased from 0.38 in early periods to 0.088 in 2024, the statistical significance increased dramatically. This apparent paradox reflects the fundamental principle that nestedness significance depends on comparison with appropriate null models rather than absolute magnitude \cite{Mariani2019}.
+Notably, the 2019 transition corresponds to the network achieving a connectance threshold of 0.0264, suggesting that nestedness emergence may be related to specific density conditions within large-scale investment networks.
 
-Table \ref{tab:nestedness_evolution_summary} presents key statistics from the temporal evolution analysis.
+The sustained significant period (2019-2024) demonstrates consistent statistical significance with progressively strengthening Z-scores, reaching a maximum of 4.76 in 2022. 
+
+Interestingly, while absolute nestedness scores decreased from 0.38 in early periods to 0.088 in 2024, the statistical significance increased significantlly. Table \ref{tab:nestedness_evolution_summary} presents key statistics from the temporal evolution analysis.
+
+This apparent paradox reflects the fundamental principle that nestedness significance depends on comparison with appropriate null models rather than absolute magnitude \cite{Mariani2019}.
 
 \begin{table}[htbp]
 \hspace*{-1cm}\centering
@@ -316,7 +347,6 @@ Significant (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 \label{fig:observed_vs_null_model}
 \end{figure}
 
-connectance-evolution.png
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
 \includegraphics[width=1.2\textwidth]{./assets/connectance-evolution.png}
@@ -337,9 +367,15 @@ Detailed analysis of the significant periods (2019-2024) reveals consistent patt
 \label{fig:null_model_distributions_significant_years}
 \end{figure}
 
-The temporal analysis provides evidence that nestedness in venture capital networks emerges through a phase transition process rather than gradual development. The sharp transition from non-significant to highly significant nestedness in 2019, followed by sustained significance, suggests threshold effects in network organization. This pattern aligns with theoretical frameworks from complex network theory indicating that certain topological properties emerge discontinuously as networks reach critical size or density parameters \cite{Mariani2019}.
+The temporal analysis provides evidence that nestedness in venture capital networks emerges through a phase transition process rather than gradual development. The sharp transition from non-significant to highly significant nestedness in 2019, followed by sustained significance, suggests threshold effects in network organization. 
+
+This pattern aligns with theoretical frameworks from complex network theory indicating that certain topological properties emerge discontinuously as networks reach critical size or density parameters \cite{Mariani2019}.
 
 \todo[inline]{Make reflection about possible link with network effect from economics / industrial organization}
 
-An intriguing coincidence emerges from the timing analysis: the period of nestedness emergence (2019-2024) corresponds with an increase in late-stage investor participation and a relative decrease in early-stage investor numbers within the community. This asymmetric evolution may contribute to the hierarchical structure by creating conditions where early-stage investors increasingly depend on relationships with a subset of the partners associated with highly-connected late-stage investors. However, whether this temporal correlation reflects causal mechanisms or represents coincidental market dynamics requires further investigation with appropriate theoretical frameworks \cite{Dalle2025}.
+An intriguing coincidence emerges from the timing analysis: the period of nestedness emergence (2019-2024) corresponds with an increase in late-stage investor participation and a relative decrease in early-stage investor numbers within the community. This asymmetric evolution may contribute to the hierarchical structure by creating conditions where early-stage investors increasingly depend on relationships with a subset of the partners associated with highly-connected late-stage investors. 
+
+\todo[inline]{Add ref to figure of nestedness vs null models between 2019 and 2024}
+
+However, whether this temporal correlation reflects causal mechanisms or represents coincidental market dynamics requires further investigation with appropriate theoretical frameworks \cite{Dalle2025}.
 

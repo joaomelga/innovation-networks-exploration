@@ -12,3 +12,6 @@
 
 ![alt text](image-4.png)
 ![alt text](null-model-distributions-significant-years.png)
+
+![alt text](investor-left-countries.png)
+![alt text](image-4.png)
