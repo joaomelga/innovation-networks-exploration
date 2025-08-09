@@ -7,7 +7,7 @@
 \newcommand{\numInvestments}{147,832}
 \newcommand{\numFundingRounds}{268,283}
 
-The Crunchbase dataset, following the cleaning processes described in the \textit{Methodology} section, yields \numInvestments{} investment registers, representing transactions among \numCompanies{} companies and \numInvestors{} investors.
+The Crunchbase dataset, following the cleaning processes described in the \textit{Methodology} section, yields \numInvestments{} investment records, representing transactions among \numCompanies{} companies and \numInvestors{} investors.
 
 % across \numFundingRounds{} funding rounds.
 
@@ -21,18 +21,18 @@ Exclusion of non-venture capital investors reduces the dataset to \numVCInvestme
 
 The division of venture capital firms into early-stage and late-stage investor groups results in \invPairs{} investment pairs comprising \invPairsUniqueStartups{} unique startups.
 
-\todo[inline]{Add explanation on why investment pairs are higher than investment record}
+\todo[inline]{Add explanation on why investment pairs are higher than investment records}
 \todo[inline]{Add network visualization showing bipartite structure}
 
 \newcommand{\numCommunities}{170}
 \newcommand{\numTopCommunities}{5}
 \newcommand{\numCommunitiesThreshold}{150}
 
-Community detection using greedy modularity optimization identifies around \numCommunities{} distinct communities (the number of communities oscilantes between 167 and 175 across different trials), with the largest communities containing over 4000 investors each, followed by 1 community with almost 1000 agents, 4 communities with more than 100 agents, and then several smaller groups, as summarized in Table~\ref{tab:community_sizes}.
+Community detection using greedy modularity optimization identifies approximately \numCommunities{} distinct communities (the number of communities oscillates between 167 and 175 across different trials), with the largest communities containing over 4000 investors each, followed by 1 community with almost 1000 agents, 4 communities with more than 100 agents, and then several smaller groups, as summarized in Table~\ref{tab:community_sizes}.
 
-In a first moment, analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. Such a threshold yields \numTopCommunities{} communities.
+Initially, analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. This threshold yields \numTopCommunities{} communities.
 
-\todo[inline]{Add rationale of threshold}
+\todo[inline]{Add rationale for threshold}
 
 \begin{table}[htp]
 \centering
@@ -54,9 +54,9 @@ In a first moment, analysis focuses on communities with at least \numCommunities
 \label{tab:community_sizes}
 \end{table}
 
-The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities. 
+The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities \cite{Borgatti2011}. 
 
-\todo[inline]{Mention literature, as this phenomena is somehow well-known}
+\todo[inline]{Mention literature, as this phenomenon is well-documented}
 
 % The community size distribution follows a typical power-law pattern observed in many social networks, where the top \numTopCommunities{} communities by size account for the majority of investors in the network, suggesting a hierarchical organization within the venture capital ecosystem.
 
@@ -68,12 +68,12 @@ The largest three communities (0, 1, and 2) contain over 12,000 investors combin
 
 Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits statistically significant nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
 
-Figure \ref{fig:nestedness_comparison} presents the comparison between observed and null model nestedness scores, where each left plot represents a distinct community's null model NODF distribution accompanied by its observed NODF value.
+Figure \ref{fig:nestedness_comparison} presents the comparison between observed and null model nestedness scores, where each plot represents a distinct community's null model NODF distribution accompanied by its observed NODF value.
 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=1\textwidth]{./assets/null-model-analysis-top-5.png}
-\caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" stands for late stage investors, and "Right" for early stage ones.}
+\caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" refers to late-stage investors, and "Right" refers to early-stage investors.}
 \label{fig:nestedness_comparison}
 \end{figure}
 
@@ -81,13 +81,13 @@ Figure \ref{fig:nestedness_comparison} presents the comparison between observed 
 \newcommand{\interestingCommunityNODF}{0.088}
 \newcommand{\interestingCommunityPValue}{0.00001}
 
-Community \interestingCommunity{} demonstrates the most pronounced nestedness, exhibiting an NODF score of \interestingCommunityNODF{} with statistical significance of p = \interestingCommunityPValue{}. It indicates that there is a non-aleatory behavior where less-connected investors maintain co-investment relationships with subsets of partners associated with highly-connected investors, creating a sort of hierarchical investment pattern.
+Community \interestingCommunity{} demonstrates the most pronounced nestedness, exhibiting an NODF score of \interestingCommunityNODF{} with statistical significance of p = \interestingCommunityPValue{}. This indicates a non-random behavior where less-connected investors maintain co-investment relationships with subsets of partners associated with highly-connected investors, creating a hierarchical investment pattern.
 
 Additionally, Community \interestingCommunity{} exhibits an asymmetric composition with a pronounced ratio favoring late-stage investors over early-stage investors. This imbalance may contribute to the nested structure by creating hierarchical dependencies between investor types.
 
 \todo[inline]{Explore how imbalance contribute to nestedness according to literature}
 
-The following sections provide detailed characterization of the 3 most relevant communities in terms of number of investors, while analysing in-depth the Community 2 (where nestedness were observed) through comparison with Communities 0 and 1, which serve as contrasting examples of similar-sized but differently structured investor networks.
+The following sections provide detailed characterization of the 3 most relevant communities in terms of number of investors, while analyzing in-depth Community 2 (where nestedness was observed) through comparison with Communities 0 and 1, which serve as contrasting examples of similar-sized but differently structured investor networks.
 
 \subsection{Communities Characterization}
 
@@ -115,7 +115,7 @@ The analysis reveals important patterns in investment activity distribution. Com
 
 \subsubsection{Degree Distribution}
 
-Before furhter examining community-level investment patterns in-depth, we analyze the degree distribution characteristics across the three largest investor communities. Right away, it reveals that all communities exhibit power-law patterns typical of scale-free networks, with notable differences in magnitude and scale parameters.
+Before further examining community-level investment patterns in-depth, we analyze the degree distribution characteristics across the three largest investor communities. This analysis reveals that all communities exhibit power-law patterns typical of scale-free networks, with notable differences in magnitude and scale parameters.
 
 Communities 0 and 2 demonstrate remarkably similar degree distribution magnitudes, while Community 1 exhibits consistently lower magnitude values across all degree ranges. This pattern becomes particularly evident when examining the degree distributions on a logarithmic scale, where Community 2 shows the highest volume of nodes across all degree ranges, suggesting greater overall connectivity within this community.
 
@@ -371,11 +371,11 @@ The temporal analysis provides evidence that nestedness in venture capital netwo
 
 This pattern aligns with theoretical frameworks from complex network theory indicating that certain topological properties emerge discontinuously as networks reach critical size or density parameters \cite{Mariani2019}.
 
-\todo[inline]{Make reflection about possible link with network effect from economics / industrial organization}
+\todo[inline]{Make reflection about possible link with network effects from economics and industrial organization}
 
-An intriguing coincidence emerges from the timing analysis: the period of nestedness emergence (2019-2024) corresponds with an increase in late-stage investor participation and a relative decrease in early-stage investor numbers within the community. This asymmetric evolution may contribute to the hierarchical structure by creating conditions where early-stage investors increasingly depend on relationships with a subset of the partners associated with highly-connected late-stage investors. 
+The period of nestedness emergence (2019-2024) corresponds with an increase in late-stage investor participation and a relative decrease in early-stage investor numbers within the community. This asymmetric evolution may contribute to the hierarchical structure by creating conditions where early-stage investors increasingly depend on relationships with a subset of the partners associated with highly-connected late-stage investors. 
 
-\todo[inline]{Add ref to figure of nestedness vs null models between 2019 and 2024}
+\todo[inline]{Add reference to figure of nestedness vs null models between 2019 and 2024}
 
 However, whether this temporal correlation reflects causal mechanisms or represents coincidental market dynamics requires further investigation with appropriate theoretical frameworks \cite{Dalle2025}.
 

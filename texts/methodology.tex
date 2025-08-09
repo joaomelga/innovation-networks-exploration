@@ -2,13 +2,9 @@
 
 \subsection{Data Source and Preprocessing}
 
-This study uses data from Crunchbase, a broad database containing information about startups, venture capital firms, and investment rounds. The dataset includes information about companies, investors, investments, and funding rounds in the United States market. International venture capital firms from other countries also appear in the dataset when they participate in US startup investments.
+This study uses data from Crunchbase, a comprehensive database containing information about startups, venture capital firms, and investment rounds. The dataset includes information about companies, investors, investments, and funding rounds in the United States market. International venture capital firms from other countries also appear in the dataset when they participate in US startup investments.
 
-The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process implemented includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
-
-% \textbf{@todo} maybe remove following paragraph
-
-% To avoid endogeneity bias, companies that received funding only from accelerators were excluded from the analysis, following the approach described by Dalle et al. \cite{Dalle2025}. This ensures that observed network patterns reflect genuine investor relationships rather than program-specific effects.
+The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
 
 \subsection{Investment Network Construction}
 
@@ -29,8 +25,7 @@ V &= \{v_1, v_2, \ldots, v_n\} \text{ (early-stage VCs)} \\
 E &\subseteq U \times V \text{ (co-investment relationships)}
 \end{align}
 
-To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization. Further more,  investors that participated in both early and late stages receive a suffix so they can be threated as distinct agents for each phase.
-
+To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization. Furthermore, investors that participated in both early and late stages receive a suffix so they can be treated as distinct agents for each phase.
 
 \todo[inline]{Clearly show the overlap or number of connections made between the same investors but in distinct phases ex. VC1\_serieA-VC1\_serieC} 
 
@@ -65,7 +60,7 @@ NODF_{columns} &= \frac{100}{C(C-1)/2} \sum_{i=1}^{C-1} \sum_{j=i+1}^{C} \frac{|
 
 Here, $R$ and $C$ are the number of rows and columns, $N_i$ represents the set of connections for node $i$, and $k_i$ is the degree of node $i$.
 
-With this method, NODF vary between 0 and 1 (perfect nestedness).
+Using this method, NODF values range between 0 and 1 (perfect nestedness).
 
 \subsection{Statistical Significance Testing}
 
@@ -81,4 +76,4 @@ Z = \frac{NODF_{observed} - \mu_{null}}{\sigma_{null}}
 
 where $\mu_{null}$ and $\sigma_{null}$ are the mean and standard deviation of the null distribution. Communities with $p < 0.05$ (where $p$ is the proportion of null models with NODF $\geq$ observed NODF) are considered to have significantly high nestedness.
 
-\todo[inline]{Better explain Z-core and P-values interpretation and relationships}
+\todo[inline]{Better explain Z-score and P-values interpretation and relationships}
