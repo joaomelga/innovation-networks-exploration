@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 from typing import Dict, List, Tuple, Optional
+import os
+
+import data_extraction
 
 def clean_companies_data(companies_df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -337,3 +340,70 @@ def identify_accelerated_companies(investments_df: pd.DataFrame) -> List[str]:
     print(f"Identified {len(accelerated_companies)} companies that participated in accelerator programs")
     
     return accelerated_companies
+
+def load_clean_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
+    """
+    Load all CSV files from the France data directory.
+    
+    Args:
+        data_dir: Path to the directory containing CSV files
+        
+    Returns:
+        Dictionary containing all loaded DataFrames
+    """
+    data_files = {
+        'companies': 'companies_clean.csv',
+        'funding_rounds': 'funding_rounds_clean.csv',
+        'investments': 'investments_clean.csv',
+        'investors': 'investors_clean.csv'
+    }
+    
+    data = {}
+    
+    for key, filename in data_files.items():
+        filepath = os.path.join(data_dir, filename)
+        if os.path.exists(filepath):
+            try:
+                df = pd.read_csv(filepath, encoding='utf-8')
+                data[key] = df
+                # print(f"✓ Loaded {key}: {df.shape[0]} rows, {df.shape[1]} columns")
+            except Exception as e:
+                print(f"✗ Error loading {filename}: {e}")
+        else:
+            print(f"✗ File not found: {filepath}")
+    
+    return data
+
+def generate_cleaned_data(data_dir, processed_dir):
+    raw_data = data_extraction.load_data(data_dir)
+
+    # Load data
+    companies = raw_data['companies']
+    investors = raw_data['investors']
+    investments = raw_data['investments']
+    funding_rounds = raw_data['funding_rounds']
+
+    print(f"Companies: {len(companies):,}")
+    print(f"Investors: {len(investors):,}")
+    print(f"Investments: {len(investments):,}")
+    print(f"Funding rounds: {len(funding_rounds):,}")
+
+    # Data cleaning based on Dalle et al. + Carniel insights
+    cleaned_data = create_final_sample(raw_data, funding_threshold=150000)
+
+    companies_clean = cleaned_data['companies']
+    investors_clean = cleaned_data['investors']
+    investments_clean = cleaned_data['investments']
+    funding_rounds_clean = cleaned_data['funding_rounds']
+
+    print(f"After cleaning:")
+    print(f"Companies: {len(companies_clean):,}")
+    print(f"Investors: {len(investors_clean):,}")
+
+    # Save each DataFrame to its respective CSV file
+    companies_clean.to_csv(f'{processed_dir}/companies_clean.csv', index=False)
+    investors_clean.to_csv(f'{processed_dir}/investors_clean.csv', index=False)
+    investments_clean.to_csv(f'{processed_dir}/investments_clean.csv', index=False)
+    funding_rounds_clean.to_csv(f'{processed_dir}/funding_rounds_clean.csv', index=False)
+
+    print(f"Cleaned data exported to {processed_dir}")
