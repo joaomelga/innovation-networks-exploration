@@ -1,0 +1,91 @@
+\section{Methodology}
+
+\subsection{Data Source and Preprocessing}
+
+This study uses data from Crunchbase, a comprehensive database containing information about startups, venture capital firms, and investment rounds. The dataset includes information about companies, investors, investments, and funding rounds in the United States market. International venture capital firms from other countries also appear in the dataset when they participate in US startup investments.
+
+The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
+
+\subsection{Investment Network Construction}
+
+The analysis focuses on venture capital co-investment patterns across different funding stages. Investment stages are categorized into two main groups:
+\begin{itemize}
+    \item Early stages: angel, pre-seed, seed, and Series A
+    \item Late stages: Series B through Series I
+\end{itemize}
+
+A bipartite network is constructed where nodes represent venture capital firms and edges represent co-investment relationships in the same company. The network is bipartite because it connects two distinct sets of investors: those participating in early-stage rounds (right nodes) and those participating in late-stage rounds (left nodes).
+
+This approach allows us to study how early-stage and late-stage investors interact in the investment ecosystem.
+
+The bipartite graph $G = (U \cup V, E)$ consists of:
+\begin{align}
+U &= \{u_1, u_2, \ldots, u_m\} \text{ (late-stage VCs)} \\
+V &= \{v_1, v_2, \ldots, v_n\} \text{ (early-stage VCs)} \\
+E &\subseteq U \times V \text{ (co-investment relationships)}
+\end{align}
+
+To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization. Furthermore, investors that participated in both early and late stages receive a suffix so they can be treated as distinct agents for each phase.
+
+\todo[inline]{Clearly show the overlap or number of connections made between the same investors but in distinct phases ex. VC1\_serieA-VC1\_serieC} 
+
+\subsection{Community Detection}
+
+Community structure in the bipartite network is identified using the greedy modularity optimization algorithm \cite{Borgatti2011}. This method iteratively merges communities to maximize the modularity score, which measures the density of connections within communities compared to connections between communities.
+
+For a bipartite network, modularity $Q$ is defined as:
+\begin{equation}
+Q = \frac{1}{2m} \sum_{i,j} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_i, c_j)
+\end{equation}
+
+where $A_{ij}$ is the adjacency matrix, $k_i$ is the degree of node $i$, $m$ is the total number of edges, $c_i$ is the community of node $i$, and $\delta(c_i, c_j)$ is 1 if nodes $i$ and $j$ are in the same community, 0 otherwise.
+
+The algorithm identifies communities of venture capital firms that frequently co-invest together, revealing structural patterns in the investment ecosystem that may not be apparent from individual investment decisions.
+
+\subsection{Nestedness Analysis}
+
+Nestedness is a structural property commonly observed in ecological networks \cite{AlmeidaNeto2008} that describes the tendency for specialists to interact with a subset of the partners of generalists. In the context of venture capital networks, nestedness would indicate that investors with fewer connections tend to co-invest with a subset of the partners of more connected investors.
+
+We measure nestedness using the NODF (Nestedness based on Overlap and Decreasing Fill) metric \cite{AlmeidaNeto2008}. For a bipartite adjacency matrix $M$ with rows and columns sorted by decreasing degree, NODF is calculated as:
+
+\begin{equation}
+NODF = \frac{NODF_{rows} + NODF_{columns}}{2}
+\end{equation}
+
+where:
+\begin{align}
+NODF_{rows} &= \frac{100}{R(R-1)/2} \sum_{i=1}^{R-1} \sum_{j=i+1}^{R} \frac{|N_i \cap N_j|}{k_j} \text{ if } k_i > k_j \\
+NODF_{columns} &= \frac{100}{C(C-1)/2} \sum_{i=1}^{C-1} \sum_{j=i+1}^{C} \frac{|N_i \cap N_j|}{k_j} \text{ if } k_i > k_j
+\end{align}
+
+Here, $R$ and $C$ are the number of rows and columns, $N_i$ represents the set of connections for node $i$, and $k_i$ is the degree of node $i$.
+
+Using this method, NODF values range between 0 and 1 (perfect nestedness).
+
+\subsection{Statistical Significance Testing}
+
+To determine whether observed nestedness values are significantly higher than expected by chance, we employ a null model approach using the Curveball algorithm \cite{Strona2014}. This algorithm generates randomized matrices that preserve the degree sequence of both node sets while randomizing the connection patterns.
+
+For each community, we generate 100 null matrices using 10,000 Curveball iterations. The statistical significance is assessed by comparing the observed NODF score against the distribution of null model scores:
+
+\todo[inline]{Generate 1000 null matrices instead}
+
+The standardized Z-score is calculated to quantify how many standard deviations the observed nestedness differs from the null expectation:
+
+\begin{equation}
+Z = \frac{NODF_{observed} - \mu_{null}}{\sigma_{null}}
+\end{equation}
+
+where $\mu_{null}$ and $\sigma_{null}$ are the mean and standard deviation of the null distribution, respectively.
+
+The p-value is calculated empirically from the null distribution as the proportion of randomized matrices that exhibit nestedness equal to or greater than the observed value:
+
+\begin{equation}
+p = \frac{1 + \sum_{i=1}^{N} I(NODF_{null,i} \geq NODF_{observed})}{N + 1}
+\end{equation}
+
+where $N$ is the number of null matrices (100 in our case), $NODF_{null,i}$ is the nestedness score of the $i$-th null matrix, and $I(\cdot)$ is an indicator function that equals 1 when the condition is true and 0 otherwise. The addition of 1 in both numerator and denominator provides a conservative estimate that avoids p-values of exactly zero.
+
+The p-value represents the probability of observing nestedness as high as or higher than the observed value under the null hypothesis of random co-investment patterns. Communities with $p < 0.05$ are considered to have significantly high nestedness, indicating that the observed nested structure is unlikely to have arisen by chance alone.
+
+While both Z-scores and p-values assess statistical significance, they provide complementary information: the Z-score quantifies the magnitude of deviation from the null expectation in standardized units, while the p-value provides the probability of observing such deviation under the null hypothesis. In our analysis, we primarily rely on p-values for significance testing as they directly quantify the statistical evidence against the null hypothesis of random network structure.
