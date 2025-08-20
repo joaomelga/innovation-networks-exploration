@@ -70,10 +70,22 @@ For each community, we generate 100 null matrices using 10,000 Curveball iterati
 
 \todo[inline]{Generate 1000 null matrices instead}
 
+The standardized Z-score is calculated to quantify how many standard deviations the observed nestedness differs from the null expectation:
+
 \begin{equation}
 Z = \frac{NODF_{observed} - \mu_{null}}{\sigma_{null}}
 \end{equation}
 
-where $\mu_{null}$ and $\sigma_{null}$ are the mean and standard deviation of the null distribution. Communities with $p < 0.05$ (where $p$ is the proportion of null models with NODF $\geq$ observed NODF) are considered to have significantly high nestedness.
+where $\mu_{null}$ and $\sigma_{null}$ are the mean and standard deviation of the null distribution, respectively.
 
-\todo[inline]{Better explain Z-score and P-values interpretation and relationships}
+The p-value is calculated empirically from the null distribution as the proportion of randomized matrices that exhibit nestedness equal to or greater than the observed value:
+
+\begin{equation}
+p = \frac{1 + \sum_{i=1}^{N} I(NODF_{null,i} \geq NODF_{observed})}{N + 1}
+\end{equation}
+
+where $N$ is the number of null matrices (100 in our case), $NODF_{null,i}$ is the nestedness score of the $i$-th null matrix, and $I(\cdot)$ is an indicator function that equals 1 when the condition is true and 0 otherwise. The addition of 1 in both numerator and denominator provides a conservative estimate that avoids p-values of exactly zero.
+
+The p-value represents the probability of observing nestedness as high as or higher than the observed value under the null hypothesis of random co-investment patterns. Communities with $p < 0.05$ are considered to have significantly high nestedness, indicating that the observed nested structure is unlikely to have arisen by chance alone.
+
+While both Z-scores and p-values assess statistical significance, they provide complementary information: the Z-score quantifies the magnitude of deviation from the null expectation in standardized units, while the p-value provides the probability of observing such deviation under the null hypothesis. In our analysis, we primarily rely on p-values for significance testing as they directly quantify the statistical evidence against the null hypothesis of random network structure.
