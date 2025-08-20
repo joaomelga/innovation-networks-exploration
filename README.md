@@ -17,6 +17,7 @@ This research investigates the structure and evolution of venture capital syndic
 
 - [Installation & Setup](#-installation--setup)
 - [Repository Structure](#-repository-structure)
+- [Data Sources](#-data-sources)
 - [Getting Started](#-getting-started)
 - [Documentation](#-documentation)
 - [Technical Details](#️-technical-details)
@@ -108,12 +109,8 @@ root/
 │   └── libs/           # Core analysis modules
 │
 ├── data/               # 📊 Dataset storage
-│   ├── raw/            # Original datasets
-│   │   ├── france/     # French VC data
-│   │   └── us/         # US VC data
+│   ├── raw/            # Original datasets (not included - see Data Availability below)
 │   └── processed/      # Clean, analysis-ready data
-│       ├── france/
-│       └── us/
 │
 ├── experiments/        # 🔬 Research notebooks
 │
@@ -125,6 +122,12 @@ root/
     ├── literature/     # Academic papers
     └── presentations/  # Project presentations
 ```
+
+## 📊 Data Sources
+
+**Raw Data**: The original datasets got from CrunchBase are not included in this repository due to their large size. The raw data includes comprehensive venture capital investment records from France and the United States. I can make it available upon request.
+
+**Processed Data**: Clean, analysis-ready datasets are included in the `data/processed/` directory and are sufficient to reproduce all analyses and results.
 
 ## 🎬 Getting Started
 

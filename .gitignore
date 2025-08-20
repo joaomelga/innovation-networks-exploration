@@ -1,6 +1,6 @@
 __pycache__
+data/raw
 
-*.csv.gz
 *.csv
 *.aux
 *.log

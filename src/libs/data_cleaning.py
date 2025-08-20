@@ -352,10 +352,10 @@ def load_clean_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
         Dictionary containing all loaded DataFrames
     """
     data_files = {
-        'companies': 'companies_clean.csv',
-        'funding_rounds': 'funding_rounds_clean.csv',
-        'investments': 'investments_clean.csv',
-        'investors': 'investors_clean.csv'
+        'companies': 'companies_clean.csv.gz',
+        'funding_rounds': 'funding_rounds_clean.csv.gz',
+        'investments': 'investments_clean.csv.gz',
+        'investors': 'investors_clean.csv.gz'
     }
     
     data = {}
@@ -364,7 +364,7 @@ def load_clean_data(data_dir: str = 'data/france') -> Dict[str, pd.DataFrame]:
         filepath = os.path.join(data_dir, filename)
         if os.path.exists(filepath):
             try:
-                df = pd.read_csv(filepath, encoding='utf-8')
+                df = pd.read_csv(filepath, encoding='utf-8', compression='gzip')
                 data[key] = df
                 # print(f"✓ Loaded {key}: {df.shape[0]} rows, {df.shape[1]} columns")
             except Exception as e:
