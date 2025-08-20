@@ -156,6 +156,8 @@ root/
 3. **Run the complete analysis**:
    - Execute all cells in order
    - The notebook will automatically generate processed data, perform network analysis, and create visualizations
+   - All plots and figures are automatically saved to `reports/figures/` and used in the LaTeX article files
+   - Running/updating the main notebook automatically updates all figures used in the research article
 
 ### Understanding the Main Workflow
 
