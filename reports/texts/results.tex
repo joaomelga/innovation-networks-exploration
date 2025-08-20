@@ -96,8 +96,15 @@ Communities 0 and 2 demonstrate remarkably similar degree distribution magnitude
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=1\textwidth]{../assets/node-degree-distributions-across-communities.png}
+\includegraphics[width=1\textwidth]{../figures/us/node_degree_distributions_comprehensive_pt1.png}
 \caption{Node degree distributions for the three largest investor communities. The figure shows both the individual degree distributions and their overlap on a logarithmic scale. Communities 0 and 2 display similar heavy-tailed, power-law-like patterns, while Community 1 has consistently lower degree magnitudes. The log-scale overlay highlights that Community 2 maintains the highest node volume across all degree ranges, indicating greater overall connectivity.}
+\label{fig:node_degree_distributions}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/node_degree_distributions_comprehensive_pt2.png}
+\caption{TBD}
 \label{fig:node_degree_distributions}
 \end{figure}
 
@@ -142,7 +149,7 @@ As per Figure \ref{fig:degree_vs_activity}, the relationship between degree cent
 
 \begin{figure}[htpb]
 \centering
-\includegraphics[width=1\textwidth]{../assets/degree_vs_investment.png}
+\includegraphics[width=1\textwidth]{../figures/us/degree_vs_investment_corr.png}
 \caption{Relationship between node degree and investment activity for the three largest investor communities. The scatter plot demonstrates a positive correlation: higher-degree nodes tend to participate in more investment activities. This pattern is consistent across all communities, supporting the interpretation that network centrality is a strong predictor of investment frequency and influence within the venture capital ecosystem.}
 \label{fig:degree_vs_activity}
 \end{figure}
@@ -157,7 +164,7 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \centering
 \begin{subfigure}{0.8\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{../assets/investor-left-countries.png}
+    \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_country_left.png}
     \caption{Late-stage investors geographic distribution (countries)}
     \label{fig:late_stage_geo}
 \end{subfigure}
@@ -166,7 +173,7 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 
 \begin{subfigure}{0.8\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{../assets/investor-right-countries.png}
+    \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_country_right.png}
     \caption{Early-stage investors geographic distribution (countries)}
     \label{fig:early_stage_geo}
 \end{subfigure}
@@ -178,7 +185,7 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \centering
 \begin{subfigure}{0.8\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{../assets/investor-left-regions.png}
+    \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_region_left.png}
     \caption{Late-stage investors geographic distribution (regions)}
     \label{fig:late_stage_geo}
 \end{subfigure}
@@ -187,7 +194,7 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 
 \begin{subfigure}{0.8\textwidth}
     \centering
-    \includegraphics[width=1\textwidth]{../assets/investor-right-regions.png}
+    \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_region_right.png}
     \caption{Early-stage investors geographic distribution (regions)}
     \label{fig:early_stage_geo}
 \end{subfigure}
@@ -215,7 +222,7 @@ Analysis of funding patterns reveals that Community 2 exhibits substantially hig
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{../assets/funding-characteristics.png}
+\includegraphics[width=1\textwidth]{../figures/us/numeric_variables_distribution.png}
 \caption{Funding characteristics across the three largest investor communities. The analysis reveals systematic differences in investment amounts, round frequency, and funding patterns between communities, with different organizational structures exhibiting distinct capital deployment strategies.}
 \label{fig:funding_characteristics}
 \end{figure}
@@ -238,14 +245,14 @@ The investment stage distributions reveal systematic specialization patterns acr
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{../assets/late-investment-types-distribution.png}
+    \includegraphics[width=\textwidth]{../figures/us/categorical_comparison_investment_type_left.png}
     \caption{Late-stage investment types distribution}
     \label{fig:late_stage_types}
 \end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.48\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{../assets/early-investment-types-distribution.png}
+    \includegraphics[width=\textwidth]{../figures/us/categorical_comparison_investment_type_right.png}
     \caption{Early-stage investment types distribution}
     \label{fig:early_stage_types}
 \end{subfigure}
@@ -265,7 +272,7 @@ The sectoral analysis reveals distinct specialization patterns that align with e
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{../assets/sectorial-distribution.png}
+\includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_category_left.png}
 \caption{Sectoral distribution across the three largest investor communities. The analysis reveals differential industry focus patterns, with certain communities demonstrating concentrated investment strategies in specific technology sectors while others maintain broader sectoral diversification.}
 \label{fig:sectoral_distribution}
 \end{figure}
@@ -290,7 +297,7 @@ Figure \ref{fig:nestedness_comparison} presents the comparison between observed 
 
 \begin{figure}[htp]
 \centering
-\includegraphics[width=1\textwidth]{../assets/null-model-analysis-top-5.png}
+\includegraphics[width=1\textwidth]{../figures/us/significant_communities_detailed.png}
 \caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" refers to late-stage investors, and "Right" refers to early-stage investors.}
 \label{fig:nestedness_comparison}
 \end{figure}
@@ -342,15 +349,22 @@ Significant (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
-\includegraphics[width=1.2\textwidth]{../assets/observed-vs-null-model.png}
-\caption{Temporal evolution of nestedness in Community 2. The left subplot shows the observed nestedness (red) and null model mean (blue) over time, with shaded areas representing the null model standard deviation. The right subplot displays the evolution of network size, with total nodes (green) and total edges (purple) over the same period. The figure highlights the phase transition in 2019, where observed nestedness becomes statistically significant and the network grows rapidly.}
+\includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt1.png}
+\caption{!!!UPDATE COMMENT Temporal evolution of nestedness in Community 2. The left subplot shows the observed nestedness (red) and null model mean (blue) over time, with shaded areas representing the null model standard deviation. The right subplot displays the evolution of network size, with total nodes (green) and total edges (purple) over the same period. The figure highlights the phase transition in 2019, where observed nestedness becomes statistically significant and the network grows rapidly.}
 \label{fig:observed_vs_null_model}
 \end{figure}
 
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
-\includegraphics[width=1.2\textwidth]{../assets/connectance-evolution.png}
-\caption{Connectance and statistical significance evolution in Community 2. The left subplot shows the decreasing trend in connectance (network density) over time, while the right subplot presents the evolution of p-values on a logarithmic scale, indicating the emergence of statistically significant nestedness after 2019. The figure demonstrates how the network becomes sparser yet more hierarchically organized, with significance emerging as the network reaches critical size and density thresholds.}
+\includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt2.png}
+\caption{!!!UPDATE COMMENT Connectance and statistical significance evolution in Community 2. The left subplot shows the decreasing trend in connectance (network density) over time, while the right subplot presents the evolution of p-values on a logarithmic scale, indicating the emergence of statistically significant nestedness after 2019. The figure demonstrates how the network becomes sparser yet more hierarchically organized, with significance emerging as the network reaches critical size and density thresholds.}
+\label{fig:connectance_evolution}
+\end{figure}
+
+\begin{figure}[htbp]
+\hspace*{-1cm}\centering
+\includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt3.png}
+\caption{TBD}
 \label{fig:connectance_evolution}
 \end{figure}
 
@@ -362,8 +376,8 @@ Detailed analysis of the significant periods (2019-2024) reveals consistent patt
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=1\textwidth]{../assets/null-model-distributions-significant-years.png}
-\caption{Detailed analysis of null model distributions and network structure for key significant years (2019, 2021, 2024) in Community 2. For each year, the left panel shows the distribution of nestedness scores from degree-preserving null models (blue), with the observed nestedness marked in red. The right panel displays the corresponding network structure, highlighting the number of late-stage and early-stage investors. The figure illustrates the emergence and persistence of statistically significant nestedness, as observed values increasingly exceed null model expectations during the significant period.}
+\includegraphics[width=1\textwidth]{../figures/us/significant_periods_community_2.png}
+\caption{!!! BREAK INTO SEPARATE IMAGES Detailed analysis of null model distributions and network structure for key significant years (2019, 2021, 2024) in Community 2. For each year, the left panel shows the distribution of nestedness scores from degree-preserving null models (blue), with the observed nestedness marked in red. The right panel displays the corresponding network structure, highlighting the number of late-stage and early-stage investors. The figure illustrates the emergence and persistence of statistically significant nestedness, as observed values increasingly exceed null model expectations during the significant period.}
 \label{fig:null_model_distributions_significant_years}
 \end{figure}
 
