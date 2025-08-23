@@ -291,7 +291,7 @@ Community 0 serves as an effective structural baseline for comparison with Commu
 
 \newcommand{\numCommAnalysedNestedness}{5}
 
-Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits statistically significant nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
+Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits significantly high nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
 
 Figure \ref{fig:nestedness_comparison} presents the comparison between observed and null model nestedness scores, where each plot represents a distinct community's null model NODF distribution accompanied by its observed NODF value.
 
@@ -316,19 +316,19 @@ The following sections provide detailed characterization of the 3 most relevant 
 
 \subsection{Evolution of Nestedness in Silicon Valley Community}
 
-To understand the emergence and development of nested structure, we conducted a temporal analysis of Community 2's nestedness evolution using cumulative window. This analysis reveals how the significantly nested structure observed in the static analysis developed over time and when it became statistically distinguishable from random network configurations.
+To understand the emergence and development of nested structure, we conducted a temporal analysis of Community 2's nestedness evolution using cumulative window. This analysis reveals how the significantly high nested structure observed in the static analysis developed over time and when it became statistically distinguishable from random network configurations.
 
-The temporal analysis spans 18 years (2007-2024) with sufficient data for nestedness calculation. Early periods (2004-2006) contained insufficient investment activity for meaningful analysis. The evolution demonstrates three distinct phases: an early non-significant period (2007-2018), a transition period (2019), and a sustained significant period (2019-2024).
+The temporal analysis spans 18 years (2007-2024) with sufficient data for nestedness calculation. Early periods (2004-2006) contained insufficient investment activity for meaningful analysis. The evolution demonstrates three distinct phases: an early period with significantly low nestedness (2007-2018), a transition period (2019), and a sustained period with significantly high nestedness (2019-2024).
 
-During the non-significant period (2007-2018), observed nestedness scores ranged from 0.15 to 0.38, consistently failing to exceed null model expectations. Z-scores remained predominantly negative, indicating that the observed network structure was less nested than expected under random configuration preserving the degree sequence. This suggests that early venture capital network organization in Community 2 followed patterns indistinguishable from random syndication among investors with equivalent activity levels.
+During the period with significantly low nestedness (2007-2018), observed nestedness scores ranged from 0.15 to 0.38, consistently failing to exceed null model expectations. Z-scores remained predominantly negative, indicating that the observed network structure was less nested than expected under random configuration preserving the degree sequence. This suggests that early venture capital network organization in Community 2 followed patterns that were actually less hierarchical than random syndication among investors with equivalent activity levels.
 
-The transition occurred in 2019, marking the first year when Community 2 achieved statistically significant nestedness (Z-score: 2.91, p-value < 0.001). This transition coincided with substantial network growth, reaching 2,364 total nodes and 33,805 edges. 
+The transition occurred in 2019, marking the first year when Community 2 achieved significantly high nestedness (Z-score: 2.91, p-value < 0.001). This transition coincided with substantial network growth, reaching 2,364 total nodes and 33,805 edges. 
 
 Notably, the 2019 transition corresponds to the network achieving a connectance threshold of 0.0264, suggesting that nestedness emergence may be related to specific density conditions within large-scale investment networks.
 
 The sustained significant period (2019-2024) demonstrates consistent statistical significance with progressively strengthening Z-scores, reaching a maximum of 4.76 in 2022. 
 
-Interestingly, while absolute nestedness scores decreased from 0.38 in early periods to 0.088 in 2024, the statistical significance increased significantlly. Table \ref{tab:nestedness_evolution_summary} presents key statistics from the temporal evolution analysis.
+Interestingly, while absolute nestedness scores decreased from 0.38 in early periods to 0.088 in 2024, the statistical significance increased dramatically. Table \ref{tab:nestedness_evolution_summary} presents key statistics from the temporal evolution analysis.
 
 This apparent paradox reflects the fundamental principle that nestedness significance depends on comparison with appropriate null models rather than absolute magnitude \cite{Mariani2019}.
 
@@ -336,11 +336,11 @@ This apparent paradox reflects the fundamental principle that nestedness signifi
 \hspace*{-1cm}\centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Period} & \textbf{Years} & \textbf{Mean NODF} & \textbf{Mean Z-score} & \textbf{Significant Years} \\
+\textbf{Period} & \textbf{Years} & \textbf{Mean NODF} & \textbf{Mean Z-score} & \textbf{Years with High Nestedness} \\
 \hline
-Early (2007-2018) & 12 & 0.2547 ± 0.1158 & -1.4442 ± 1.1108 & 0 \\
+Low Nestedness (2007-2018) & 12 & 0.2547 ± 0.1158 & -1.4442 ± 1.1108 & 0 \\
 Transition (2019) & 1 & 0.1177 & 2.9125 & 1 \\
-Significant (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
+High Nestedness (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 \hline
 \end{tabular}
 \caption{Summary statistics for Community 2 nestedness evolution across temporal periods}
@@ -350,14 +350,14 @@ Significant (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
 \includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt1.png}
-\caption{!!!UPDATE COMMENT Temporal evolution of nestedness in Community 2. The left subplot shows the observed nestedness (red) and null model mean (blue) over time, with shaded areas representing the null model standard deviation. The right subplot displays the evolution of network size, with total nodes (green) and total edges (purple) over the same period. The figure highlights the phase transition in 2019, where observed nestedness becomes statistically significant and the network grows rapidly.}
+\caption{Temporal evolution of nestedness in Community 2. The left subplot shows the observed nestedness (red) and null model mean (blue) over time, with shaded areas representing the null model standard deviation. The right subplot displays the evolution of network size, with total nodes (green) and total edges (purple) over the same period. The figure highlights the phase transition in 2019, where observed nestedness becomes significantly higher than null model expectations and the network grows rapidly.}
 \label{fig:observed_vs_null_model}
 \end{figure}
 
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
 \includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt2.png}
-\caption{!!!UPDATE COMMENT Connectance and statistical significance evolution in Community 2. The left subplot shows the decreasing trend in connectance (network density) over time, while the right subplot presents the evolution of p-values on a logarithmic scale, indicating the emergence of statistically significant nestedness after 2019. The figure demonstrates how the network becomes sparser yet more hierarchically organized, with significance emerging as the network reaches critical size and density thresholds.}
+\caption{Connectance and statistical significance evolution in Community 2. The left subplot shows the decreasing trend in connectance (network density) over time, while the right subplot presents the evolution of p-values on a logarithmic scale, indicating the emergence of significantly high nestedness after 2019. The figure demonstrates how the network becomes sparser yet more hierarchically organized, with high nestedness emerging as the network reaches critical size and density thresholds.}
 \label{fig:connectance_evolution}
 \end{figure}
 
@@ -377,11 +377,11 @@ Detailed analysis of the significant periods (2019-2024) reveals consistent patt
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/significant_periods_community_2.png}
-\caption{!!! BREAK INTO SEPARATE IMAGES Detailed analysis of null model distributions and network structure for key significant years (2019, 2021, 2024) in Community 2. For each year, the left panel shows the distribution of nestedness scores from degree-preserving null models (blue), with the observed nestedness marked in red. The right panel displays the corresponding network structure, highlighting the number of late-stage and early-stage investors. The figure illustrates the emergence and persistence of statistically significant nestedness, as observed values increasingly exceed null model expectations during the significant period.}
+\caption{Detailed analysis of null model distributions and network structure for key years with significantly high nestedness (2019, 2021, 2024) in Community 2. For each year, the left panel shows the distribution of nestedness scores from degree-preserving null models (blue), with the observed nestedness marked in red. The right panel displays the corresponding network structure, highlighting the number of late-stage and early-stage investors. The figure illustrates the emergence and persistence of significantly high nestedness, as observed values increasingly exceed null model expectations during the high nestedness period.}
 \label{fig:null_model_distributions_significant_years}
 \end{figure}
 
-The temporal analysis provides evidence that nestedness in venture capital networks emerges through a phase transition process rather than gradual development. The sharp transition from non-significant to highly significant nestedness in 2019, followed by sustained significance, suggests threshold effects in network organization. 
+The temporal analysis provides evidence that nestedness in venture capital networks emerges through a phase transition process rather than gradual development. The sharp transition from significantly low to significantly high nestedness in 2019, followed by sustained high nestedness, suggests threshold effects in network organization. 
 
 This pattern aligns with theoretical frameworks from complex network theory indicating that certain topological properties emerge discontinuously as networks reach critical size or density parameters \cite{Mariani2019}.
 
