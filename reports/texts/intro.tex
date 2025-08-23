@@ -1,19 +1,77 @@
 \section{Introduction}
 
-\todo[inline]{Improve introduction, it is still embryonic}
+Two or more investors co-investing on the same venture is known as syndication. This collaborative behavior goes beyond simple risk-sharing and reflects information asymmetries and screening challenges inherent in investment markets. Understanding how syndication patterns emerge and evolve requires examining the social, economic, and structural forces that shape investor relationships within innovation ecosystems.
 
-Venture capital syndication, where two or more firms co-invest in the same enterprise, represents a fundamental mechanism in innovation financing \cite{Granovetter1985}. This collaborative behavior emerges as investors seek to reduce risks associated with early-stage companies that lack complete validation or functional products. In such contexts, reputation and network centrality influence investment decisions, as venture capitalists use their co-investors' characteristics as signals that affect their own investment choices.
+In venture capital markets (innovation financing included), syndication serves as a coordination mechanisms used by Venture Capitalists (VCs) to operate in complex networks where investment decisions are embedded within social structures, geographic clusters, and institutional relationships. 
 
-The increasing prevalence of syndicated investments in recent decades demonstrates that innovation networks are highly socialized systems where agents do not act in isolation but rather form communities influenced by their peers. This phenomenon reflects the concept of embeddedness, where economic actions are shaped by social structures and relationships \cite{Granovetter1985}.
+However, traditional approaches to studying venture capital often focus on individual investment decisions or firm-level characteristics, leaving the broader systemic patterns of investor coordination (e.g. syndication) to be further explored.
 
-Extensive literature documents how heavy-tailed degree distributions emerge from such interactions in social networks. Innovation networks follow similar patterns, particularly regarding investor connectivity, where concentrated hubs of highly connected agents coexist with a majority of participants having few connections. This heterogeneous distribution of connectivity follows a power-law degree distribution pattern.
+This study applies network theory to analyze these coordination patterns in the US, revealing how investors organize into distinct network communities with different structural properties and organizational patterns that may influence capital allocation efficiency, deal flow, and market access.
 
-The widespread presence of power-law degree distributions has motivated numerous studies investigating the mechanisms behind their emergence and their impact on processes such as spreading dynamics \cite{PastorSatorras2001} and network robustness \cite{Albert2000}.
+Special attention is given for the fact that a community of proiminent VCs in the Sylicon Valley  demonstrate nested hierarchical organization patterns, while others maintain more random, hard-to-define partnership structures.
 
-Regarding spreading dynamics, social and economic scientists have explored how novel ideas propagate through networks and how bridge edges with high betweenness centrality affect the likelihood of innovation diffusion. Established theories such as the Strength of Weak Ties \cite{Granovetter1973} provide theoretical foundations for these analyses.
+The following sections examine the theoretical foundations for syndication behavior, drawing from literature in innovation financing, social embeddedness, network theory, and ecological systems to build a comprehensive framework for understanding syndication investments networks organization. 
 
-In the other hand, measuring robustness in social and innovation networks remains both a theoretical and practical challenge. Ecological network analysis has provided insights for addressing this challenge, with metrics such as nestedness and their ecological consequences being applied to social networks \cite{Theophile2024}.
+Nevertheless, implications on market efficiency, geographic clustering effects, and the role of innovation hubs in shaping investment ecosystems is discussed, as well as future reasearch opportunities are presented.
 
-This paper applies network theory to represent syndicated investments as edges in a network where investors serve as nodes with diverse characteristics (geographic, financial, sectoral). This mathematical representation enables visualization and interpretation of syndication network structures through both ecological and economic perspectives.
+\subsection{Syndication in Innovation Financing}
 
-Particular attention is given to the observation of nestedness within a large community of early and late-stage investors in California. The implications and potential consequences of this phenomenon are explored in the \textit{Discussion and Implications} section of this paper.
+Theoretical foundations for syndication behavior comes from literature on screening and information sharing among venture capitalists \cite{Casamatta2007}. In summary, in markets characterized by incomplete information (e.g. innovation financing), the decision to syndicate and the choice of syndication partners are aspects that influence both investment outcomes and network position \cite{Casamatta2007}.
+
+In innovation financing, when investors face uncertainty about startup quality and potential, syndication serves multiple strategic functions: it enables knowledge pooling from partners with complementary expertise \cite{Lerner1994}, reduces individual exposure to high-risk ventures, and provides valuable signals \cite{Spence1981} about investment quality through the revealed preferences of co-investors. 
+
+In this context, considering that screening innovative ventures is frequently a multi-stage process (venture capitalists define formal pipeline which startups and often their founders need to pass through), syndication plays an important role to reduce the effort and possibilty the number of screening stages, with the cost of disclousring information, as investors are essencially competitors.
+
+\subsection{Social Sciences and Embeddedness}
+
+Social science theory provides crucial insights into why syndication patterns emerge through social relationships rather than purely economic calculations. Granovetter's concept of embeddedness demonstrates that economic actions are fundamentally driven by social structures and ongoing relationships, challenging the assumption that markets operate through atomized, independent decision-making \cite{Granovetter1985}.
+
+In venture capital markets, embeddedness manifests in several important ways. First, investment decisions are embedded within social networks where venture capitalists develop recurring partnerships based on trust, shared investment philosophies, and successful collaboration histories \cite{Granovetter1985}. These relationships create persistent patterns of co-investment that go beyond individual deal characteristics, forming the basis for community structure within investor networks.
+
+Second, geographic embeddedness plays a critical role in shaping investor relationships. Venture capitalists concentrated in innovation hubs like Silicon Valley develop dense local networks through frequent face-to-face interactions, shared professional communities, and common institutional affiliations \cite{Granovetter1985}. This geographic clustering creates information advantages and relationship-building opportunities that can influence syndication patterns and network organization.
+
+Third, embeddedness creates informal hierarchies of influence and reputation within investor communities. Rather than operating as independent agents, investors form interconnected networks that share information, coordinate investment strategies, and establish social rankings based on past performance and network position \cite{Granovetter1985}. These social hierarchies can evolve into the structural hierarchies measured through nestedness analysis.
+
+The embeddedness perspective helps explain why certain investor communities develop systematic organizational patterns while others remain more randomly structured. Social relationships, trust networks, and geographic proximity may facilitate the emergence of hierarchical organization by creating conditions where, for instance, specialists naturally align with generalists' investment strategies (not purely random). This social foundation provides the context for understanding how network topology emerges from underlying social processes rather than purely market-driven mechanisms.
+
+\subsection{Network Theory and Power-law}
+
+Network theory provides a mathematical framework for understanding complex systems of interconnected actors through node-link structures \cite{Borgatti2011}. In venture capital ecosystems, this approach enables systematic analysis of syndication by representing investors as nodes and co-investment relationships as edges.
+
+Three network concepts are particularly relevant for understanding venture capital ecosystems. First, network position and centrality metrics quantify an investor's importance within the overall system. Highly central investors often function as gatekeepers who control information flow and access to investment opportunities \cite{Borgatti2011}. 
+
+In fact, different centrality measures capture distinct aspects of influence: degree centrality identifies investors with many direct partnerships, while betweenness centrality identifies those who bridge otherwise disconnected investor groups.
+
+Second, community structure reveals how investors cluster into distinct groups with denser internal connections than external ones \cite{Theophile2024}. These communities often reflect shared investment philosophies, geographic proximity, or sector specialization. The modularity optimization methods used in this study identify these natural groupings within the investment network, revealing how social embeddedness manifests in structural patterns.
+
+Last but not least, power-law degree distributions characterize the heterogeneous connectivity patterns in venture capital networks \cite{Bygrave1987}. This mathematical property describes systems where a small number of investors (hubs) maintain extensive partnership networks while most participants have relatively few connections. Power-law distributions arise from preferential attachment mechanisms, where well-connected investors attract disproportionately more new partnerships, reflecting reputation accumulation and resource concentration dynamics.
+
+Empirical evidence shows that venture capital networks consistently exhibit these power-law properties \cite{Dalle2025}. Hub investors play crucial roles in facilitating deal flow and information diffusion throughout the ecosystem, while also creating potential bottlenecks that may limit access for entrepreneurs outside established networks. 
+
+This structural feature creates conditions for the emergence of hierarchical organization patterns measured through, for instance, nestedness analysis.
+
+The methodology section builds directly on these network theory foundations by implementing community detection algorithms that identify investor clusters, while the results section examines how community structure relates to geographic distribution, investment patterns, and hierarchical organization.
+
+\subsection{Ecology and Nestedness}
+
+The power-law degree distributions discussed above provide important insights into network structure, but they cannot fully capture the hierarchical organization patterns that emerge within investor communities. Ecological network theory offers additional tools for understanding these organizational patterns through the concept of nestedness \cite{Mariani2019}.
+
+Nestedness originates from ecological studies of mutualistic relationships, particularly pollinator-plant networks. In these systems, specialist pollinators (those that visit few plant species) typically interact with subsets of the same plants that generalist pollinators (those that visit many species) choose \cite{Mariani2019}. This creates a nested hierarchy where specialists operate within the interaction networks established by generalists, rather than forming separate, independent partnerships.
+
+Nestedness describes this specific structural pattern where specialist nodes (those with few connections) tend to connect to subsets of the partners associated with generalist nodes (those with many connections) \cite{Mariani2019}. In venture capital networks, this means that investors with fewer partnerships typically co-invest with a subset of the same companies that highly connected investors choose. This creates hierarchical organization where less connected investors operate within the partnership networks established by more connected ones.
+
+This hierarchical arrangement has important implications for information flow and market access. In nested networks, information and opportunities tend to flow from generalist nodes (highly connected investors) to specialist nodes (less connected investors), creating asymmetric relationships that can influence deal flow, startup access to capital, and overall market efficiency \cite{Mariani2019}. Such organization contrasts with random network structures where partnerships form without systematic hierarchical patterns.
+
+Nestedness patterns are particularly relevant for understanding venture capital ecosystems because they can reveal whether certain investors function as gatekeepers who control access to broader investment networks \cite{Borgatti2011}. This has direct implications for startup fundraising success and the overall efficiency of capital allocation within innovation ecosystems \cite{Theophile2024}.
+
+Measuring nestedness requires specialized metrics that can quantify the extent to which observed network patterns deviate from random organization. The NODF (Nestedness based on Overlap and Decreasing Fill) metric provides a standardized approach for measuring these hierarchical patterns and testing their statistical significance against null models of random network formation \cite{Mariani2019}. This methodological approach enables systematic investigation of whether investor communities exhibit meaningful hierarchical organization or operate through random partnership patterns.
+
+\subsection{Research Approach and Contribution}
+
+This study addresses the theoretical and methodological challenges outlined above by developing a empirical approach that combines network theory (focusing on bipartite networks) with ecological analysis techniques. We construct a bipartite network representation of venture capital syndication patterns using comprehensive data from the United States market, where co-investment relationships between early-stage and late-stage investors is used as the analytical basis for understanding ecosystem organization.
+
+Our analytical framework integrates community detection algorithms with nestedness analysis. The NODF (Nestedness based on Overlap and Decreasing Fill) metric, combined with statistical significance testing through null model comparisons, enables us to identify investor communities that exhibit systematic hierarchical structures beyond what would be expected from random partnership formation.
+
+The empirical analysis reveals three key contributions to the literature: First, we demonstrate significant heterogeneity in organizational structures across investor communities on US, with some exhibiting pronounced hierarchical patterns while others maintain more distributed partnership networks. Second, we identify a strong relationship between geographic clustering—particularly within Silicon Valley—and the emergence of nested organizational structures that confer measurable advantages in transaction efficiency and capital deployment. Third, we provide quantitative evidence that network topology, rather than community size alone, serves as a critical determinant of investment ecosystem performance.
+
+The remainder of this paper presents our methodological framework, empirical findings, and their implications for understanding venture capital market organization. The Methodology section details our data preprocessing, network construction, and analytical techniques. The Results section provides comprehensive characterization of investor communities, including their geographic distributions, funding patterns, sectoral focus, and quantitative nestedness measurements. Together, these analyses offer new insights into how network structure shapes innovation financing efficiency and market access patterns.
