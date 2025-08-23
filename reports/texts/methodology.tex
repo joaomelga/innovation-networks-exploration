@@ -2,13 +2,41 @@
 
 \subsection{Data Source and Preprocessing}
 
-This study uses data from Crunchbase, a comprehensive database containing information about startups, venture capital firms, and investment rounds. The dataset includes information about companies, investors, investments, and funding rounds in the United States market. International venture capital firms from other countries also appear in the dataset when they participate in US startup investments.
+This study uses data from Crunchbase, a commercial database that has emerged as a primary source for entrepreneurship and venture capital research \cite{OECD2017}. Founded in 2007 as a side project to TechCrunch, Crunchbase has evolved into a crowdsourced platform containing detailed information about startups, venture capital firms, accelerators, and investment rounds globally. The platform relies on multiple data collection methods, including user submissions, automated web crawling, partnerships with data providers, and editorial curation \cite{OECD2017}.
 
-The data preprocessing follows established methodologies from entrepreneurship literature \cite{Dalle2025}. The cleaning process includes several steps: (1) removal of companies with incomplete information, (2) exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, (3) removal of companies with exit status (bankruptcy, acquisition, or IPO), and (4) application of a minimum funding threshold of \$150,000 to focus on substantive investment relationships.
+The dataset was obtained by querying Crunchbase for all investment transactions involving enterprises (startups, scale-ups, and growth companies) domiciled in the United States, which captures the complete investment ecosystem for US-based firms, including both domestic and cross-border capital flows. 
+
+Foreign venture capital firms and institutional investors appear in the dataset when they participate in financing rounds of US enterprises. Furthermore, Crunchbase's coverage is particularly good for technology-oriented startups and venture capital transactions, making it well-suited for studies of innovation ecosystems and investment networks.
+
+However, limitations and potential biases must be acknowledged when using Crunchbase data \cite{OECD2017}, for instance:
+
+\begin{itemize}
+    \item \textbf{Geographic bias}: Stronger coverage of US and Western European markets compared to emerging economies.
+    \item \textbf{Sectoral bias}: Emphasis on technology and internet companies, potentially underrepresenting traditional industries.
+    \item \textbf{Venture capital bias}: Better documentation of VC-backed companies compared to bootstrapped or debt-financed ventures (which may not be problematic for this study).
+    \item \textbf{Size bias}: Larger and more successful companies are more likely to be thoroughly documented.
+    \item \textbf{Temporal bias}: More recent information tends to be more complete and accurate than historical records.
+\end{itemize}
+
+These biases do not invalidate research using Crunchbase but require careful consideration in study design and interpretation of results. For network analysis of venture capital co-investments, the VC bias may actually enhance data quality by focusing on the target population of interest.
+
+The data preprocessing and cleaning follows established methodologies from entrepreneurship literature \cite{Dalle2025} and is implemented through the following multi-step procedure:
+
+\begin{enumerate}
+    \item \textbf{Company data cleaning}: Removal of companies with incomplete essential information (missing unique identifiers, names, or founding years), exclusion of companies founded after 2017 to allow sufficient time for investment patterns to emerge, and removal of companies with exit status (closed, acquired, or IPO).
+    
+    \item \textbf{Investment data cleaning}: Removal of investment records with missing essential linkage information (company or investor identifiers), elimination of investments with invalid funding amounts (negative or zero values), and validation of funding consistency by excluding rounds where the sum of individual investments does not match the total funding amount reported in the database.
+    
+    \item \textbf{Funding threshold application}: Restriction of the sample to companies that raised more than \$150{,}000 in total funding to focus on substantive investment relationships and ensure stronger statistical reliability.
+    
+    % \item \textbf{Endogeneity bias prevention}: Exclusion of companies that received funding exclusively from accelerators or incubators to prevent endogeneity bias, as these companies may not have attracted independent market validation from external investors.
+    
+    \item \textbf{Data consistency validation}: Final consistency checks to ensure all investment records reference existing companies in the dataset and all retained companies have at least one valid investment record.
+\end{enumerate}
 
 \subsection{Investment Network Construction}
 
-The analysis focuses on venture capital co-investment patterns across different funding stages. Investment stages are categorized into two main groups:
+The analysis focuses on venture capital co-investment patterns across different funding stages, following established approaches in the venture capital literature for studying syndication networks \cite{Bubna2020}. Investment stages are categorized into two main groups:
 \begin{itemize}
     \item Early stages: angel, pre-seed, seed, and Series A
     \item Late stages: Series B through Series I
@@ -16,7 +44,7 @@ The analysis focuses on venture capital co-investment patterns across different 
 
 A bipartite network is constructed where nodes represent venture capital firms and edges represent co-investment relationships in the same company. The network is bipartite because it connects two distinct sets of investors: those participating in early-stage rounds (right nodes) and those participating in late-stage rounds (left nodes).
 
-This approach allows us to study how early-stage and late-stage investors interact in the investment ecosystem.
+This approach allows us to study how early-stage and late-stage investors interact in the investment ecosystem, building on methodologies established in computational studies of venture capital communities that have demonstrated the effectiveness of network-based approaches for understanding syndication patterns over extended time periods.
 
 The bipartite graph $G = (U \cup V, E)$ consists of:
 \begin{align}
@@ -31,7 +59,9 @@ To prevent spurious connections from related entities, investor pairs where the 
 
 \subsection{Community Detection}
 
-Community structure in the bipartite network is identified using the greedy modularity optimization algorithm \cite{Borgatti2011}. This method iteratively merges communities to maximize the modularity score, which measures the density of connections within communities compared to connections between communities.
+Community structure in the bipartite network is identified using modularity-based optimization methods, building on foundational work by \cite{Newman2006} who established modularity as a key metric for community detection in complex networks. For bipartite networks specifically, we employ the greedy modularity optimization algorithm following \cite{Barber2007}, who introduced a modularity definition tailored for bipartite graphs and developed corresponding algorithms that account for the distinct node sets characteristic of bipartite structures.
+
+The choice of greedy optimization is motivated by its computational efficiency and scalability, as demonstrated by \cite{Blondel2008} in their widely-adopted Louvain algorithm. This approach iteratively merges communities to maximize the modularity score, which measures the density of connections within communities compared to connections between communities.
 
 For a bipartite network, modularity $Q$ is defined as:
 \begin{equation}
@@ -40,13 +70,15 @@ Q = \frac{1}{2m} \sum_{i,j} \left[ A_{ij} - \frac{k_i k_j}{2m} \right] \delta(c_
 
 where $A_{ij}$ is the adjacency matrix, $k_i$ is the degree of node $i$, $m$ is the total number of edges, $c_i$ is the community of node $i$, and $\delta(c_i, c_j)$ is 1 if nodes $i$ and $j$ are in the same community, 0 otherwise.
 
-The algorithm identifies communities of venture capital firms that frequently co-invest together, revealing structural patterns in the investment ecosystem that may not be apparent from individual investment decisions.
+This methodology has proven particularly effective in venture capital research, as demonstrated by \cite{Bubna2020} who used computational methods over three decades of syndication data to identify venture capital communities. Their work establishes empirical precedent for applying community detection algorithms to co-investment networks, showing that such methods can reveal meaningful structural patterns in the investment ecosystem that may not be apparent from individual investment decisions.
 
 \subsection{Nestedness Analysis}
 
 Nestedness is a structural property commonly observed in ecological networks \cite{AlmeidaNeto2008} that describes the tendency for specialists to interact with a subset of the partners of generalists. In the context of venture capital networks, nestedness would indicate that investors with fewer connections tend to co-invest with a subset of the partners of more connected investors.
 
-We measure nestedness using the NODF (Nestedness based on Overlap and Decreasing Fill) metric \cite{AlmeidaNeto2008}. For a bipartite adjacency matrix $M$ with rows and columns sorted by decreasing degree, NODF is calculated as:
+We measure nestedness using the NODF (Nestedness based on Overlap and Decreasing Fill) metric \cite{AlmeidaNeto2008}, which has become a standard measure for quantifying nested patterns in bipartite networks. The NODF metric is particularly well-suited for network analysis as it provides a standardized measure that accounts for both the overlap of connections and the degree differences between nodes \cite{Dormann2009}.
+
+For a bipartite adjacency matrix $M$ with rows and columns sorted by decreasing degree, NODF is calculated as:
 
 \begin{equation}
 NODF = \frac{NODF_{rows} + NODF_{columns}}{2}
@@ -64,7 +96,9 @@ Using this method, NODF values range between 0 and 1 (perfect nestedness).
 
 \subsection{Statistical Significance Testing}
 
-To determine whether observed nestedness values are significantly higher than expected by chance, we employ a null model approach using the Curveball algorithm \cite{Strona2014}. This algorithm generates randomized matrices that preserve the degree sequence of both node sets while randomizing the connection patterns.
+To determine whether observed nestedness values differ significantly from what would be expected by chance, we employ a null model approach using the Curveball algorithm \cite{Strona2014}. This algorithm generates randomized matrices that preserve the degree sequence of both node sets while randomizing the connection patterns, representing a "hard" constraint null model that maintains structural properties while randomizing interaction patterns \cite{Dormann2009}.
+
+The choice of degree-preserving null models is critical for nestedness interpretation, as the degree sequence itself can influence apparent nestedness patterns. By preserving degree sequences, we ensure that observed nestedness reflects genuine structural organization rather than mere consequences of heterogeneous node connectivity.
 
 For each community, we generate 100 null matrices using 10,000 Curveball iterations. The statistical significance is assessed by comparing the observed NODF score against the distribution of null model scores:
 
@@ -86,6 +120,6 @@ p = \frac{1 + \sum_{i=1}^{N} I(NODF_{null,i} \geq NODF_{observed})}{N + 1}
 
 where $N$ is the number of null matrices (100 in our case), $NODF_{null,i}$ is the nestedness score of the $i$-th null matrix, and $I(\cdot)$ is an indicator function that equals 1 when the condition is true and 0 otherwise. The addition of 1 in both numerator and denominator provides a conservative estimate that avoids p-values of exactly zero.
 
-The p-value represents the probability of observing nestedness as high as or higher than the observed value under the null hypothesis of random co-investment patterns. Communities with $p < 0.05$ are considered to have significantly high nestedness, indicating that the observed nested structure is unlikely to have arisen by chance alone.
+The p-value represents the probability of observing nestedness as high as or higher than the observed value under the null hypothesis of random co-investment patterns. Communities with $p < 0.05$ are considered to have significantly high nestedness (when observed values exceed null expectations) or significantly low nestedness (when observed values fall below null expectations), indicating that the observed nested structure is unlikely to have arisen by chance alone.
 
 While both Z-scores and p-values assess statistical significance, they provide complementary information: the Z-score quantifies the magnitude of deviation from the null expectation in standardized units, while the p-value provides the probability of observing such deviation under the null hypothesis. In our analysis, we primarily rely on p-values for significance testing as they directly quantify the statistical evidence against the null hypothesis of random network structure.
