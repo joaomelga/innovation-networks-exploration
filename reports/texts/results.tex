@@ -1,30 +1,150 @@
 \section{Results}
 
-\subsection{Data Mining and Clustering Overview}
+\subsection{Dataset Characterization}
 
-\newcommand{\numCompanies}{22,527}
-\newcommand{\numInvestors}{38,843}
-\newcommand{\numInvestments}{147,832}
-\newcommand{\numFundingRounds}{268,283}
+The dataset scraped from Crunchbase contains data about 22,527 companies (startups, ...), 38,843 investors, and 147,832 invesments.
 
-The Crunchbase dataset, following the cleaning processes described in the \textit{Methodology} section, yields \numInvestments{} investment records, representing transactions among \numCompanies{} companies and \numInvestors{} investors.
+After the data cleaning process described in the \textit{Methodology} section, the dataset used to further generate the syndication networks yields 104,618 investment records, representing transactions among 16,932 companies and 11,279 investors, totaling \$3.19 tri USD invested from 1990 until 2025, even though we are going to concentrate on invesment data among the 20 years window from 2004 to 2024.
 
-% across \numFundingRounds{} funding rounds.
+\subsubsection{Syndication Trends}
 
-\newcommand{\numVCInvestments}{104,618}
-\newcommand{\numCompaniesWithVCFund}{16,932}
+A significant part of these investments records represent syndicated investments, as showed in figure \ref{fig:syndication_evolution}.
 
-Exclusion of non-venture capital investors reduces the dataset to \numVCInvestments{} investment records and \numCompaniesWithVCFund{} unique companies with venture capital funding.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/syndication_trends.png}
+\caption{Evolution of syndicated investment trends in the Crunchbase dataset. The figure illustrates changes in the proportion and of syndicated investments over time, highlighting the prevalence of co-investment activity among venture capital investors.}
+\label{fig:syndication_evolution}
+\end{figure}
+
+\subsubsection{Investment Activity}
+
+Figure \ref{fig:vc_investment_activity} presents the overall investment activity trends, while Figure \ref{fig:investment_temporal_evolution} provides a detailed breakdown of temporal patterns across different investment characteristics.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/vc_investment_activity_over_time.png}
+\caption{Venture capital investment activity over time. The figure shows the evolution of investment transactions and funding patterns across the study period, highlighting major trends and cyclical patterns in venture capital deployment.}
+\label{fig:vc_investment_activity}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/investment_funding_temporal_evolution.png}
+\caption{Temporal evolution of investment activity characteristics. This comprehensive view illustrates how different aspects of venture capital investment behavior have changed over time, including variations in funding amounts, transaction frequency, and market participation patterns.}
+\label{fig:investment_temporal_evolution}
+\end{figure}
+
+The investment activity data demonstrates clear temporal variations that might reflect broader economic cycles and venture capital market maturation. 
+
+The analysis reveals growth in venture capital activity over the study period, with remarkable acceleration followed by decreasing period in recent years. From 2004 to 2024, the venture capital ecosystem experienced substantial expansion, with total investments increasing by 674.5\% and unique investors growing by 544.4\%.
+
+The year 2021 emerged as a unique moment for venture capital activity, representing peak performance across multiple dimensions. This year recorded the highest number of investments (18,741 transactions), the largest total funding amount (\$1.41 trillion), and the greatest investor participation (6,636 unique investors). This convergence of peak metrics in 2021 reflects both the maturation of the venture capital industry and the exceptional market conditions during the post-pandemic economic recovery.
+
+The analysis reveals that investment frequency and average funding amounts do not necessarily follow identical temporal patterns. While transaction volumes may increase during certain periods, average investment sizes can exhibit different trends, suggesting varying risk appetites and market conditions across different time windows. 
+
+The substantial growth rates observed between 2004 and 2024 indicate not only market expansion but also the increasing institutionalization of venture capital as an asset class.
+
+These temporal patterns provide important context for understanding the network structures observed in the community analysis, as investment behaviors and syndication patterns may be influenced by the broader economic environment during different time periods. 
+
+\todo[inline]{add insights from Crunchbase posts on why investment activities are decreasing}
+
+\subsubsection{Investment Stages Evolution}
+
+Figures \ref{fig:investment_stage_dist} and \ref{fig:investment_stage_temporal} illustrates the analysis of investment stages over time across the venture capital ecosystem
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/investment_stage_distribution.png}
+\caption{Distribution of investment stages across the venture capital dataset. The figure shows the prevalence of different funding stages, highlighting the concentration of activity in early-stage investments (seed and Series A) which together account for over 43\% of all transactions.}
+\label{fig:investment_stage_dist}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/investment_stage_curves_log.png}
+\caption{Temporal evolution of investment stage distribution. This chart illustrates how the composition of different funding stages has evolved over time.}
+\label{fig:investment_stage_temporal}
+\end{figure}
+
+The investment stage distribution demonstrates a clear early-stage focus within the venture capital ecosystem. Seed funding represents the largest single category at 23.3\% of all investments (33,419 transactions), followed closely by Series A at 20.0\% (28,703 transactions). This concentration in early-stage funding reflects the fundamental role of venture capital in supporting nascent companies during their most critical development phases.
+
+When aggregated by stage classification, early-stage investments (angel through Series A) comprise 46.7\% of all transactions (66,978 investments), substantially exceeding late-stage investments (Series B and beyond) at 30.4\% (43,635 investments). The remaining 22.9\% consists of alternative funding mechanisms including grants, convertible notes, and specialized instruments.
+
+However, temporal analysis also reveals a shift in capital allocation patterns. While early-stage investments dominate by transaction count, late-stage funding has achieved financial dominance in recent years. From 2004 to 2024, late-stage funding experienced exponential growth, escalating from \$5.31 billion in 2004 to \$409.52 billion in 2024 (a 77 times increase). In contrast, early-stage funding grew from \$1.13 billion to \$12.24 billion over the same period, representing an 11 times increase.
+
+This divergence became particularly pronounced after 2013, when late-stage funding began substantially outpacing early-stage investments. By 2021, late-stage funding reached an unprecedented \$1.16 trillion, passing the \$82.74 billion in early-stage funding by a factor of 14. 
+
+Even during the market correction of 2022-2024, late-stage funding maintained its dominance, suggesting a structural trend toward growth-stage capital deployment.
+
+% The prevalence of Series B investments (14.5\%) as the dominant late-stage category by transaction count masks the reality that later-stage rounds involve substantially larger investment amounts. The declining percentages in subsequent series (C: 8.5\%, D: 4.4\%, E: 1.9\%) reflect both the increasingly selective nature of later-stage capital deployment and the substantially higher capital requirements of mature companies.
+
+This capital concentration in late-stage investments may indicate the venture capital industry's evolution toward supporting unicorn creation and pre-IPO growth, where individual transactions can exceed hundreds of millions of dollars. The trend suggests that while early-stage investments remain crucial for company formation, the majority of venture capital deployment now focuses on scaling proven business models.
+
+\todo{Some strong affirmatives need to have supporting references}
+
+\subsubsection{Geographic Distribution}
+
+As expected, as our dataset query was built to get US companies, the geographic distribution of venture capital investments reveals US-concentration pattern on global scale (Figure \ref{fig:geographic_distribution_country}). At US regional levels, Californian region (where Sylicon Valley is located) concentrates the invesment registers, as illustrated in Figure \ref{fig:geographic_distribution_region}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/geographic_distribution_country_analysis.png}
+\caption{Geographic distribution of venture capital investments by country. The analysis shows the dominance of the United States VCs in venture capital activity on US (naturaly), accounting for 82.9\% of all investment transactions, with the top 15 countries representing the vast majority of global venture capital deployment on US.}
+\label{fig:geographic_distribution_country}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/geographic_distribution_region_analysis.png}
+\caption{Regional distribution of venture capital investments within the United States. California emerges as the dominant hub with 40.4\% of all US investments, followed by New York at 15.8\%, demonstrating significant geographic clustering within the American venture capital ecosystem.}
+\label{fig:geographic_distribution_region}
+\end{figure}
+
+Globally, the United States accounts for 118,859 investments (82.9\% of total activity), while international markets collectively represent 24,579 investments (17.1\%). Among international markets, the United Kingdom leads with 3,210 investments (2.2\%), followed by China with 1,855 investments (1.3\%) and Canada with 1,743 investments (1.2\%).
+
+Within the United States, regional concentration patterns mirror the global trend. California dominates with 48,033 investments (40.4\% of US total), representing nearly half of all American venture capital activity. New York follows as the second-largest market with 18,755 investments (15.8\%), while Massachusetts ranks third with 7,946 investments (6.7\%). The top ten US regions account for approximately 81.5\% of all domestic venture capital transactions.
+
+These geographic patterns reflect the clustering effects of venture capital ecosystems around established technology and financial centers. The concentration in California, particularly in Silicon Valley, and New York's financial district demonstrates how proximity to talent, infrastructure, and capital sources influences investment distribution. Similar clustering patterns emerge internationally, with London, Beijing, and Toronto serving as regional venture capital hubs for funds coming to US.
+
+\subsubsection{Sectorial Distribution}
+
+The sectoral distribution analysis reveals significant concentration patterns in venture capital investment activity. As illustrated in Figure \ref{fig:sectoral_industry_bars}, health care dominates the investment landscape with 21,574 investments (15.0\% of total activity), followed by financial services at 11,409 investments (8.0\%) and data and analytics at 8,626 investments (6.0\%).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/sectoral_industry_analysis_bars.png}
+\caption{Sectoral distribution of venture capital investments across industry categories. The bar chart shows the concentration of investment activity, with health care as the dominant sector, followed by financial services and data analytics. The top 20 categories account for over 81\% of all investment transactions.}
+\label{fig:sectoral_industry_bars}
+\end{figure}
+
+The investment concentration demonstrates a highly uneven distribution across sectors. The top 5 categories capture 38.2\% of total investments, while the top 10 categories account for 56.0\% of all activity. This concentration extends to the top 20 categories, which represent 81.2\% of total investments across only 42 unique industry categories.
+
+Technology-related sectors represent a notable but minority portion of the ecosystem. The analysis identifies 6 technology categories (artificial intelligence, data and analytics, hardware, information technology, privacy and security, and internet services) that collectively account for 33,998 investments (23.7\% of total activity). The remaining 109,440 investments (76.3\%) occur in non-technology sectors, indicating that venture capital deployment extends well beyond traditional technology boundaries.
+
+Figure \ref{fig:sectoral_industry_trends} illustrates the temporal evolution of sectoral investment patterns, revealing how industry preferences have shifted over time.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/sectoral_industry_analysis_trends.png}
+\caption{Temporal trends in sectoral investment distribution. The figure shows how investment patterns across different industry categories have evolved over time, highlighting the growth trajectories of major sectors and the emergence of new investment areas.}
+\label{fig:sectoral_industry_trends}
+\end{figure}
+
+The healthcare sector's dominance reflects the substantial capital requirements and long development cycles characteristic of medical innovation, which align well with venture capital investment strategies. Financial services' strong showing demonstrates the ongoing fintech revolution and the digitization of traditional financial institutions.
+
+The presence of traditional sectors like food and beverage (4,727 investments, 3.3\%), transportation (4,648 investments, 3.2\%), and manufacturing (4,188 investments, 2.9\%) among the top categories indicates that venture capital has expanded beyond its historical technology focus to encompass a broader range of innovation-driven industries.
+
+Biotechnology's position as the fourth-largest category (7,047 investments, 4.9\%) highlights the significant role of life sciences in the venture capital ecosystem, often requiring specialized knowledge and longer investment horizons compared to other sectors.
+
+\subsection{Communities Characterization}
 
 \newcommand{\invPairs}{169,679}
 \newcommand{\invPairsUniqueStartups}{3,666}
 
 The division of venture capital firms into early-stage and late-stage investor groups results in \invPairs{} investment pairs comprising \invPairsUniqueStartups{} unique startups.
 
-\todo[inline]{Add explanation on why investment pairs are higher than investment records}
-\todo[inline]{Add network visualization showing bipartite structure}
-
-\newcommand{\numCommunities}{170}
+\newcommand{\numCommunities}{168}
 \newcommand{\numTopCommunities}{5}
 \newcommand{\numCommunitiesThreshold}{150}
 
@@ -54,15 +174,11 @@ Initially, analysis focuses on communities with at least \numCommunitiesThreshol
 \label{tab:community_sizes}
 \end{table}
 
-The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities \cite{Borgatti2011}. 
+The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities, what suggests community size distribution follows a typical power-law pattern observed in many social networks \cite{Borgatti2011}. 
 
 \todo[inline]{Mention literature, as this phenomenon is well-documented}
 
-% The community size distribution follows a typical power-law pattern observed in many social networks, where the top \numTopCommunities{} communities by size account for the majority of investors in the network, suggesting a hierarchical organization within the venture capital ecosystem.
-
 \todo[inline]{Add figure of community size distribution}
-
-\subsection{Communities Characterization}
 
 Community boundaries are defined at the node level, meaning each investor belongs to exactly one community. However, edges (investment relationships) can span community boundaries when investors from different communities co-invest in the same startup.
 
@@ -289,7 +405,7 @@ Community 0 serves as an effective structural baseline for comparison with Commu
 
 \subsection{Overall Nestedness Findings}
 
-\newcommand{\numCommAnalysedNestedness}{5}
+\newcommand{\numCommAnalysedNestedness}{8}
 
 Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits significantly high nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
 
@@ -301,6 +417,19 @@ Figure \ref{fig:nestedness_comparison} presents the comparison between observed 
 \caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" refers to late-stage investors, and "Right" refers to early-stage investors.}
 \label{fig:nestedness_comparison}
 \end{figure}
+
+A broader analysis examining nestedness patterns across all analyzed communities reveals a relationship between community size and nestedness significance, as illustrated in Figure \ref{fig:nestedness_by_community_size}. This analysis examines 8 communities ranging from 122 to 4,248 investors, providing insights into how community structure varies across different organizational scales.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=1\textwidth]{../figures/us/nestedness_by_community_size.png}
+\caption{Relationship between community size and nestedness significance across all analyzed investor communities. The figure shows observed nestedness scores (y-axis) against community size (x-axis), with markers indicating statistical significance. Only Community 2 exhibits significantly high nestedness, while all other communities show significant low patterns relative to their respective null models.}
+\label{fig:nestedness_by_community_size}
+\end{figure}
+
+The analysis reveals that high nestedness significance does not follow a simple relationship with community size. While smaller communities (122-188 investors) tend to exhibit higher absolute nestedness scores (0.045-0.099), these values are statistically significant low when compared to appropriate null models. Medium-sized communities (979-4,248 investors) generally show lower absolute nestedness scores (0.011-0.028), with most falling below low nestedness significance thresholds.
+
+Notably, Community 2 stands out as the only community achieving statistically significant nestedness despite having a moderate absolute score (0.088) and being neither the largest nor smallest community analyzed. This pattern suggests that nestedness emergence depends on specific structural characteristics rather than simple community scale effects.
 
 \newcommand{\interestingCommunity}{2}
 \newcommand{\interestingCommunityNODF}{0.088}
