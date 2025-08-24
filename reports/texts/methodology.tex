@@ -1,6 +1,6 @@
 \section{Methodology}
 
-\subsection{Data Source and Preprocessing}
+\subsection{Data Cleaning and Preprocessing}
 
 This study uses data from Crunchbase, a commercial database that has emerged as a primary source for entrepreneurship and venture capital research \cite{OECD2017}. Founded in 2007 as a side project to TechCrunch, Crunchbase has evolved into a crowdsourced platform containing detailed information about startups, venture capital firms, accelerators, and investment rounds globally. The platform relies on multiple data collection methods, including user submissions, automated web crawling, partnerships with data providers, and editorial curation \cite{OECD2017}.
 
@@ -34,19 +34,41 @@ The data preprocessing and cleaning follows established methodologies from entre
     \item \textbf{Data consistency validation}: Final consistency checks to ensure all investment records reference existing companies in the dataset and all retained companies have at least one valid investment record.
 \end{enumerate}
 
-\subsection{Investment Network Construction}
+\subsection{Network Construction}
 
-The analysis focuses on venture capital co-investment patterns across different funding stages, following established approaches in the venture capital literature for studying syndication networks \cite{Bubna2020}. Investment stages are categorized into two main groups:
+The network construction process transforms raw investment data into a structured bipartite representation that enables theoretical reasoning about venture capital syndication patterns. This transformation follows the conceptual framework outlined by \cite{Borgatti2011}, who distinguish between flow models (focusing on how resources move through networks) and bond models (emphasizing coordination and solidarity among actors).
+
+The construction process involves three sequential transformations, each representing a different conceptualization of network ties, each one described in \ref{fig:bipartite_pipeline} and in the subsequent paragraphs below.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../diagrams/vc_investment_bipartite_pipeline.png}
+    \caption{From event-type investment ties to bipartite syndicate networks: structuring vc relations through flow and bond models}
+    \label{fig:bipartite_pipeline}
+\end{figure}
+
+\textbf{Stage 1 - Raw event-type investment ties:}
+The initial Crunchbase dataset records discrete transactional relationships between venture capital firms and portfolio companies. These event-type ties represent what \cite{Borgatti2011} characterize as nominalist network constructions, where investment transactions ere defined as the fundamental tie type that constitutes the network in that stage. Each investment event creates a direct dyadic relationship between a venture capital firm and a company, but these isolated ties do not yet reveal the broader structural patterns of co-investment behavior.
+
+\textbf{Stage 2 - Syndicated investment network construction:}
+The raw event data are aggregated to identify co-investment relationships, where multiple venture capital firms participate in the same funding round or invest in the same company across different rounds. This aggregation transforms discrete investment events into a network structure where venture capital firms become indirectly connected through their shared ties to portfolio companies. Following \cite{Borgatti2011}, this step creates pathways between actors that enable analysis of their relative positions, including measures of centrality and brokerage within the investment ecosystem.
+
+\textbf{Stage 3 - Bipartite network segmentation by investment stage:}
+The final transformation reorganizes the syndicated network into a bipartite structure that separates investors based on their participation in different funding stages. 
+
+First, investment stages are categorized into two main groups:
 \begin{itemize}
     \item Early stages: angel, pre-seed, seed, and Series A
     \item Late stages: Series B through Series I
 \end{itemize}
 
-A bipartite network is constructed where nodes represent venture capital firms and edges represent co-investment relationships in the same company. The network is bipartite because it connects two distinct sets of investors: those participating in early-stage rounds (right nodes) and those participating in late-stage rounds (left nodes).
+This bipartite structure reflects both flow and bond models as described by \cite{Borgatti2011}. The flow model perspective enables analysis of how resources and information traverse across investment stages, capturing the sequential nature of venture capital financing. Simultaneously, the bond model perspective recognizes that co-investors within each stage can be conceptualized as forming coordinated coalitions, reflecting solidarity ties among investors.
 
-This approach allows us to study how early-stage and late-stage investors interact in the investment ecosystem, building on methodologies established in computational studies of venture capital communities that have demonstrated the effectiveness of network-based approaches for understanding syndication patterns over extended time periods.
+An important consideration in this construction involves investors who participate in both early and late stages (for example, a venture capital firm that invests in both Series A and Series C rounds). In such exceptional cases, the same investor appears as distinct agents on both sides of the bipartite network. This separation is achieved by appending the investment stage identifier to the unique investor UUID during the network construction process, effectively creating stage-specific identities for multi-stage investors. This approach ensures that the bipartite structure remains mathematically valid while preserving the analytical ability to study how the same investor behaves differently across investment stages.
 
-The bipartite graph $G = (U \cup V, E)$ consists of:
+The resulting bipartite graph connects two distinct sets of investors: those participating in early-stage rounds and those participating in late-stage rounds. Edges represent co-investment relationships where early-stage and late-stage investors have both invested in the same company, creating a bridge between different phases of the venture capital investment cycle.
+
+Formally, the bipartite graph $G = (U \cup V, E)$ consists of:
 \begin{align}
 U &= \{u_1, u_2, \ldots, u_m\} \text{ (late-stage VCs)} \\
 V &= \{v_1, v_2, \ldots, v_n\} \text{ (early-stage VCs)} \\
@@ -54,8 +76,6 @@ E &\subseteq U \times V \text{ (co-investment relationships)}
 \end{align}
 
 To prevent spurious connections from related entities, investor pairs where the first five characters of their names match are filtered out, reducing the likelihood of including different funds from the same parent organization. Furthermore, investors that participated in both early and late stages receive a suffix so they can be treated as distinct agents for each phase.
-
-\todo[inline]{Clearly show the overlap or number of connections made between the same investors but in distinct phases ex. VC1\_serieA-VC1\_serieC} 
 
 \subsection{Community Detection}
 
