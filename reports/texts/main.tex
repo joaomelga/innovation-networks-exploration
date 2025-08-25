@@ -1,51 +1,83 @@
 \documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
+\linespread{1.6}
+
 \usepackage{amsfonts}
+\usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{subcaption}
+\usepackage{caption}
 \usepackage{cite}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{lipsum}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{subfiles}
 \usepackage{url}
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{multirow}
-
-\setlength{\marginparwidth}{2cm}
+\usepackage[ddmmyyyy]{datetime}
+\usepackage[english]{babel}
+\usepackage[numbers]{natbib}
 \usepackage[colorinlistoftodos,prependcaption]{todonotes}
 
-\usepackage{setspace}
-\onehalfspacing
+% \setlength{\marginparwidth}{2cm}
+% \usepackage{setspace}
+% \onehalfspacing
+
+\addtolength{\oddsidemargin}{-.5in}
+\addtolength{\evensidemargin}{-.5in}
+\addtolength{\textwidth}{1in}
+
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1in}
+
+\renewcommand*\contentsname{Contents}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tabelas}
+\renewcommand*{\figurename}{Figure}
+\renewcommand*{\tablename}{Table}
+\renewcommand{\refname}{References}
+
+\captionsetup{labelfont=bf}
+\captionsetup{font=scriptsize}
+%\newcommand{\figurescale}{0.7}
 
 \begin{document}
-\title{Nested Syndication Networks: Community Structure and Hierarchical Organization in Innovation Ecosystems}
-\author{}
-\date{}
-\maketitle
-\newpage
+
+\input{sections/cover.tex}
 
 \input{sections/abstract.tex}
-\newpage
 
 \tableofcontents
 \newpage
 
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\newpage
+
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
 {
 \setlength{\parskip}{0.7em}
 \input{sections/intro.tex}
-\newpage
 
 \input{sections/methodology.tex}
-\newpage
 
 \input{sections/results.tex}
-\newpage
 
 \input{sections/discussion.tex}
-\newpage
 
 \input{sections/conclusion.tex}
-\newpage
 }
 
 \bibliographystyle{plain}
