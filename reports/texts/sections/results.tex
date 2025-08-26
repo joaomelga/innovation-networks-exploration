@@ -11,7 +11,7 @@ Syndicated investments account for a large share of activity, as shown in Figure
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/syndication_trends.png}
-\caption{Evolution of syndicated investment trends in the Crunchbase dataset. The figure illustrates changes in the proportion and of syndicated investments over time, highlighting the prevalence of co-investment activity among venture capital investors.}
+\caption{Syndication rate in the dataset. Top: annual share of syndicated rounds; bottom: cumulative share over time. The dashed line marks the overall rate.}
 \label{fig:syndication_evolution}
 \end{figure}
 
@@ -22,14 +22,14 @@ Figure \ref{fig:vc_investment_activity} presents the overall investment activity
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/vc_investment_activity_over_time.png}
-\caption{Venture capital investment activity over time. The figure shows the evolution of investment transactions and funding patterns across the study period, highlighting major trends and cyclical patterns in venture capital deployment.}
+\caption{Total investments, unique companies, and unique investors by year.}
 \label{fig:vc_investment_activity}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/investment_funding_temporal_evolution.png}
-\caption{Temporal evolution of investment activity characteristics. This comprehensive view illustrates how different aspects of venture capital investment behavior have changed over time, including variations in funding amounts, transaction frequency, and market participation patterns.}
+\caption{Temporal evolution of investment activity characteristics across the study period.}
 \label{fig:investment_temporal_evolution}
 \end{figure}
 
@@ -49,7 +49,7 @@ Figures \ref{fig:investment_stage_dist} and \ref{fig:investment_stage_temporal} 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/investment_stage_curves_log.png}
-\caption{Temporal evolution of investment stage distribution. This chart illustrates how the composition of different funding stages has evolved over time.}
+\caption{Stage composition over time (log scale for counts).}
 \label{fig:investment_stage_temporal}
 \end{figure}
 
@@ -113,7 +113,7 @@ Figure \ref{fig:sectoral_industry_trends} illustrates the temporal evolution of 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/sectoral_industry_analysis_trends.png}
-\caption{Temporal trends in sectoral investment distribution. The figure shows how investment patterns across different industry categories have evolved over time, highlighting the growth trajectories of major sectors and the emergence of new investment areas.}
+\caption{Left: category distribution (Top 10 + Others). Right: yearly evolution of the top five categories by number of investments.}
 \label{fig:sectoral_industry_trends}
 \end{figure}
 
@@ -154,7 +154,7 @@ Initially, analysis focuses on communities with at least \numCommunitiesThreshol
 7 & 122 \\
 \hline
 \end{tabular}
-\caption{Size distribution of the largest investor communities identified through greedy modularity optimization}
+\caption{Sizes of the largest investor communities identified by greedy modularity.}
 \label{tab:community_sizes}
 \end{table}
 
@@ -171,7 +171,7 @@ To provide a concise overview of community characteristics, Table~\ref{tab:commu
 2 & 3{,}959 & 55{,}863 & 33.6\% & 0.088 & $<\!0.001$ \\
 \hline
 \end{tabular}
-\caption{Summary statistics for the three largest investor communities.  Investment share refers to the proportion of all intra‑community syndicated investments attributed to each group.  NODF values and p‑values are based on degree‑preserving null models.  Community~2 displays significantly high nestedness, whereas Communities~0 and~1 have nestedness levels consistent with random expectations.}
+\caption{Three largest communities: investors, co‑investment pairs, share of intra‑community investments, observed NODF, and p‑value (degree‑preserving null model).}
 \label{tab:community_summary}
 \end{table}
 
@@ -195,7 +195,7 @@ Community 2 & 55,863 & 33.6\% \\
 Cross-community & 58,329 & 35.1\% \\
 \hline
 \end{tabular}
-\caption{Distribution of syndicated investments across investor communities}
+\caption{Distribution of co‑investment pairs by community and cross‑community share.}
 \label{tab:investment_distribution}
 \end{table}
 
@@ -249,7 +249,7 @@ Table \ref{tab:high_degree_nodes} presents the top high-degree nodes for each co
 & New Enterprise Associates-series\_a & 619 & Early-stage \\
 \hline
 \end{tabular}
-\caption{Top 5 high-degree nodes (95th percentile) for the three largest investor communities}
+\caption{Top 5 high-degree investors (95th percentile) by community and stage.}
 \label{tab:high_degree_nodes}
 \end{table}
 
@@ -266,7 +266,7 @@ As per Figure \ref{fig:degree_vs_activity}, the relationship between degree cent
 
 \subsubsection{Geographic Distribution}
 
-Geographic analysis reveals distinct spatial clustering patterns across the three largest communities. Figure \ref{fig:geographic_distribution} illustrates the asymmetric geographic distributions between early-stage and late-stage investment networks.
+Geographic analysis reveals distinct spatial clustering patterns across the three largest communities. Figure \ref{fig:geographic_distribution_countries} illustrates the asymmetric geographic distributions between early-stage and late-stage investment networks.
 
 % The geographic distribution figure is presented in a multi‑panel format to facilitate comparison between early‑ and late‑stage investors.
 
@@ -275,8 +275,8 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_country_left.png}
-    \caption{Late-stage investors geographic distribution (countries)}
-    \label{fig:late_stage_geo}
+    \caption{Late-stage investors by country (log scale)}
+    \label{fig:late_stage_geo_countries}
 \end{subfigure}
 
 \vspace{0.5em}
@@ -284,11 +284,11 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_country_right.png}
-    \caption{Early-stage investors geographic distribution (countries)}
-    \label{fig:early_stage_geo}
+    \caption{Early-stage investors by country (log scale)}
+    \label{fig:early_stage_geo_countries}
 \end{subfigure}
-\caption{Geographic distribution of venture capital investors across the largest communities. The bipartite structure reveals differential geographic clustering between late-stage (top) and early-stage (bottom) investor networks, with Community 1 exhibiting greater international diversification compared to the U.S.-concentrated Communities 0 and 2.}
-\label{fig:geographic_distribution}
+\caption{Geographic distribution across countries for late-stage (top) and early-stage (bottom) investors in the three largest communities.}
+\label{fig:geographic_distribution_countries}
 \end{figure}
 
 \begin{figure}[htp]
@@ -296,8 +296,8 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_region_left.png}
-    \caption{Late-stage investors geographic distribution (regions)}
-    \label{fig:late_stage_geo}
+    \caption{Late-stage investors by region}
+    \label{fig:late_stage_geo_regions}
 \end{subfigure}
 
 \vspace{0.5em}
@@ -305,11 +305,11 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 \begin{subfigure}{0.8\textwidth}
     \centering
     \includegraphics[width=1\textwidth]{../figures/us/categorical_comparison_investor_region_right.png}
-    \caption{Early-stage investors geographic distribution (regions)}
-    \label{fig:early_stage_geo}
+    \caption{Early-stage investors by region}
+    \label{fig:early_stage_geo_regions}
 \end{subfigure}
-\caption{Geographic distribution of venture capital investors across regions}
-\label{fig:geographic_distribution}
+\caption{Geographic distribution across regions (worldwide) for late-stage (top) and early-stage (bottom) investors in the three largest communities.}
+\label{fig:geographic_distribution_regions}
 \end{figure}
 
 % The geographic distributions exhibit notable asymmetries: late-stage investors demonstrate greater international representation, while early-stage investors show concentrated domestic clustering. This pattern suggests stage-specific geographic preferences that may reflect risk tolerance, regulatory constraints, or information asymmetries across international markets.
@@ -328,12 +328,10 @@ In contrast, Community 1 demonstrates significantly greater international divers
 
 Analysis of funding patterns reveals that Community 2 exhibits substantially higher funding frequency and larger investment amounts compared to the other communities, as demonstrated in Figure \ref{fig:funding_characteristics}.
 
-To assess whether differences in funding distributions are statistically significant we computed Mann–Whitney U tests between communities for median funding amounts and found that Community~2 has significantly higher funding distributions than Communities~0 and~1 (p<0.001).
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/numeric_variables_distribution.png}
-\caption{Funding characteristics across the three largest investor communities. The analysis reveals systematic differences in investment amounts, round frequency, and funding patterns between communities, with different organizational structures exhibiting distinct capital deployment strategies.}
+\caption{Distributions across communities. Top row: histograms of deal years. Bottom row: log-scale histograms of total funding per round with KDE overlays.}
 \label{fig:funding_characteristics}
 \end{figure}
 
@@ -408,7 +406,7 @@ Figure \ref{fig:nestedness_comparison} presents the comparison between observed 
 \begin{figure}[htp]
 \centering
 \includegraphics[width=1\textwidth]{../figures/us/significant_communities_detailed.png}
-\caption{Comparison of observed versus null model nestedness scores for the five largest investor communities. The diagonal line represents equal observed and expected values, with points above the line indicating higher-than-random nestedness. "Left" refers to late-stage investors, and "Right" refers to early-stage investors.}
+\caption{For each large community (rows): left, null-model NODF distribution (blue) with observed value (red); right, network size split into late-stage (left nodes) and early-stage (right nodes). Reported Z-scores and p-values summarize significance.}
 \label{fig:nestedness_comparison}
 \end{figure}
 
@@ -466,7 +464,7 @@ Transition (2019) & 1 & 0.1177 & 2.9125 & 1 \\
 High Nestedness (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 \hline
 \end{tabular}
-\caption{Summary statistics for Community 2 nestedness evolution across temporal periods}
+\caption{Community~2 nestedness over time: mean NODF, mean Z‑score, and number of high‑nestedness years per period.}
 \label{tab:nestedness_evolution_summary}
 \end{table}
 
@@ -487,8 +485,8 @@ High Nestedness (2019-2024) & 6 & 0.1012 ± 0.0121 & 3.8950 ± 0.7182 & 6 \\
 \begin{figure}[htbp]
 \hspace*{-1cm}\centering
 \includegraphics[width=1.2\textwidth]{../figures/us/nestedness_evolution_community_2_pt3.png}
-\caption{TBD}
-\label{fig:connectance_evolution}
+\caption{Summary for Community~2 (2007–2024). Left: total nodes and edges; middle: counts of late- vs early-stage investors; right: connectance.}
+\label{fig:nestedness_evolution_pt3}
 \end{figure}
 
 The analysis reveals several notable patterns in network structure evolution. Late-stage investor participation increased consistently over time, while early-stage investor numbers showed initial growth followed by stabilization after 2020. This asymmetric growth pattern contributed to the development of the nested structure by creating increasingly hierarchical relationships between investor types.
