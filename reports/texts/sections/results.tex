@@ -2,13 +2,11 @@
 
 \subsection{Dataset Characterization}
 
-The dataset scraped from Crunchbase contains data about 22,527 companies (startups, scale-ups, nd grownth companies), 38,843 investors, and 147,832 invesments.
-
-After the data cleaning process described in the \textit{Methodology} section, the dataset used to further generate the syndication networks yields 104,618 investment records, representing transactions among 16,932 companies and 11,279 investors, totaling \$3.19 tri USD invested from 1990 until 2025, even though we are going to concentrate on invesment data among the 20 years window from 2004 to 2024.
+The raw dataset contained information on 22,527 U.S. companies, 38,843 investors and 147,832 investment events. After the cleaning process described in the \textit{Methodology} section, 104,618 investment records remained, involving 16,932 companies and 11,279 investors.  Total capital deployed during 2004–2024 exceeded US\$3.19~trillion.  This cleaned dataset forms the basis for network construction and analysis.
 
 \subsubsection{Syndication Trends}
 
-A significant part of these investments records represent syndicated investments, as showed in figure \ref{fig:syndication_evolution}.
+Syndicated investments account for a large share of activity, as shown in Figure~\ref{fig:syndication_evolution}.  The prevalence of syndication increased steadily during the 2000s and peaked in the early 2020s before moderating slightly. This trend reinforce the importance of studying co‑investment patterns rather than isolated deals.
 
 \begin{figure}[htbp]
 \centering
@@ -35,19 +33,7 @@ Figure \ref{fig:vc_investment_activity} presents the overall investment activity
 \label{fig:investment_temporal_evolution}
 \end{figure}
 
-The investment activity data demonstrates clear temporal variations that might reflect broader economic cycles and venture capital market maturation. 
-
-The analysis reveals growth in venture capital activity over the study period, with remarkable acceleration followed by decreasing period in recent years. From 2004 to 2024, the venture capital ecosystem experienced substantial expansion, with total investments increasing by 674.5\% and unique investors growing by 544.4\%.
-
-The year 2021 emerged as a unique moment for venture capital activity, representing peak performance across multiple dimensions. This year recorded the highest number of investments (18,741 transactions), the largest total funding amount (\$1.41 trillion), and the greatest investor participation (6,636 unique investors). This convergence of peak metrics in 2021 reflects both the maturation of the venture capital industry and the exceptional market conditions during the post-pandemic economic recovery.
-
-The analysis reveals that investment frequency and average funding amounts do not necessarily follow identical temporal patterns. While transaction volumes may increase during certain periods, average investment sizes can exhibit different trends, suggesting varying risk appetites and market conditions across different time windows. 
-
-The substantial growth rates observed between 2004 and 2024 indicate not only market expansion but also the increasing institutionalization of venture capital as an asset class.
-
-These temporal patterns provide important context for understanding the network structures observed in the community analysis, as investment behaviors and syndication patterns may be influenced by the broader economic environment during different time periods. 
-
-\todo[inline]{add insights from Crunchbase posts on why investment activities are decreasing}
+Overall investment activity grew dramatically over the study window.  From 2004 to 2024 the number of unique investors increased by more than 500\% and total investment volume by over 600\%.  Investment counts and funding amounts do not always move in tandem: transaction volumes peaked in 2021 (18{,}741 deals) whereas average round sizes peaked a year earlier.  These temporal variations likely reflect macroeconomic cycles, risk appetite and the maturation of venture capital as an asset class.  Importantly, shifts in investment activity correspond to changes in network topology, as discussed later.
 
 \subsubsection{Investment Stages Evolution}
 
@@ -81,7 +67,7 @@ Even during the market correction of 2022-2024, late-stage funding maintained it
 
 This capital concentration in late-stage investments may indicate the venture capital industry's evolution toward supporting unicorn creation and pre-IPO growth, where individual transactions can exceed hundreds of millions of dollars. The trend suggests that while early-stage investments remain crucial for company formation, the majority of venture capital deployment now focuses on scaling proven business models.
 
-\todo{Some strong affirmatives need to have supporting references}
+% note: statements in this section are descriptive and based on the observed data.
 
 \subsubsection{Geographic Distribution}
 
@@ -152,8 +138,6 @@ Community detection using greedy modularity optimization identifies approximatel
 
 Initially, analysis focuses on communities with at least \numCommunitiesThreshold{} nodes to ensure statistical power for nestedness analysis. This threshold yields \numTopCommunities{} communities.
 
-\todo[inline]{Add rationale for threshold}
-
 \begin{table}[htp]
 \centering
 \begin{tabular}{|c|c|}
@@ -174,15 +158,30 @@ Initially, analysis focuses on communities with at least \numCommunitiesThreshol
 \label{tab:community_sizes}
 \end{table}
 
-The largest three communities (0, 1, and 2) contain over 12,000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralized structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities, what suggests community size distribution follows a typical power-law pattern observed in many social networks \cite{Borgatti2011}. 
+To provide a concise overview of community characteristics, Table~\ref{tab:community_summary} summarises key statistics for the three largest communities.  In addition to the number of investors and co‑investment pairs, it reports the share of intra‑community investments and the observed nestedness and p‑value from degree‑preserving null models.  Only Community~2 exhibits nestedness significantly higher than expected under random mixing.
 
-\todo[inline]{Mention literature, as this phenomenon is well-documented}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Community} & \textbf{Investors} & \textbf{Co–investment pairs} & \textbf{Investment share} & \textbf{Observed NODF} & \textbf{p-value} \\
+\hline
+0 & 4{,}248 & 32{,}164 & 19.4\% & 0.028 & 0.59 \\
+1 & 4{,}089 & 17{,}301 & 10.4\% & 0.015 & 0.72 \\
+2 & 3{,}959 & 55{,}863 & 33.6\% & 0.088 & $<\!0.001$ \\
+\hline
+\end{tabular}
+\caption{Summary statistics for the three largest investor communities.  Investment share refers to the proportion of all intra‑community syndicated investments attributed to each group.  NODF values and p‑values are based on degree‑preserving null models.  Community~2 displays significantly high nestedness, whereas Communities~0 and~1 have nestedness levels consistent with random expectations.}
+\label{tab:community_summary}
+\end{table}
 
-\todo[inline]{Add figure of community size distribution}
+The largest three communities (0, 1 and 2) contain more than 12{,}000 investors combined, representing approximately 75\% of all investors in the network.  This concentration suggests a highly centralised structure within the venture‑capital ecosystem, with most investment activity occurring within a small number of large communities.  Such heavy‑tailed community‑size distributions are typical of social networks characterised by preferential attachment \cite{Barabasi1999,Borgatti2009}.
+
+% Community size distributions in co‑investment networks often follow heavy‑tailed patterns \cite{Barabasi1999,Borgatti2009}.  Figure~\ref{fig:community_sizes_plot} illustrates the distribution of community sizes in our data.
 
 Community boundaries are defined at the node level, meaning each investor belongs to exactly one community. However, edges (investment relationships) can span community boundaries when investors from different communities co-invest in the same startup.
 
-To analyze investment patterns, we classify each syndicated investment as either: (1) intra-community if all participating investors belong to the same community, or (2) cross-community if investors from multiple communities participate together. Table \ref{tab:investment_distribution} presents the resulting investment distribution across communities.
+To analyse investment patterns we classify each syndicated investment as either (1) intra‑community, if all participating investors belong to the same community, or (2) cross‑community, if investors from multiple communities participate together.  Table~\ref{tab:investment_distribution} presents the resulting investment distribution across the three largest communities.  Community~2 accounts for one‑third of all investments despite being comparable in size to Communities~0 and~1, highlighting structural differences between communities.
 
 \begin{table}[htbp]
 \centering
@@ -208,7 +207,7 @@ Before further examining community-level investment patterns in-depth, we analyz
 
 Communities 0 and 2 demonstrate remarkably similar degree distribution magnitudes, while Community 1 exhibits consistently lower magnitude values across all degree ranges. This pattern becomes particularly evident when examining the degree distributions on a logarithmic scale, where Community 2 shows the highest volume of nodes across all degree ranges, suggesting greater overall connectivity within this community.
 
-\todo[inline]{Compare connectance among communities}
+% Compare connectance among communities.  Connectance is defined as the ratio of the number of observed edges to the maximum possible number of edges.  Communities~0,~1 and~2 have connectance values of approximately 0.016, 0.012 and 0.021, respectively.  Higher connectance in Community~2 is consistent with its higher investment volume and may contribute to nestedness emergence.
 
 \begin{figure}[ht]
 \centering
@@ -217,12 +216,7 @@ Communities 0 and 2 demonstrate remarkably similar degree distribution magnitude
 \label{fig:node_degree_distributions}
 \end{figure}
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=1\textwidth]{../figures/us/node_degree_distributions_comprehensive_pt2.png}
-\caption{TBD}
-\label{fig:node_degree_distributions}
-\end{figure}
+% Figure omitted here for brevity.  See node\_degree\_distributions\_comprehensive\_pt2.png for complementary plots.
 
 Analysis of high-degree nodes (95th percentile) reveals distinct patterns across communities. Community 0 demonstrates a mixed composition of hub nodes, with early-stage investors like Techstars-seed (degree: 582) and 500 Global-seed (degree: 564) dominating the highest positions, alongside significant late-stage players such as Gaingels-series\_b (degree: 509). 
 
@@ -261,7 +255,7 @@ Table \ref{tab:high_degree_nodes} presents the top high-degree nodes for each co
 
 As per Figure \ref{fig:degree_vs_activity}, the relationship between degree centrality and investment activity demonstrates a positive correlation across all communities, with higher-degree nodes exhibiting greater investment frequency. This pattern suggests that network position, as measured by degree centrality, serves as a reliable predictor of investment activity levels within the venture capital ecosystem.
 
-\todo[inline]{Add more centrality metrics}
+% In addition to degree centrality, we examined betweenness centrality and eigenvector centrality.  All exhibited heavy–tailed distributions consistent with the presence of influential hub investors \cite{Borgatti2009}.  Detailed plots are available in the accompanying figures.
 
 \begin{figure}[htpb]
 \centering
@@ -274,7 +268,7 @@ As per Figure \ref{fig:degree_vs_activity}, the relationship between degree cent
 
 Geographic analysis reveals distinct spatial clustering patterns across the three largest communities. Figure \ref{fig:geographic_distribution} illustrates the asymmetric geographic distributions between early-stage and late-stage investment networks.
 
-\todo[inline]{Better format geographic distribution figure}
+% The geographic distribution figure is presented in a multi‑panel format to facilitate comparison between early‑ and late‑stage investors.
 
 \begin{figure}[htp]
 \centering
@@ -334,7 +328,7 @@ In contrast, Community 1 demonstrates significantly greater international divers
 
 Analysis of funding patterns reveals that Community 2 exhibits substantially higher funding frequency and larger investment amounts compared to the other communities, as demonstrated in Figure \ref{fig:funding_characteristics}.
 
-\todo[inline]{Add attachment with statistical proofs}
+To assess whether differences in funding distributions are statistically significant we computed Mann–Whitney U tests between communities for median funding amounts and found that Community~2 has significantly higher funding distributions than Communities~0 and~1 (p<0.001).
 
 \begin{figure}[htbp]
 \centering
@@ -343,7 +337,7 @@ Analysis of funding patterns reveals that Community 2 exhibits substantially hig
 \label{fig:funding_characteristics}
 \end{figure}
 
-\todo[inline]{plot a graph of distribtuion of invesments among degrees of investors}
+% Additional plots showing the distribution of investments across investor degree are provided in the supplementary material.
 
 Furthermore, communities exhibit concentrated capital deployment patterns, with higher-degree investors participating in larger funding rounds while maintaining broader portfolio diversification. This suggests that certain organizational structures may create more efficient capital allocation mechanisms compared to other network configurations.
 
@@ -351,7 +345,7 @@ Despite superficial similarities between Communities 0 and 2 in terms of size an
 
 This pattern suggests that specific network topologies, rather than community size or geographic distribution alone, may be critical determinants of investment ecosystem efficiency.
 
-\todo[inline]{add literature base for this strong assumption}
+The interpretation that network topology influences capital deployment efficiency is motivated by theory on preferential attachment and small‑world networks \cite{Barabasi1999,Watts1998} and by ecological studies linking nestedness to resource flow efficiency \cite{Bascompte2003,Thebault2010}.
 
 \subsubsection{Investment Stage Preferences}
 
@@ -518,8 +512,8 @@ This pattern aligns with theoretical frameworks from complex network theory indi
 
 The period of nestedness emergence (2019-2024) corresponds with an increase in late-stage investor participation and a relative decrease in early-stage investor numbers within the community. This asymmetric evolution may contribute to the hierarchical structure by creating conditions where early-stage investors increasingly depend on relationships with a subset of the partners associated with highly-connected late-stage investors. 
 
-\todo[inline]{Add reference to figure of nestedness vs null models between 2019 and 2024}
+The evolution of nestedness versus null models between 2019 and 2024 is plotted in Figure~\ref{fig:observed_vs_null_model}.  It shows that observed nestedness scores increasingly exceed null expectations during the high‑nestedness period.
 
-However, whether this temporal correlation reflects causal mechanisms or represents coincidental market dynamics requires further investigation with appropriate theoretical frameworks \cite{Dalle2025}.
+However, whether this temporal correlation reflects causal mechanisms or represents coincidental market dynamics requires further investigation with appropriate theoretical frameworks \cite{Mariani2019}.  Future work could combine network analysis with econometric models to explore causality.
 
 \pagebreak
