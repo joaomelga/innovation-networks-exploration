@@ -2,11 +2,11 @@
 
 \subsection{Dataset Characterization}
 
-The raw dataset contained information on 22,527 U.S. companies, 38,843 investors and 147,832 investment events. After the cleaning process described in the \textit{Methodology} section, 104,618 investment records remained, involving 16,932 companies and 11,279 investors.  Total capital deployed during 2004–2024 exceeded US\$3.19~trillion.  This cleaned dataset forms the basis for network construction and analysis.
+The raw dataset contained information on 22,527 U.S. companies, 38,843 investors and 147,832 investment events. After the cleaning process described in the \textit{Methodology} section, 104,618 investment records remained, involving 16,932 companies and 11,279 investors. Total capital deployed during 2004–2024 exceeded US\$3.19~trillion. This cleaned dataset forms the basis for network construction and analysis.
 
 \subsubsection{Syndication Trends}
 
-Syndicated investments account for a large share of activity, as shown in Figure~\ref{fig:syndication_evolution}.  The prevalence of syndication increased steadily during the 2000s and peaked in the early 2020s before moderating slightly. This trend reinforce the importance of studying co‑investment patterns rather than isolated deals.
+Syndicated investments account for a large share of activity, as shown in Figure~\ref{fig:syndication_evolution}. The prevalence of syndication increased steadily during the 2000s and peaked in the early 2020s before moderating slightly. This trend reinforces the importance of studying co-investment patterns rather than isolated deals.
 
 \begin{figure}[htbp]
 \centering
@@ -33,11 +33,11 @@ Figure \ref{fig:vc_investment_activity} presents the overall investment activity
 \label{fig:investment_temporal_evolution}
 \end{figure}
 
-From 2004 to 2024 the number of unique investors increased by more than 500\% and total investment volume by over 600\%.  Investment counts and funding amounts do not always move in tandem: transaction volumes peaked in 2021 (18{,}741 deals) whereas average round sizes peaked a year earlier.  These temporal variations likely reflect macroeconomic cycles, risk appetite and the maturation of venture capital as an asset class.  Importantly, shifts in investment activity correspond to changes in network topology, as discussed later.
+From 2004 to 2024 the number of unique investors increased by more than 500\% and total investment volume by over 600\%. Investment counts and funding amounts do not always move in tandem: transaction volumes peaked in 2021 (18{,}741 deals) whereas average round sizes peaked a year earlier. These temporal variations likely reflect macroeconomic cycles, risk appetite and the maturation of venture capital as an asset class. Importantly, shifts in investment activity correspond to changes in network topology, as discussed later.
 
 \subsubsection{Investment Stages Evolution}
 
-Figures \ref{fig:investment_stage_dist} and \ref{fig:investment_stage_temporal} illustrates the analysis of investment stages over time across the venture capital ecosystem
+Figures \ref{fig:investment_stage_dist} and \ref{fig:investment_stage_temporal} illustrate the analysis of investment stages over time across the venture capital ecosystem
 
 \begin{figure}[htbp]
 \centering
@@ -71,7 +71,7 @@ This capital concentration in late-stage investments may indicate the venture ca
 
 \subsubsection{Geographic Distribution}
 
-As expected, as our dataset query was built to get US companies, the geographic distribution of venture capital investments reveals US-concentration pattern on global scale (Figure \ref{fig:geographic_distribution_country}). At US regional levels, Californian region (where Sylicon Valley is located) concentrates the invesment registers, as illustrated in Figure \ref{fig:geographic_distribution_region}.
+As expected, since our dataset query was built to capture US companies, the geographic distribution of venture capital investments reveals US concentration patterns on a global scale (Figure \ref{fig:geographic_distribution_country}). At US regional levels, the Californian region (where Silicon Valley is located) concentrates the investment registers, as illustrated in Figure \ref{fig:geographic_distribution_region}.
 
 \begin{figure}[htbp]
 \centering
@@ -91,7 +91,7 @@ Globally, the United States accounts for 118,859 investments (82.9\% of total ac
 
 Within the United States, regional concentration patterns mirror the global trend. California dominates with 48,033 investments (40.4\% of US total), representing nearly half of all American venture capital activity. New York follows as the second-largest market with 18,755 investments (15.8\%), while Massachusetts ranks third with 7,946 investments (6.7\%). The top ten US regions account for approximately 81.5\% of all domestic venture capital transactions.
 
-These geographic patterns reflect the clustering effects of venture capital ecosystems around established technology and financial centers. The concentration in California, particularly in Silicon Valley, and New York's financial district demonstrates how proximity to talent, infrastructure, and capital sources influences investment distribution. Similar clustering patterns emerge internationally, with London, Beijing, and Toronto serving as regional venture capital hubs for funds coming to US.
+These geographic patterns reflect the clustering effects of venture capital ecosystems around established technology and financial centers. The concentration in California, particularly in Silicon Valley, and New York's financial district demonstrates how proximity to talent, infrastructure, and capital sources influences investment distribution. Similar clustering patterns emerge internationally, with London, Beijing, and Toronto serving as regional venture capital hubs for funds coming to the US.
 
 \subsubsection{Sectorial Distribution}
 
@@ -158,13 +158,13 @@ Initially, analysis focuses on communities with at least \numCommunitiesThreshol
 \label{tab:community_sizes}
 \end{table}
 
-The largest three communities (0, 1 and 2) contain more than 12{,}000 investors combined, representing approximately 75\% of all investors in the network.  This concentration suggests a highly centralised structure within the venture‑capital ecosystem, with most investment activity occurring within a small number of large communities.  Such heavy‑tailed community‑size distributions are typical of social networks characterised by preferential attachment \cite{Barabasi1999,Borgatti2009}.
+The largest three communities (0, 1 and 2) contain more than 12{,}000 investors combined, representing approximately 75\% of all investors in the network. This concentration suggests a highly centralised structure within the venture capital ecosystem, with most investment activity occurring within a small number of large communities. Such heavy-tailed community size distributions are typical of social networks characterised by preferential attachment \cite{Barabasi1999,Borgatti2009}.
 
 % Community size distributions in co‑investment networks often follow heavy‑tailed patterns \cite{Barabasi1999,Borgatti2009}.  Figure~\ref{fig:community_sizes_plot} illustrates the distribution of community sizes in our data.
 
 Community boundaries are defined at the node level, meaning each investor belongs to exactly one community. However, edges (investment relationships) can span community boundaries when investors from different communities co-invest in the same startup.
 
-To analyse investment patterns we classify each syndicated investment as either (1) intra‑community, if all participating investors belong to the same community, or (2) cross‑ community, if investors from multiple communities participate together.  Table~\ref{tab:investment_distribution} presents the resulting investment distribution across the three largest communities.  Community~2 accounts for one‑third of all investments despite being comparable in size to Communities~0 and~1, highlighting structural differences between communities.
+To analyse investment patterns we classify each syndicated investment as either (1) intra-community, if all participating investors belong to the same community, or (2) cross-community, if investors from multiple communities participate together. Table~\ref{tab:investment_distribution} presents the resulting investment distribution across the three largest communities. Community~2 accounts for one-third of all investments despite being comparable in size to Communities~0 and~1, highlighting structural differences between communities.
 
 \begin{table}[htbp]
 \centering
@@ -178,7 +178,7 @@ Community 2 & 55,863 & 33.6\% \\
 Cross-community & 58,329 & 35.1\% \\
 \hline
 \end{tabular}
-\caption{Distribution of co‑investment pairs by community and cross‑community share.}
+\caption{Distribution of co-investment pairs by community and cross-community share.}
 \label{tab:investment_distribution}
 \end{table}
 
@@ -299,7 +299,7 @@ Geographic analysis reveals distinct spatial clustering patterns across the thre
 
 Communities 0 and 2 exhibit similar geographic profiles with predominantly American investors, reflecting the dominance of U.S.-based venture capital (important to remember our dataset contains only American startups' investments, which include international investors). 
 
-However, regional analysis within the United States reveals a striking pattern: Community 2 demonstrates exceptional concentration in California, particularly Silicon Valley, with approximately 50\% more California-based investors than either Community 0 or Community 1 for both late-stage and early-stage investor categories.
+However, Community 2 demonstrates exceptional concentration in California (Silicon Valley), with approximately 50\% more California-based investors than either Community 0 or Community 1 for both late-stage and early-stage investor categories.
 
 This Silicon Valley concentration in Community 2 is particularly notable given the region's status as the world's premier innovation ecosystem. The dominance of California investors in this community, which also exhibits the highest transaction volumes, suggests potential advantages conferred by geographic clustering within innovation hubs.
 
@@ -320,13 +320,13 @@ Analysis of funding patterns reveals that Community 2 exhibits substantially hig
 
 % Additional plots showing the distribution of investments across investor degree are provided in the supplementary material.
 
-Furthermore, communities exhibit concentrated capital deployment patterns, with higher-degree investors participating in larger funding rounds while maintaining broader portfolio diversification. This suggests that certain organizational structures may create more efficient capital allocation mechanisms compared to other network configurations.
+Furthermore, communities exhibit concentrated capital deployment patterns, with higher-degree investors participating in larger funding rounds while maintaining broader portfolio diversification. This suggests that certain organisational structures may create more efficient capital allocation mechanisms compared to other network configurations.
 
-Despite superficial similarities between Communities 0 and 2 in terms of size and geographic concentration within the United States, Community 2 appears to confer distinctive advantages in organizational efficiency. While both communities share comparable scales and American investor bases, Community 2's organizational structure enables it to achieve substantially higher transaction volumes (33.6\% vs. 19.4\% of total investments) and more comprehensive funding coverage across all investment stages. 
+Despite superficial similarities between Communities 0 and 2 in terms of size and geographic concentration within the United States, Community 2 appears to confer distinctive advantages in organisational efficiency. While both communities share comparable scales and American investor bases, Community 2's organisational structure enables it to achieve substantially higher transaction volumes (33.6\% vs. 19.4\% of total investments) and more comprehensive funding coverage across all investment stages. 
 
 This pattern suggests that specific network topologies, rather than community size or geographic distribution alone, may be critical determinants of investment ecosystem efficiency.
 
-The interpretation that network topology influences capital deployment efficiency is motivated by theory on preferential attachment and small‑world networks \cite{Barabasi1999,Watts1998} and by ecological studies linking nestedness to resource flow efficiency \cite{Bascompte2003,Thebault2010}.
+The interpretation that network topology influences capital deployment efficiency is motivated by theory on preferential attachment and small-world networks \cite{Barabasi1999,Watts1998} and by ecological studies linking nestedness to resource flow efficiency \cite{Bascompte2003,Thebault2010}.
 
 \subsubsection{Investment Stage Preferences}
 
@@ -382,7 +382,7 @@ Community 0 serves as an effective structural baseline for comparison with Commu
 
 Nestedness analysis across investor communities reveals heterogeneous structural patterns. Among the \numCommAnalysedNestedness{} communities examined, one exhibits significantly high nestedness (p < 0.01) relative to degree-preserving null models generated through the Curveball algorithm.
 
-To provide a concise overview of community characteristics in that regard, Table~\ref{tab:community_summary} summarises key statistics for the three largest communities.  In addition to the number of investors and co‑investment pairs, it reports the share of intra‑community investments and the observed nestedness and p‑value from degree‑preserving null models. Only Community~2 (msotly composed by Silicon Valley investors) exhibits nestedness significantly higher than expected under random mixing.
+To provide a concise overview of community characteristics in that regard, Table~\ref{tab:community_summary} summarises key statistics for the three largest communities. In addition to the number of investors and co-investment pairs, it reports the share of intra-community investments and the observed nestedness and p-value from degree-preserving null models. Only Community~2 (mostly composed by Silicon Valley investors) exhibits nestedness significantly higher than expected under random mixing.
 
 \begin{table}[ht]
 \centering
@@ -396,7 +396,7 @@ To provide a concise overview of community characteristics in that regard, Table
 2 & 3{,}959 & 55{,}863 & 33.6\% & 0.088 & $<\!0.001$ \\
 \hline
 \end{tabular}
-\caption{Three largest communities: investors, co‑investment pairs, share of intra‑community investments, observed NODF, and p‑value (degree‑preserving null model) for the hypothesis of nestedness higher than null expectation.}
+\caption{Three largest communities: investors, co-investment pairs, share of intra-community investments, observed NODF, and p-value (degree-preserving null model) for the hypothesis of nestedness higher than null expectation.}
 \label{tab:community_summary}
 \end{table}
 
