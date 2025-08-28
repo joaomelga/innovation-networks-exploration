@@ -2,7 +2,7 @@
 
 The practice of investors jointly funding the same venture is known as  syndication. It plays a central role in innovation financing by allowing investors to pool expertise, share risk and signal project quality to the market \cite{Lerner1994,Casamatta2007}.  
 
-Despite its practical importance, most empirical studies analyse syndication at the firm or deal level and provide limited insight into the system‑level patterns through which investors coordinate \cite{Pruthi2005, Benzouai2021}.  Understanding how these patterns emerge requires a multidisciplinary perspective encompassing finance, sociology, Network Science and ecology.
+Despite its practical importance, most empirical studies analyse syndication at the firm or deal level and provide limited insight into the system‑level patterns through which investors coordinate \cite{Pruthi2005, Benzouai2021}.  Understanding how these patterns emerge requires a multidisciplinary perspective encompassing finance, sociology, network science and ecology.
 
 This collaborative behavior also reflects information asymmetries and screening challenges inherent in investment markets \cite{Lerner1994}, as in incomplete information environments, investors rely on social relationships to reduce uncertainty and improve screening efficiency.
 
@@ -12,7 +12,7 @@ In venture capital markets (innovation financing included), syndication serves a
 
 This study aims to apply Network Science theories and methods to analyze these coordination patterns in the syndication network of early and late stage investors operating in the U.S. market, revealing how investors organize into distinct network communities with different structural properties and organizational patterns that may influence capital allocation efficiency, deal flow, and market access.
 
-Special attention is given for the fact that a community of proiminent VCs in the Sylicon Valley  demonstrate nested hierarchical organization patterns, while others maintain more random, hard-to-define partnership structures.
+Special attention is given to the fact that a community of prominent VCs in Silicon Valley demonstrates nested hierarchical organization patterns that develop progressively over time, with nestedness values beginning to increase after 2012 and reaching statistical significance around 2019, while other communities maintain more random, hard-to-define partnership structures. The specific factors underlying this progressive structural evolution remain unexplored in this work, presenting opportunities for future research into the mechanisms driving hierarchical organization in innovation networks \cite{Mariani2019, Barabasi1999, Scheffer2009}.
 
 The following sections examine the theoretical foundations for syndication behavior, drawing from literature in innovation financing, social embeddedness, network theory, and ecological systems to build a comprehensive framework for understanding syndication investments networks organization. 
 
@@ -28,15 +28,19 @@ In this context, considering that screening innovative ventures is frequently a 
 
 \subsection{Economic Sociology and Embeddedness}
 
-Economic sociologists have shown that economic action is embedded in ongoing social networks \cite{Granovetter1985}; entrepreneurs and venture capitalists form recurring partnerships based on trust and reputation \cite{Uzzi1997}.  The concept of structural holes \cite{Burt1992} highlights that brokers who bridge otherwise disconnected groups can access unique information and control resource flows.  Geographic clustering in innovation hubs, such as Silicon Valley, facilitates repeated interactions and strengthens these social ties, potentially shaping syndication patterns.
+While the screening and signaling functions of syndication explain why investors collaborate, understanding how these partnerships form and persist requires insights from economic sociology. 
 
-In venture capital markets, embeddedness manifests in several important ways. First, investment decisions are embedded within social networks where venture capitalists develop recurring partnerships based on trust, shared investment philosophies, and successful collaboration histories \cite{Granovetter1985}. These relationships create persistent patterns of co-investment that go beyond individual deal characteristics, forming the basis for community structure within investor networks.
+Economic sociologists have demonstrated that economic action is fundamentally embedded in ongoing social networks \cite{Granovetter1985}. For instance, entrepreneurs and venture capitalists develop recurring partnerships built on trust and reputation rather than purely transactional relationships \cite{Uzzi1997}. This embeddedness perspective reveals that syndication patterns emerge from social structures that extend beyond individual deal characteristics.
 
-Second, geographic embeddedness plays a critical role in shaping investor relationships. Venture capitalists concentrated in innovation hubs like Silicon Valley develop dense local networks through frequent face-to-face interactions, shared professional communities, and common institutional affiliations \cite{Granovetter1985}. This geographic clustering creates information advantages and relationship-building opportunities that can influence syndication patterns and network organization.
+Central to this framework is Burt's concept of structural holes \cite{Burt1992}, which shows how investors who bridge otherwise disconnected groups gain access to unique information and control over resource flows (advantages that directly complement the screening benefits discussed earlier).In that sale manner, geographic clustering in innovation hubs such as Silicon Valley facilitates the repeated face-to-face interactions that strengthen these social ties, creating the relational foundation upon which systematic syndication patterns can emerge.
 
-Third, embeddedness creates informal hierarchies of influence and reputation within investor communities. Rather than operating as independent agents, investors form interconnected networks that share information, coordinate investment strategies, and establish social rankings based on past performance and network position \cite{Granovetter1985}. These social hierarchies can evolve into the structural hierarchies measured through nestedness analysis.
+% In venture capital markets, this embeddedness manifests in several interconnected ways that directly influence network organization. First, investment decisions are embedded within social networks where venture capitalists develop recurring partnerships based on trust, shared investment philosophies, and successful collaboration histories \cite{Granovetter1985}. These relationships create persistent patterns of co-investment that go beyond individual deal characteristics, forming the basis for community structure within investor networks.
 
-The embeddedness perspective helps explain why certain investor communities develop systematic organizational patterns while others remain more randomly structured. Social relationships, trust networks, and geographic proximity may facilitate the emergence of hierarchical organization by creating conditions where, for instance, specialists naturally align with generalists' investment strategies (not purely random). This social foundation provides the context for understanding how network topology emerges from underlying social processes rather than purely market-driven mechanisms.
+% Second, geographic embeddedness plays a critical role in shaping investor relationships. Venture capitalists concentrated in innovation hubs like Silicon Valley develop dense local networks through frequent face-to-face interactions, shared professional communities, and common institutional affiliations \cite{Granovetter1985}. This geographic clustering creates information advantages and relationship-building opportunities that can influence syndication patterns and network organization.
+
+Furthermore, embeddedness creates informal hierarchies of influence and reputation within investor communities. Rather than operating as independent agents, investors form interconnected networks that share information, coordinate investment strategies, and establish social rankings based on past performance and network position \cite{Granovetter1985}. These social hierarchies can evolve into the structural hierarchies measured through, for instance, nestedness analysis.
+
+The embeddedness perspective helps explain why certain investor communities develop systematic organizational patterns while others remain more randomly structured. Social relationships, trust networks, and geographic proximity may facilitate the emergence of hierarchical organization by creating conditions where, for example, specialists naturally align with generalists' investment strategies (not purely random). This social foundation provides the context for understanding how network topology emerges from underlying social processes rather than purely market-driven mechanisms.
 
 \subsection{Network Science and Syndication Networks}
 
@@ -48,17 +52,17 @@ By contrast, theory of networks (ii) asks about the causes of structure—the an
 
 Under both views sits graph theory (iii), the math of networks. It gives precise definitions of nodes and edges, paths and distances, and the core measures we use (degree, centrality, clustering, connectivity). These tools let us describe a network’s shape, test ideas about causes and effects, and compare cases. Network Science (as a broader field) builds on this math to study system-level patterns, and statistics helps with modeling and uncertainty.
 
-In the following sub-sections we explore concepts spaning all of those fields to set the theorical basis to our reasoning on the syndication networks analysis for furhter chapters.
+In syndication networks, investors are nodes and shared funding rounds are edges, while network measures quantify centrality, detect community structure and reveal degree heterogeneity \cite{Borgatti2009,Newman2003}. Many real‑world networks, including VC ecosystems, exhibit heavy‑tailed degree distributions generated by preferential attachment dynamics \cite{Barabasi1999}, and so they display small‑world characteristics, combining local clustering with short global path lengths \cite{Watts1998}.
+
+In the following sub-sections we explore concepts spaning all of those fields to set the theorical basis to our reasoning on the syndication networks construction and analysis for further chapters.
 
 \subsubsection{Unipartite and Bipartite Networks}
 
 Understanding the distinction between unipartite and bipartite network representations is fundamental to our analysis of investor syndication patterns, as it determines our ability to identify hierarchical structures like nestedness that emerge from role differentiation between network participants.
 
-A unipartite network has a single set of nodes, and any two nodes may be linked (e.g., people connected to people). A bipartite network has two disjoint sets of nodes that play different roles, and links are allowed only between the sets (e.g., plants–pollinators \cite{Dormann2009} or early–late investors), never within a set. Bipartite models are useful when role separation matters; unipartite views can be obtained by projecting a bipartite network onto one side. 
+A unipartite network has a single set of nodes, and any two nodes may be linked (e.g., people connected to people). In the other hand, a bipartite network has two disjoint sets of nodes that play different roles, and links are allowed only between the sets (e.g., plants–pollinators \cite{Dormann2009} or early–late investors), never within a set. In summary, bipartite models are useful when role separation matters. Figure~\ref{fig:unipartite_vs_bipartite} provides an illustration of both types of networks.
 
-These network types differ fundamentally in their matrix representations: unipartite networks are represented by square matrices where all nodes appear in both rows and columns (known as adjacency matrix), while bipartite networks use rectangular matrices where rows represent one node group and columns represent the other (biadjacency matrix), as illustrated in Figure~\ref{fig:unipartite_vs_bipartite}. 
-
-This matrix structure is crucial because nestedness patterns—characterized by the triangular arrangement of non-zero entries when ordered by degree—can only be properly identified in the rectangular bipartite matrix format. Moreover, ecological concepts like nestedness (which we will employ to analyze investor hierarchies) are most naturally defined and measured in biadjacency matrices.
+These network types differ fundamentally in their matrix representations: unipartite networks are represented by square matrices where all nodes appear in both rows and columns (known as adjacency matrix), while bipartite networks use rectangular matrices where rows represent one node group and columns represent the other (biadjacency matrix), as illustrated in Figure~\ref{fig:unipartite_vs_bipartite}.
 
 \begin{figure}[htbp]
     \centering
@@ -67,13 +71,15 @@ This matrix structure is crucial because nestedness patterns—characterized by 
     \label{fig:unipartite_vs_bipartite}
 \end{figure}
 
+This matrix structure is important because nestedness patterns (characterized by the triangular arrangement of non-zero entries when ordered by degree) can only be properly identified in the rectangular bipartite matrix format. Moreover, ecological concepts like nestedness (which we will employ to analyze investor hierarchies) are most naturally defined and measured in biadjacency matrices.
+
 In our context, modeling investors and companies as distinct node sets in a bipartite framework allows us to capture the role-specific interactions that generate nested patterns, whereas traditional unipartite investor-investor projections \cite{Bygrave1987} would obscure these hierarchical relationships. 
 
-As we will demonstrate in the methodology section and through ecological analogies, the bipartite representation preserves the structural information necessary to transpose interpretations from mutualistic ecological systems to economic and social systems. The figure below contrasts these two cases.
+As we will demonstrate in the methodology section and through ecological analogies, the bipartite representation preserves the structural information necessary to transpose interpretations from mutualistic ecological systems to economic and social systems.
+
+Last but not least, in this work we explore how bipartite networks can be projected back into unipartite networks by connecting nodes from the same set whenever they share connections to the other set. This projection mechanism provides a bridge between our role-aware bipartite model and classical syndication networks, enabling compatibility with existing research while preserving distinct investor roles.
 
 \subsubsection{The Classical Syndication Model}
-
-In co‑investment networks, investors are nodes and shared funding rounds are edges. Network measures quantify centrality, detect community structure and reveal degree heterogeneity \cite{Borgatti2009,Newman2003}. Many real‑world networks, including VC ecosystems, exhibit heavy‑tailed degree distributions generated by preferential attachment dynamics \cite{Barabasi1999}, and so they display small‑world characteristics, combining local clustering with short global path lengths \cite{Watts1998}. 
 
 The classical approach to studying venture capital syndication treats all investors as a single group and connects them whenever they participate in the same funding round \cite{Bygrave1987}. In this model, investors are represented as nodes in a network, and an edge is drawn between any two investors who have co-invested in at least one company together.
 
@@ -88,7 +94,7 @@ While this approach has been widely used in venture capital research \cite{Bygra
     \label{fig:classical_syndication_net}
 \end{figure}
 
-\subsubsection{Bipartite Projections and the Early-Late Syndication Model}
+\subsubsection{Bipartite Early-Late Syndication Model}
 
 The classical syndication model described above treats all investors the same way, but in reality, investors play different roles depending on when they invest in a company's lifecycle. Our approach (detailed in our methodology) recognizes this by separating investors into two groups: early-stage investors (who fund seed and Series A rounds) and late-stage investors (who fund Series B and beyond).
 
@@ -96,20 +102,22 @@ This creates an early-late stage syndication model represented as a bipartite ne
 
 The connection between our bipartite model and the classical approach lies in network projections. A projection transforms a bipartite network back into a unipartite network by connecting nodes from the same side when they share connections to the other side, as illustrated in Figure~\ref{fig:bipartite_projections}.
 
-Mathematically, we represent our bipartite network with a biadjacency matrix $\mathbf{B}$, where $B_{uv}=1$ if early-stage investor $u$ is connected to late-stage investor $v$. The projection onto the early-stage investors is:
-
-$$\mathbf{W}^{Early}=\mathbf{B}\mathbf{B}^{\top}$$
-
-where $W^{Early}_{ij}$ counts how many late-stage partners two early-stage investors share. Similarly, the projection onto late-stage investors is $\mathbf{W}^{Late}=\mathbf{B}^{\top}\mathbf{B}$.
-
-This projection mechanism provides a bridge between our role-aware bipartite model and classical syndication networks. When we project our Early-Late model, we recover something similar to classical investor-investor networks, but with the advantage of preserving distinct investor roles. This bipartite approach enables the study of hierarchical patterns like nestedness—something obscured in classical models—while ensuring compatibility with existing venture capital research.
-
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{../diagrams/bipartite_projections.png}
     \caption{Illustration of bipartite network projections. The left panel shows a bipartite graph with two disjoint node sets (e.g., Early and Late investors). The middle and right panels show the corresponding one-mode projections onto each set, where edges represent shared partners in the opposite set. This process preserves role information in the bipartite base while enabling standard network analyses in the projected graphs.}
     \label{fig:bipartite_projections}
 \end{figure}
+
+Mathematically, we represent our bipartite network with a biadjacency matrix $\mathbf{B}$, where $B_{uv}=1$ if early-stage investor $u$ is connected to late-stage investor $v$. The projection onto the early-stage investors is:
+
+$$\mathbf{W}^{Early}=\mathbf{B}\mathbf{B}^{\top}$$
+
+where $W^{Early}_{ij}$ counts how many late-stage partners two early-stage investors share. Similarly, the projection onto late-stage investors is $\mathbf{W}^{Late}=\mathbf{B}^{\top}\mathbf{B}$.
+
+This projection mechanism provides a bridge between our role-aware bipartite model and classical syndication networks. When we project our Early-Late model, we recover something similar to classical investor-investor networks, even though this work does not explicitly model and explore this dynamic.
+
+In summary, our bipartite approach enables the study of hierarchical patterns like nestedness (something obscured in classical models) while maintaining compatibility with existing venture capital research.
 
 \subsubsection{Centrality, Community Structure, and Degree Patterns}
 
@@ -119,7 +127,7 @@ In fact, different centrality measures capture distinct aspects of influence: de
 
 Second, community structure reveals how investors cluster into distinct groups with denser internal connections than external ones \cite{Theophile2024}. These communities often reflect shared investment philosophies, geographic proximity, or sector specialization. 
 
-We detect communities by maximizing \emph{modularity}, which scores a partition by comparing the observed number of within-group edges to what a degree-preserving random network would produce. In its common form,
+In our case, we detect communities by maximizing \emph{modularity}, which scores a partition by comparing the observed number of within-group edges to what a degree-preserving random network would produce. In its common form,
 
 \[
 Q=\frac{1}{2m}\sum_{i,j}\left(A_{ij}-\frac{k_i k_j}{2m}\right)\delta(c_i,c_j),
@@ -127,7 +135,7 @@ Q=\frac{1}{2m}\sum_{i,j}\left(A_{ij}-\frac{k_i k_j}{2m}\right)\delta(c_i,c_j),
 
 where $A_{ij}$ is the adjacency matrix, $k_i$ is node degree, $m$ is the number of edges, and $\delta(c_i,c_j)=1$ if $i$ and $j$ are in the same community. Louvain and Leiden algorithms search for partitions with high $Q$ \cite{Blondel2008,Traag2019}. This links naturally to the rest of our analysis: central and bridging investors can shape community boundaries, and modularity helps summarize heterogeneous, heavy-tailed connectivity into coherent groups for further study.
 
-Last but not least, power-law degree distributions characterize the heterogeneous heavy-tailed connectivity patterns in venture capital networks \cite{Bygrave1987}. This property describes systems where a small number of investors (hubs) maintain extensive partnership networks while most participants have relatively few connections. 
+Lastly, the concept of power-law degree distributions characterize the heterogeneous heavy-tailed connectivity patterns in venture capital networks \cite{Bygrave1987}, which basically describes systems where a small number of investors (hubs) maintain extensive partnership networks while most participants have relatively few connections.
 
 Power-law distributions arise from preferential attachment mechanisms, where well-connected investors attract disproportionately more new partnerships, reflecting reputation accumulation and resource concentration dynamics.
 
@@ -135,7 +143,7 @@ Many real-world networks, including VC ecosystems, exhibit heavy-tailed degree d
 
 Further, empirical evidence shows that venture capital networks consistently exhibit these power-law properties \cite{Dalle2025}, where hub investors facilitate deal flow and information diffusion throughout the ecosystem, while also creating potential bottlenecks that may limit access for entrepreneurs outside established networks. 
 
-This structural feature creates conditions for the emergence of hierarchical organization patterns measured through, for instance, nestedness analysis.
+This structural feature creates conditions for the emergence of hierarchical organization patterns measured through nestedness analysis.
 
 The methodology section builds directly on these foundations by implementing community detection algorithms that identify investor clusters, while the results section examines how community structure relates to geographic distribution, investment patterns, and hierarchical organization.
 
@@ -143,7 +151,7 @@ The methodology section builds directly on these foundations by implementing com
 
 The power-law degree distributions discussed above provide important insights into network structure, but they cannot fully capture the hierarchical organization patterns that emerge within investor communities.
 
-Ecology theory offers additional insight into these organisation of complex networks. In special, studies of mutualistic pollinator-plant networks have shown that interactions often form nested structures in which specialist pollinators (those that visit few plant species) typically interact with subsets of the same plants that generalist pollinators (those that visit many species) choose \cite{Bascompte2003,Mariani2019}. 
+Ecology theory offers additional insight into these organisation of complex networks. In special, studies of mutualistic pollinator-plant networks have shown that interactions often form nested structures in which specialist pollinators (those that visit few plant species) typically interact with subsets of the same plants as generalist pollinators (those that visit many species) \cite{Bascompte2003,Mariani2019}. 
 
 \subsubsection{Understanding Nestedness}
 
@@ -196,6 +204,6 @@ By answering these questions, the thesis seeks to illuminate how network topolog
 
 The empirical analysis reveals three key contributions to the literature: First, we demonstrate significant heterogeneity in organizational structures across investor communities on US, with some exhibiting pronounced hierarchical patterns while others maintain more distributed partnership networks. Second, we identify a strong relationship between geographic clustering (particularly within Silicon Valley) and the emergence of nested organizational structures that confer measurable advantages in transaction efficiency and capital deployment. Third, we provide quantitative evidence that network topology, rather than community size alone, serves as a critical determinant of investment ecosystem performance.
 
-The remainder of this paper presents our methodological framework, empirical findings, and their implications for understanding venture capital market organization. The Methodology section details our data preprocessing, network construction, and analytical techniques. The Results section provides comprehensive characterization of investor communities, including their geographic distributions, funding patterns, sectoral focus, and quantitative nestedness measurements. Together, these analyses offer new insights into how network structure shapes innovation financing efficiency and market access patterns.
+The remainder of this paper is organized as follows. The \textit{Methodology} section establishes our analytical framework by detailing the Crunchbase data preprocessing procedures, the construction of bipartite early-late stage investor networks, and the implementation of community detection and nestedness measurement techniques. The \textit{Results} section first provides a comprehensive dataset characterization including syndication trends and investment activity patterns, then presents the identification and analysis of investor communities through modularity optimization, examines their geographic distributions and funding behaviors, and finally quantifies nestedness patterns using NODF metrics and statistical significance testing. The \textit{Discussion} section interprets these empirical findings by exploring the implications of hierarchical organization for investment efficiency, analyzing the temporal dynamics of progressive nestedness development, and examining the relationship between geographic clustering and network topology. Finally, the \textit{Conclusion} synthesizes our key contributions, acknowledges study limitations, and outlines directions for future research into network-driven innovation financing mechanisms.
 
 \pagebreak
