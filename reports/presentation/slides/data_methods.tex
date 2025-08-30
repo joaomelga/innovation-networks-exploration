@@ -1,0 +1,97 @@
+\section{Data \& Methodology}
+
+\begin{frame}
+\frametitle{Dataset Overview}
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+\textbf{After Cleaning:}
+\begin{itemize}
+    \item 16,932 companies
+    \item 11,279 investors
+    \item 104,618 records
+    \item \textbf{\$3.2 tri} volume
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\vspace{-0.3cm} % Adjust this value as needed
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{../figures/us/vc_investment_activity_over_time.png}
+  % \caption{Investment activity trends 2004-2024}
+\end{figure}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+
+\textbf{Geographic \& Temporal Scope:}
+\begin{itemize}
+    \item Focus: U.S. companies (international investors included)
+    \item Period: 2004-2024
+    \item Minimum funding threshold: \$150,000
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Network Construction Process}
+
+\begin{enumerate}
+    \item \textbf{Stage Classification:}
+    \begin{itemize}
+        \item Early stages: Angel, Pre-seed, Seed, Series A
+        \item Late stages: Series B through Series I
+    \end{itemize}
+    \vspace{0.3cm}
+
+    \item \textbf{Bipartite Network Creation:}
+    \begin{itemize}
+        \item Two disjoint investor sets: Early vs. Late
+        \item Edges = co-investment in same companies
+        \item 169,679 investment pairs across 3,666 startups
+    \end{itemize}
+    \vspace{0.3cm}
+    
+    \item \textbf{Community Detection:}
+    \begin{itemize}
+        \item Greedy modularity optimization
+        \item Identifies ~168 communities
+        \item Focus on 7 communities with 150+ investors
+    \end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Analytical Framework}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Network Analysis:}
+\begin{itemize}
+    \item Degree distribution
+    \item Geographic clustering
+    \item Investment characteristics
+\end{itemize}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\textbf{Nestedness Analysis:}
+\begin{itemize}
+    \item NODF metric calculation
+    \item Curveball null models (1,000)
+    \item Temporal evolution analysis
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.2cm}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{../figures/us/investment_stage_curves_log.png}
+    %\caption{Investment stage evolution over time}
+\end{figure}
+
+\end{frame}

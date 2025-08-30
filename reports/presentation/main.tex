@@ -1,0 +1,76 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Packages
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% Color customization - change from blue to black
+\definecolor{institutionalblack}{RGB}{4,4,4}
+\setbeamercolor{palette primary}{bg=institutionalblack,fg=white}
+\setbeamercolor{palette secondary}{bg=institutionalblack,fg=white}
+\setbeamercolor{palette tertiary}{bg=institutionalblack,fg=white}
+\setbeamercolor{palette quaternary}{bg=institutionalblack,fg=white}
+\setbeamercolor{structure}{fg=institutionalblack}
+\setbeamercolor{section in toc}{fg=institutionalblack}
+\setbeamercolor{subsection in head/foot}{bg=institutionalblack,fg=white}
+
+% Theme customization
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.7cm, text margin right=0.8cm}
+
+% Custom footline with section, author, and slide numbers
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertsectionhead\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Title information
+\title[Nested Investor Syndication Networks]{Nested Investor Syndication Networks}
+\subtitle{A Network Science Approach to Venture Capital Ecosystems}
+\author[João Melga]{João Melga}
+\institute{Master IREN\\Institut Polytechnique de Paris}
+\date{August 30, 2025}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\begin{center}
+\vspace{\fill}
+\includegraphics[height=2cm]{../figures/ipparis-logo.png}
+\vspace{\fill}
+\titlepage
+\end{center}
+\end{frame}
+
+% Include slide sections
+\input{slides/outline.tex}
+\input{slides/introduction.tex}
+\input{slides/motivation_bipartite.tex}
+\input{slides/nestedness_bipartite.tex}
+\input{slides/data_methods.tex}
+\input{slides/key_results.tex}
+\input{slides/discussion.tex}
+\input{slides/conclusion.tex}
+\input{slides/thankyou.tex}
+
+\end{document}
