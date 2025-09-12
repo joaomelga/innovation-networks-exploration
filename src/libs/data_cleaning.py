@@ -401,9 +401,9 @@ def generate_cleaned_data(data_dir, processed_dir):
     print(f"Investors: {len(investors_clean):,}")
 
     # Save each DataFrame to its respective CSV file
-    companies_clean.to_csv(f'{processed_dir}/companies_clean.csv', index=False)
-    investors_clean.to_csv(f'{processed_dir}/investors_clean.csv', index=False)
-    investments_clean.to_csv(f'{processed_dir}/investments_clean.csv', index=False)
-    funding_rounds_clean.to_csv(f'{processed_dir}/funding_rounds_clean.csv', index=False)
+    companies_clean.to_csv(f'{processed_dir}/companies_clean.csv.gz', index=False, compression='gzip')
+    investors_clean.to_csv(f'{processed_dir}/investors_clean.csv.gz', index=False, compression='gzip')
+    investments_clean.to_csv(f'{processed_dir}/investments_clean.csv.gz', index=False, compression='gzip')
+    funding_rounds_clean.to_csv(f'{processed_dir}/funding_rounds_clean.csv.gz', index=False, compression='gzip')
 
     print(f"Cleaned data exported to {processed_dir}")
