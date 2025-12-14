@@ -1,6 +1,16 @@
 # Nested Syndication Networks
 
-This repository contains the complete data pipeline, analysis code, and documentation for a research article on **Nested Syndication Networks: Community Structure and Hierarchical Organization in Venture Capital Ecosystems**. The project analyzes the structural properties of VC syndication networks, particularly nestedness patterns and community structures, using data from France and the United States.
+This repository was initially created to store and share the complete data pipeline, analysis code, and documentation for my master's thesis: **Nested Syndication Networks: Community Structure and Hierarchical Organization in Venture Capital Ecosystems**.
+
+📄 **[Read the full paper](Melga%20-%202025%20-%20Nested%20Investor%20Syndication%20Networks.pdf)**
+
+In this research, I explore the hypothesis that **nestedness** - a network property typically observed in biological and ecological systems - might also emerge in venture capital syndication networks.
+
+I was genuinely surprised to discover that real-world investment networks exhibit organizational patterns strikingly similar to those found in nature, such as mutualistic ecosystems where species interact in hierarchical, nested structures.
+
+As a result, this repository has evolved beyond the original thesis work to include additional experiments and analyses that explore related network phenomena in investment ecosystems. Some of these ongoing investigations may lead to future publications.
+
+The project analyzes the structural properties of VC syndication networks, particularly nestedness patterns and community structures, using comprehensive data from France and the United States.
 
 ## 🎯 Project Overview
 
@@ -10,8 +20,8 @@ This research investigates the structure and evolution of venture capital syndic
 - Detecting community structures within VC syndication networks
 - Measuring nestedness patterns and their statistical significance
 - Conducting temporal analysis of network evolution
-- Comparing patterns between French and US ecosystems
-- Identifying nested hierarchical organization in Silicon Valley investor communities
+- Comparing patterns between communities
+- Special attention for Silicon Valley investor communities
 
 ## 📋 Table of Contents
 
@@ -105,22 +115,22 @@ root/
 ├── NOTEBOOKS.md        # Notebook organization guide
 │
 ├── src/                # 🔧 Main analysis pipeline
-│   ├── main.ipynb      # Primary analysis notebook
+│   ├── thesis_fr.ipynb # Final French data analysis
+│   ├── thesis_us.ipynb # Final US data analysis
+│   ├── experiments/    # 🔬 Research notebooks and exploratory analysis
 │   └── libs/           # Core analysis modules
 │
 ├── data/               # 📊 Dataset storage
 │   ├── raw/            # Original datasets (not included - see Data Availability below)
 │   └── processed/      # Clean, analysis-ready data
 │
-├── experiments/        # 🔬 Research notebooks
-│
 ├── reports/            # 📈 Output and documentation
+│   ├── article/        # LaTeX article files
 │   ├── figures/        # Generated visualizations
-│   └── texts/          # Written analysis
+│   └── drafts/         # Draft documents and comparisons
 │
-└── docs/               # 📚 Reference materials
-    ├── literature/     # Academic papers
-    └── presentations/  # Project presentations
+└── references/         # 📚 Reference materials
+    └── *.pdf           # Academic papers and literature
 ```
 
 ## 📊 Data Sources
@@ -131,17 +141,23 @@ root/
 
 ## 🎬 Getting Started
 
-### Quick Start - Running the Main Analysis
+### Running the Thesis Analysis
 
-1. **Navigate to the main analysis notebook**:
+1. **Navigate to the thesis analysis notebook**:
 
+   For US data analysis:
    ```bash
-   jupyter notebook src/main.ipynb
+   jupyter notebook src/thesis_us.ipynb
+   ```
+
+   For French data analysis:
+   ```bash
+   jupyter notebook src/thesis_fr.ipynb
    ```
 
 2. **Configure analysis parameters** (in the notebook):
 
-    Adjust main analysis parameters in `src/main.ipynb` as needed:
+    Adjust main analysis parameters in `src/thesis_us.ipynb` (or `src/thesis_fr.ipynb`) as needed:
   
     ```python
     # Data generation
@@ -157,18 +173,7 @@ root/
    - Execute all cells in order
    - The notebook will automatically generate processed data, perform network analysis, and create visualizations
    - All plots and figures are automatically saved to `reports/figures/` and used in the LaTeX article files
-   - Running/updating the main notebook automatically updates all figures used in the research article
-
-### Understanding the Main Workflow
-
-The primary analysis follows this workflow:
-
-1. **Data Cleaning** → Clean raw investment data
-2. **Network Construction** → Build bipartite investor networks  
-3. **Community Detection** → Identify investor communities
-4. **Nestedness Analysis** → Calculate nestedness with null models
-5. **Temporal Analysis** → Study network evolution over time
-6. **Visualization** → Generate publication-ready figures
+   - Running/updating the thesis notebooks automatically updates all figures used in the research article
 
 ## 📚 Documentation
 
